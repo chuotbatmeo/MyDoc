@@ -2,124 +2,497 @@
 <html lang="vi">
 
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
   <title>Kho dữ liệu</title>
+
+  <!-- FONT -->
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- ICON -->
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  >
 
   <style>
 
+    * {
+
+      margin: 0;
+
+      padding: 0;
+
+      box-sizing: border-box;
+
+    }
+
     body {
-      font-family: Arial;
-      background: #f3f4f6;
+
+      min-height: 100vh;
+
+      font-family: 'Quicksand', sans-serif;
+
+      background:
+
+        linear-gradient(
+
+          rgba(245,248,252,0.94),
+
+          rgba(245,248,252,0.94)
+
+        ),
+
+        url("https://images.unsplash.com/photo-1506744038136-46273834b3fb");
+
+      background-size: cover;
+
+      background-position: center;
+
       padding: 40px;
+
+      color: #222;
+
+      overflow-x: hidden;
+
     }
 
     .container {
-      max-width: 700px;
+
+      max-width: 900px;
+
       margin: auto;
-      background: white;
-      padding: 24px;
-      border-radius: 14px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+    }
+
+    /* STICKERS */
+
+    .stickers {
+
+      display: flex;
+
+      justify-content: center;
+
+      gap: 30px;
+
+      margin-bottom: 20px;
+
+    }
+
+    .sticker {
+
+      font-size: 70px;
+
+      animation: floaty 2.5s ease-in-out infinite;
+
+      user-select: none;
+
+    }
+
+    .sticker.cat {
+
+      animation-delay: 1s;
+
+    }
+
+    @keyframes floaty {
+
+      0% {
+
+        transform: translateY(0px) rotate(0deg);
+
+      }
+
+      50% {
+
+        transform: translateY(-10px) rotate(4deg);
+
+      }
+
+      100% {
+
+        transform: translateY(0px) rotate(0deg);
+
+      }
+
     }
 
     h1 {
-      margin-bottom: 20px;
+
+      text-align: center;
+
+      margin-bottom: 28px;
+
+      font-size: 34px;
+
+      color: #222;
+
     }
+
+    /* SEARCH */
 
     input {
+
       width: 100%;
-      padding: 14px;
+
+      padding: 16px;
+
+      border-radius: 16px;
+
+      border: 1px solid #d1d5db;
+
       font-size: 16px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      margin-bottom: 20px;
-      box-sizing: border-box;
+
+      margin-bottom: 32px;
+
+      outline: none;
+
+      background: rgba(255,255,255,0.95);
+
+      font-family: inherit;
+
+      box-shadow:
+        0 4px 10px rgba(0,0,0,0.04);
+
     }
+
+    input:focus {
+
+      border-color: #2563eb;
+
+      box-shadow:
+        0 0 0 4px rgba(37,99,235,0.12);
+
+    }
+
+    /* CARD */
 
     .card {
-      background: #f9fafb;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 16px;
+
+      position: relative;
+
+      background: rgba(255,255,255,0.98);
+
+      border-radius: 22px;
+
+      padding: 30px;
+
+      margin-bottom: 26px;
+
+      border: 2px solid rgba(255,255,255,0.95);
+
+      box-shadow:
+        0 10px 25px rgba(0,0,0,0.08),
+        0 0 0 1px rgba(0,0,0,0.04);
+
+    }
+
+    .card div {
+
       margin-bottom: 14px;
+
+      line-height: 1.9;
+
+      color: #333;
+
+      font-size: 19px;
+
+      word-break: break-word;
+
     }
 
-    .name {
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 8px;
+    .title-line {
+
+      font-size: 34px !important;
+
+      font-weight: 700;
+
+      color: #2563eb !important;
+
+      margin-bottom: 28px !important;
+
+      line-height: 1.4 !important;
+
+      padding-right: 60px;
+
     }
 
-    .phone {
-      color: #2563eb;
-      margin-bottom: 6px;
+    /* COPY */
+
+    .copy-icon {
+
+      position: absolute;
+
+      top: 24px;
+
+      right: 24px;
+
+      width: 42px;
+
+      height: 42px;
+
+      border-radius: 12px;
+
+      background: #2563eb;
+
+      color: white;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+
+      font-size: 16px;
+
+      box-shadow:
+        0 4px 10px rgba(37,99,235,0.25);
+
     }
 
-    .note {
-      color: #555;
+    .copy-icon:hover {
+
+      transform: scale(1.05);
+
+      opacity: 0.92;
+
     }
+
+    /* POPUP */
+
+    .toast {
+
+      position: fixed;
+
+      bottom: 90px;
+
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      background: rgba(37,99,235,0.95);
+
+      color: white;
+
+      padding: 12px 20px;
+
+      border-radius: 14px;
+
+      font-size: 14px;
+
+      opacity: 0;
+
+      pointer-events: none;
+
+      transition: 0.3s;
+
+      z-index: 9999;
+
+    }
+
+    .toast.show {
+
+      opacity: 1;
+
+      bottom: 105px;
+
+    }
+
+    /* EMPTY */
 
     .empty {
+
       text-align: center;
-      color: gray;
-      padding: 20px;
+
+      padding: 40px;
+
+      font-size: 22px;
+
+      color: #666;
+
+    }
+
+    /* ========================= */
+    /* MUSIC BUTTON */
+    /* ========================= */
+
+    #musicButton {
+
+      position: fixed;
+
+      right: 18px;
+
+      bottom: 18px;
+
+      width: 58px;
+
+      height: 58px;
+
+      border-radius: 50%;
+
+      background: rgba(37,99,235,0.95);
+
+      color: white;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 22px;
+
+      cursor: pointer;
+
+      z-index: 99999;
+
+      box-shadow:
+        0 8px 22px rgba(0,0,0,0.18);
+
+      transition: 0.25s;
+
+    }
+
+    #musicButton:hover {
+
+      transform: scale(1.08);
+
+    }
+
+    #musicButton.playing {
+
+      animation: spinMusic 4s linear infinite;
+
+    }
+
+    @keyframes spinMusic {
+
+      from {
+
+        transform: rotate(0deg);
+
+      }
+
+      to {
+
+        transform: rotate(360deg);
+
+      }
+
     }
 
   </style>
+
 </head>
 
 <body>
 
   <div class="container">
 
-    <h1>Kho dữ liệu khách hàng 📁</h1>
+    <!-- STICKERS -->
+
+    <div class="stickers">
+
+      <div class="sticker">
+        🐭
+      </div>
+
+      <div class="sticker cat">
+        🐱
+      </div>
+
+    </div>
+
+    <h1>Tìm kiếm gì đó... 🔍</h1>
+
+    <!-- SEARCH -->
 
     <input
       type="text"
       id="search"
-      placeholder="Tìm theo tên, số điện thoại hoặc ghi chú..."
+      placeholder="Nhập từ khóa để tìm kiếm..."
     >
+
+    <!-- RESULT -->
 
     <div id="result"></div>
 
   </div>
 
+  <!-- POPUP -->
+
+  <div id="toast" class="toast">
+
+    Đã copy nội dung
+
+  </div>
+
+  <!-- ========================= -->
+  <!-- NHẠC NỀN -->
+  <!-- ========================= -->
+
+  <audio id="bgMusic" loop>
+
+    <source
+      src="nhacthien.mp3"
+      type="audio/mpeg">
+
+  </audio>
+
+  <!-- NÚT NHẠC -->
+
+  <div id="musicButton">
+
+    <i class="fa-solid fa-music"></i>
+
+  </div>
+
   <script>
 
-    // DATABASE MINI
-    const data = [
+    let data = [];
 
-      {
-        name: "Nguyễn Văn A",
-        phone: "0909123456",
-        note: "Khách VIP"
-      },
+    const search =
+      document.getElementById("search");
 
-      {
-        name: "Trần Thị B",
-        phone: "0988111222",
-        note: "Khách mới"
-      },
+    const result =
+      document.getElementById("result");
 
-      {
-        name: "Lê Văn C",
-        phone: "0977333444",
-        note: "Đã mua hàng"
-      },
+    const toast =
+      document.getElementById("toast");
 
-      {
-        name: "Phạm Văn D",
-        phone: "0911000000",
-        note: "Nợ tiền"
-      }
+    // =========================
+    // LOAD JSON
+    // =========================
 
-    ];
+    fetch("data.json")
 
-    const search = document.getElementById("search");
-    const result = document.getElementById("result");
+      .then(response => response.json())
 
-    // HIỂN THỊ DỮ LIỆU
+      .then(json => {
+
+        data = json;
+
+        showList(data);
+
+      });
+
+    // =========================
+    // SHOW DATA
+    // =========================
+
     function showList(list) {
 
       result.innerHTML = "";
@@ -127,61 +500,234 @@
       if (list.length === 0) {
 
         result.innerHTML = `
+
           <div class="empty">
-            Không tìm thấy dữ liệu
+
+            Không tìm thấy dữ liệu 😢
+
           </div>
+
         `;
 
         return;
+
       }
 
       list.forEach(item => {
 
-        result.innerHTML += `
+        let html = `
 
           <div class="card">
 
-            <div class="name">
-              ${item.name}
+        `;
+
+        let first = true;
+
+        let copyLines = [];
+
+        for (const key in item) {
+
+          const value =
+            String(item[key]);
+
+          // KHÔNG COPY TITLE
+
+          if (!first) {
+
+            copyLines.push(value);
+
+          }
+
+          html += `
+
+            <div class="${
+              first ? "title-line" : ""
+            }">
+
+              ${formatText(value)}
+
             </div>
 
-            <div class="phone">
-              📞 ${item.phone}
-            </div>
+          `;
 
-            <div class="note">
-              📝 ${item.note}
-            </div>
+          first = false;
+
+        }
+
+        const copyText =
+          copyLines.join("\n");
+
+        html += `
+
+          <div
+            class="copy-icon"
+            onclick="copyContent(\`${copyText}\`)">
+
+            <i class="fa-regular fa-copy"></i>
 
           </div>
 
         `;
+
+        html += `
+          </div>
+        `;
+
+        result.innerHTML += html;
 
       });
 
     }
 
-    // TÌM KIẾM REALTIME
+    // =========================
+    // FORMAT TEXT
+    // =========================
+
+    function formatText(text) {
+
+      return text
+
+        // XUỐNG DÒNG
+
+        .replace(/\n/g, "<br>")
+
+        // MÀU CHỮ
+
+        .replace(/<red>(.*?)<\/red>/g,
+          '<span style="color:red;">$1</span>')
+
+        .replace(/<blue>(.*?)<\/blue>/g,
+          '<span style="color:blue;">$1</span>')
+
+        .replace(/<green>(.*?)<\/green>/g,
+          '<span style="color:green;">$1</span>')
+
+        .replace(/<pink>(.*?)<\/pink>/g,
+          '<span style="color:hotpink;">$1</span>')
+
+        .replace(/<gray>(.*?)<\/gray>/g,
+          '<span style="color:gray;">$1</span>')
+
+        .replace(/<purple>(.*?)<\/purple>/g,
+          '<span style="color:purple;">$1</span>')
+
+        .replace(/<orange>(.*?)<\/orange>/g,
+          '<span style="color:orange;">$1</span>');
+
+    }
+
+    // =========================
+    // SEARCH REALTIME
+    // =========================
+
     search.addEventListener("input", () => {
 
-      const keyword = search.value.toLowerCase();
+      const keyword =
+        search.value.toLowerCase();
 
-      const filtered = data.filter(item =>
+      const filtered = data.filter(item => {
 
-        item.name.toLowerCase().includes(keyword) ||
+        return Object.values(item)
 
-        item.phone.includes(keyword) ||
+          .join(" ")
 
-        item.note.toLowerCase().includes(keyword)
+          .toLowerCase()
 
-      );
+          .includes(keyword);
+
+      });
 
       showList(filtered);
 
     });
 
-    // LOAD BAN ĐẦU
-    showList(data);
+    // =========================
+    // COPY
+    // =========================
+
+    function copyContent(text) {
+
+      navigator.clipboard.writeText(text)
+
+        .then(() => {
+
+          showToast();
+
+        });
+
+    }
+
+    // =========================
+    // TOAST
+    // =========================
+
+    function showToast() {
+
+      toast.classList.add("show");
+
+      setTimeout(() => {
+
+        toast.classList.remove("show");
+
+      }, 2000);
+
+    }
+
+    // =========================
+    // MUSIC
+    // =========================
+
+    const bgMusic =
+      document.getElementById("bgMusic");
+
+    const musicButton =
+      document.getElementById("musicButton");
+
+    // ÂM LƯỢNG NHẸ
+
+    bgMusic.volume = 0.18;
+
+    // AUTO PLAY SAU CLICK ĐẦU
+
+    document.body.addEventListener("click", () => {
+
+      bgMusic.play()
+
+        .then(() => {
+
+          musicButton.classList.add("playing");
+
+        })
+
+        .catch(err => {
+
+          console.log(err);
+
+        });
+
+    }, { once: true });
+
+    // PLAY / PAUSE
+
+    musicButton.addEventListener("click", () => {
+
+      if (bgMusic.paused) {
+
+        bgMusic.play();
+
+        musicButton.classList.add("playing");
+
+      }
+
+      else {
+
+        bgMusic.pause();
+
+        musicButton.classList.remove("playing");
+
+      }
+
+    });
 
   </script>
 
