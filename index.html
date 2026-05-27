@@ -2,169 +2,1124 @@
 <html lang="vi">
 
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trang bí mật</title>
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Kinh Pháp Cú</title>
+
+  <!-- FONT -->
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- ICON -->
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  >
 
   <style>
 
     * {
+
       margin: 0;
+
       padding: 0;
+
       box-sizing: border-box;
+
     }
 
     body {
 
-      height: 100vh;
+      min-height: 100vh;
 
-      display: flex;
+      font-family: 'Quicksand', sans-serif;
 
-      justify-content: center;
+      padding: 30px;
 
-      align-items: center;
+      overflow-x: hidden;
 
-      font-family: Arial;
+      background:
 
-      background-image:
-        url("https://images.unsplash.com/photo-1506744038136-46273834b3fb");
+        linear-gradient(
+
+          rgba(255,255,255,0.80),
+
+          rgba(255,255,255,0.80)
+
+        ),
+
+        url("https://images.unsplash.com/photo-1528715471579-d1bcf0ba5e83");
 
       background-size: cover;
 
       background-position: center;
 
-    }
+      background-repeat: no-repeat;
 
-    .box {
-
-      width: 400px;
-
-      background: rgba(255,255,255,0.15);
-
-      backdrop-filter: blur(10px);
-
-      padding: 30px;
-
-      border-radius: 20px;
-
-      text-align: center;
-
-      color: white;
-
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      background-attachment: fixed;
 
     }
 
     h1 {
 
-      margin-bottom: 20px;
+      text-align: center;
 
-      font-size: 28px;
+      font-size: 40px;
+
+      margin-bottom: 24px;
+
+      color: #b91c1c;
+
+      text-shadow:
+        0 2px 10px rgba(255,255,255,0.8);
 
     }
 
-    input {
+    /* ========================= */
+    /* SEARCH */
+    /* ========================= */
+
+    .search-box {
+
+      max-width: 700px;
+
+      margin: auto;
+
+      margin-bottom: 35px;
+
+    }
+
+    .search-box input {
 
       width: 100%;
 
-      padding: 14px;
+      padding: 15px 20px;
 
       border: none;
 
-      border-radius: 10px;
+      outline: none;
 
-      margin-bottom: 16px;
+      border-radius: 18px;
 
       font-size: 16px;
 
+      font-family: inherit;
+
+      background: rgba(255,255,255,0.92);
+
+      box-shadow:
+        0 8px 25px rgba(0,0,0,0.08);
+
     }
 
-    button {
+    /* ========================= */
+    /* GRID */
+    /* ========================= */
 
-      width: 100%;
+    .grid {
 
-      padding: 14px;
+      max-width: 1200px;
+
+      margin: auto;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(150px, 1fr));
+
+      gap: 16px;
+
+    }
+
+    /* ========================= */
+    /* CARD */
+    /* ========================= */
+
+    .card {
+
+      min-height: 95px;
+
+      border-radius: 20px;
+
+      padding: 16px;
+
+      cursor: pointer;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-align: center;
+
+      font-size: 18px;
+
+      font-weight: 700;
+
+      color: white;
+
+      line-height: 1.5;
+
+      transition: 0.3s;
+
+      box-shadow:
+        0 10px 24px rgba(0,0,0,0.12);
+
+      backdrop-filter: blur(10px);
+
+      user-select: none;
+
+      position: relative;
+
+      overflow: hidden;
+
+    }
+
+    /* ========================= */
+    /* HOA SEN */
+    /* ========================= */
+
+    .lotus {
+
+      position: absolute;
+
+      font-size: 22px;
+
+      opacity: 0;
+
+      pointer-events: none;
+
+      animation:
+        lotusFloat 2.6s linear infinite;
+
+    }
+
+    .card:hover .lotus {
+
+      opacity: 1;
+
+    }
+
+    .lotus1 {
+
+      top: 10px;
+      left: 10px;
+
+      animation-delay: 0s;
+
+    }
+
+    .lotus2 {
+
+      top: 40px;
+      right: 18px;
+
+      animation-delay: 0.5s;
+
+    }
+
+    .lotus3 {
+
+      bottom: 14px;
+      left: 26px;
+
+      animation-delay: 1s;
+
+    }
+
+    .lotus4 {
+
+      bottom: 8px;
+      right: 10px;
+
+      animation-delay: 1.5s;
+
+    }
+
+    @keyframes lotusFloat {
+
+      0% {
+
+        transform:
+          translateY(0px)
+          rotate(0deg);
+
+      }
+
+      50% {
+
+        transform:
+          translateY(-10px)
+          rotate(8deg);
+
+      }
+
+      100% {
+
+        transform:
+          translateY(0px)
+          rotate(0deg);
+
+      }
+
+    }
+
+    /* ========================= */
+    /* HOVER */
+    /* ========================= */
+
+    .card:hover {
+
+      transform:
+        translateY(-5px)
+        scale(1.03);
+
+      box-shadow:
+        0 0 18px rgba(255,255,255,0.8),
+        0 0 35px rgba(255,192,203,0.7),
+        0 18px 35px rgba(0,0,0,0.18);
+
+      filter: brightness(1.08);
+
+    }
+
+    /* ========================= */
+    /* RANDOM COLORS */
+    /* ========================= */
+
+    .color1 {
+      background: linear-gradient(135deg,#ef4444,#dc2626);
+    }
+
+    .color2 {
+      background: linear-gradient(135deg,#f59e0b,#d97706);
+    }
+
+    .color3 {
+      background: linear-gradient(135deg,#10b981,#059669);
+    }
+
+    .color4 {
+      background: linear-gradient(135deg,#3b82f6,#2563eb);
+    }
+
+    .color5 {
+      background: linear-gradient(135deg,#8b5cf6,#7c3aed);
+    }
+
+    .color6 {
+      background: linear-gradient(135deg,#ec4899,#db2777);
+    }
+
+    /* ========================= */
+    /* HIGHLIGHT */
+    /* ========================= */
+
+    mark {
+
+      background: yellow;
+
+      color: #111;
+
+      padding: 0 4px;
+
+      border-radius: 4px;
+
+    }
+
+    /* ========================= */
+    /* PAGINATION */
+    /* ========================= */
+
+    .pagination {
+
+      margin-top: 40px;
+
+      display: flex;
+
+      justify-content: center;
+
+      gap: 10px;
+
+      flex-wrap: wrap;
+
+    }
+
+    .page-btn {
+
+      width: 42px;
+
+      height: 42px;
+
+      border-radius: 12px;
 
       border: none;
 
-      border-radius: 10px;
+      cursor: pointer;
+
+      font-weight: 700;
+
+      background: rgba(255,255,255,0.92);
+
+      box-shadow:
+        0 6px 16px rgba(0,0,0,0.08);
+
+      transition: 0.2s;
+
+    }
+
+    .page-btn:hover {
+
+      transform: scale(1.08);
+
+    }
+
+    .page-btn.active {
 
       background: #2563eb;
 
       color: white;
 
-      font-size: 16px;
+    }
+
+    /* ========================= */
+    /* POPUP */
+    /* ========================= */
+
+    .popup-overlay {
+
+      position: fixed;
+
+      inset: 0;
+
+      background: rgba(0,0,0,0.5);
+
+      display: none;
+
+      align-items: center;
+
+      justify-content: center;
+
+      z-index: 999999;
+
+      padding: 20px;
+
+      backdrop-filter: blur(5px);
+
+    }
+
+    .popup-box {
+
+      width: 100%;
+
+      max-width: 820px;
+
+      background: rgba(255,255,255,0.97);
+
+      border-radius: 30px;
+
+      padding: 36px;
+
+      position: relative;
+
+      max-height: 85vh;
+
+      overflow-y: auto;
+
+      box-shadow:
+        0 25px 60px rgba(0,0,0,0.2);
+
+    }
+
+    .popup-title {
+
+      font-size: 34px;
+
+      font-weight: 700;
+
+      margin-bottom: 28px;
+
+      color: #dc2626;
+
+      padding-right: 90px;
+
+      line-height: 1.5;
+
+    }
+
+    .popup-content {
+
+      font-size: 20px;
+
+      line-height: 2;
+
+      color: #333;
+
+      white-space: pre-line;
+
+      word-break: break-word;
+
+    }
+
+    .popup-close {
+
+      position: absolute;
+
+      top: 18px;
+
+      right: 20px;
+
+      width: 42px;
+
+      height: 42px;
+
+      border-radius: 12px;
+
+      background: #e5e7eb;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
 
       cursor: pointer;
 
+      font-size: 20px;
+
+    }
+
+    .popup-copy {
+
+      position: absolute;
+
+      top: 18px;
+
+      right: 72px;
+
+      width: 42px;
+
+      height: 42px;
+
+      border-radius: 12px;
+
+      background: #2563eb;
+
+      color: white;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      cursor: pointer;
+
+    }
+
+    /* ========================= */
+    /* TOAST */
+    /* ========================= */
+
+    .toast {
+
+      position: fixed;
+
+      left: 50%;
+
+      bottom: 40px;
+
+      transform: translateX(-50%);
+
+      background: rgba(37,99,235,0.96);
+
+      color: white;
+
+      padding: 14px 24px;
+
+      border-radius: 16px;
+
+      font-size: 15px;
+
+      opacity: 0;
+
+      pointer-events: none;
+
       transition: 0.3s;
 
-    }
-
-    button:hover {
-
-      opacity: 0.9;
+      z-index: 9999999;
 
     }
 
-    .error {
+    .toast.show {
 
-      margin-top: 14px;
+      opacity: 1;
 
-      color: #ffd5d5;
+      bottom: 60px;
+
+    }
+
+    @media (max-width: 768px) {
+
+      body {
+
+        padding: 18px;
+
+      }
+
+      h1 {
+
+        font-size: 32px;
+
+      }
+
+      .card {
+
+        min-height: 85px;
+
+        font-size: 16px;
+
+      }
+
+      .popup-title {
+
+        font-size: 28px;
+
+      }
+
+      .popup-content {
+
+        font-size: 18px;
+
+      }
 
     }
 
   </style>
+
 </head>
 
 <body>
 
-  <div class="box">
+  <h1>
+    🌸 Kinh Pháp Cú 🌸
+  </h1>
 
-    <h1>
-      Mã bí mật:
-    </h1>
+  <!-- SEARCH -->
+
+  <div class="search-box">
 
     <input
-      type="password"
-      id="secret"
-      placeholder=""
+      type="text"
+      id="searchInput"
+      placeholder="Tìm kiếm nội dung..."
     >
-
-    <button onclick="checkPassword()">
-      Tiếp tục
-    </button>
-
-    <div class="error" id="error"></div>
 
   </div>
 
+  <!-- GRID -->
+
+  <div class="grid"
+       id="grid">
+
+  </div>
+
+  <!-- PAGINATION -->
+
+  <div class="pagination"
+       id="pagination">
+
+  </div>
+
+  <!-- POPUP -->
+
+  <div
+    class="popup-overlay"
+    id="popupOverlay">
+
+    <div class="popup-box">
+
+      <div
+        class="popup-close"
+        onclick="closePopup()">
+
+        ✕
+
+      </div>
+
+      <div
+        class="popup-copy"
+        onclick="copyPopupContent()">
+
+        <i class="fa-regular fa-copy"></i>
+
+      </div>
+
+      <div
+        class="popup-title"
+        id="popupTitle">
+
+      </div>
+
+      <div
+        class="popup-content"
+        id="popupContent">
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- TOAST -->
+
+  <div
+    class="toast"
+    id="toast">
+
+    Đã copy nội dung
+
+  </div>
+
+  <!-- NHẠC -->
+
+  <audio
+    id="bgMusic"
+    autoplay
+    loop>
+
+    <source
+      src="nhacthien.mp3"
+      type="audio/mpeg">
+
+  </audio>
+
   <script>
 
-    function checkPassword() {
+    let data = [];
 
-      const password =
-        document.getElementById("secret").value;
+    let keyword = "";
 
-      const error =
-        document.getElementById("error");
+    let currentPage = 1;
 
-      if (password === "chuotbatmeo") {
+    const rowsPerPage = 7;
 
-        window.location.href =
-          "timkiem.html";
+    const colors = [
 
-      }
+      "color1",
+      "color2",
+      "color3",
+      "color4",
+      "color5",
+      "color6"
 
-      else {
+    ];
 
-        error.innerText =
-          "Mã bí mật không đúng 😢";
+    const grid =
+      document.getElementById("grid");
+
+    const pagination =
+      document.getElementById("pagination");
+
+    const popupOverlay =
+      document.getElementById("popupOverlay");
+
+    const popupTitle =
+      document.getElementById("popupTitle");
+
+    const popupContent =
+      document.getElementById("popupContent");
+
+    const toast =
+      document.getElementById("toast");
+
+    const searchInput =
+      document.getElementById("searchInput");
+
+    // =========================
+    // LOAD JSON
+    // =========================
+
+    fetch("jsonkpc.json")
+
+      .then(response => response.json())
+
+      .then(json => {
+
+        data = json;
+
+        renderPage();
+
+      });
+
+    // =========================
+    // SEARCH
+    // =========================
+
+    searchInput.addEventListener("input", () => {
+
+      keyword =
+        searchInput.value.toLowerCase();
+
+      currentPage = 1;
+
+      renderPage();
+
+    });
+
+    // =========================
+    // FILTER
+    // =========================
+
+    function getFilteredData() {
+
+      return data.filter(item => {
+
+        return (
+
+          item.title
+            .toLowerCase()
+            .includes(keyword)
+
+          ||
+
+          item.content
+            .toLowerCase()
+            .includes(keyword)
+
+        );
+
+      });
+
+    }
+
+    // =========================
+    // PAGE
+    // =========================
+
+    function renderPage() {
+
+      const filtered =
+        getFilteredData();
+
+      const columns =
+        getColumnCount();
+
+      const itemsPerPage =
+        columns * rowsPerPage;
+
+      const start =
+        (currentPage - 1) * itemsPerPage;
+
+      const end =
+        start + itemsPerPage;
+
+      const pageData =
+        filtered.slice(start, end);
+
+      renderCards(pageData);
+
+      renderPagination(
+        filtered.length,
+        itemsPerPage
+      );
+
+    }
+
+    // =========================
+    // COLUMN COUNT
+    // =========================
+
+    function getColumnCount() {
+
+      const width =
+        window.innerWidth;
+
+      if (width <= 500) return 2;
+
+      if (width <= 768) return 3;
+
+      if (width <= 1100) return 5;
+
+      return 6;
+
+    }
+
+    // =========================
+    // RENDER CARDS
+    // =========================
+
+    function renderCards(list) {
+
+      grid.innerHTML = "";
+
+      list.forEach(item => {
+
+        const card =
+          document.createElement("div");
+
+        // RANDOM COLOR
+
+        const randomColor =
+          colors[
+            Math.floor(
+              Math.random() * colors.length
+            )
+          ];
+
+        card.className =
+          `card ${randomColor}`;
+
+        card.innerHTML = `
+
+          <div class="lotus lotus1">🌸</div>
+          <div class="lotus lotus2">🪷</div>
+          <div class="lotus lotus3">🌸</div>
+          <div class="lotus lotus4">🪷</div>
+
+          <div>
+
+            ${highlightText(item.title)}
+
+          </div>
+
+        `;
+
+        card.onclick = () => {
+
+          openPopup(
+            item.title,
+            item.content
+          );
+
+        };
+
+        grid.appendChild(card);
+
+      });
+
+    }
+
+    // =========================
+    // PAGINATION
+    // =========================
+
+    function renderPagination(totalItems, itemsPerPage) {
+
+      pagination.innerHTML = "";
+
+      const totalPages =
+        Math.ceil(
+          totalItems / itemsPerPage
+        );
+
+      for (let i = 1; i <= totalPages; i++) {
+
+        const btn =
+          document.createElement("button");
+
+        btn.className =
+          "page-btn";
+
+        if (i === currentPage) {
+
+          btn.classList.add("active");
+
+        }
+
+        btn.innerText = i;
+
+        btn.onclick = () => {
+
+          currentPage = i;
+
+          renderPage();
+
+          window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+          });
+
+        };
+
+        pagination.appendChild(btn);
 
       }
 
     }
+
+    // =========================
+    // HIGHLIGHT
+    // =========================
+
+    function highlightText(text) {
+
+      if (!keyword) return text;
+
+      const regex =
+        new RegExp(`(${keyword})`, "gi");
+
+      return text.replace(
+        regex,
+        `<mark>$1</mark>`
+      );
+
+    }
+
+    // =========================
+    // POPUP
+    // =========================
+
+    function openPopup(title, content) {
+
+      popupTitle.innerHTML =
+        highlightText(title);
+
+      popupContent.innerHTML =
+        formatText(
+          highlightText(content)
+        );
+
+      popupOverlay.style.display =
+        "flex";
+
+    }
+
+    function closePopup() {
+
+      popupOverlay.style.display =
+        "none";
+
+    }
+
+    popupOverlay.addEventListener("click", e => {
+
+      if (e.target === popupOverlay) {
+
+        closePopup();
+
+      }
+
+    });
+
+    // =========================
+    // COPY
+    // =========================
+
+    function copyPopupContent() {
+
+      const text =
+        popupContent.innerText.trim();
+
+      navigator.clipboard.writeText(text)
+
+        .then(() => {
+
+          showToast();
+
+        });
+
+    }
+
+    // =========================
+    // TOAST
+    // =========================
+
+    function showToast() {
+
+      toast.classList.add("show");
+
+      setTimeout(() => {
+
+        toast.classList.remove("show");
+
+      }, 2000);
+
+    }
+
+    // =========================
+    // FORMAT
+    // =========================
+
+    function formatText(text) {
+
+      return text
+
+        .replace(/\n/g, "<br>")
+
+        .replace(/<red>(.*?)<\/red>/g,
+          '<span style="color:red;">$1</span>')
+
+        .replace(/<blue>(.*?)<\/blue>/g,
+          '<span style="color:blue;">$1</span>')
+
+        .replace(/<green>(.*?)<\/green>/g,
+          '<span style="color:green;">$1</span>')
+
+        .replace(/<pink>(.*?)<\/pink>/g,
+          '<span style="color:hotpink;">$1</span>')
+
+        .replace(/<gray>(.*?)<\/gray>/g,
+          '<span style="color:gray;">$1</span>')
+
+        .replace(/<purple>(.*?)<\/purple>/g,
+          '<span style="color:purple;">$1</span>')
+
+        .replace(/<orange>(.*?)<\/orange>/g,
+          '<span style="color:orange;">$1</span>');
+
+    }
+
+    // =========================
+    // MUSIC
+    // =========================
+
+    const bgMusic =
+      document.getElementById("bgMusic");
+
+    bgMusic.volume = 0.18;
+
+    window.addEventListener("load", () => {
+
+      bgMusic.play()
+
+        .catch(() => {
+
+          document.body.addEventListener(
+            "click",
+            () => {
+
+              bgMusic.play();
+
+            },
+            { once: true }
+          );
+
+        });
+
+    });
+
+    // =========================
+    // RESIZE
+    // =========================
+
+    window.addEventListener("resize", () => {
+
+      renderPage();
+
+    });
 
   </script>
 
