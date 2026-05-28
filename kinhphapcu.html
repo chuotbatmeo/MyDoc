@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Kinh Pháp Cú</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+
+      font-family:'Quicksand',sans-serif;
+
+      min-height:100vh;
+
+      padding:30px;
+
+      overflow-x:hidden;
+
+      background:
+      linear-gradient(
+        rgba(255,255,255,0.70),
+        rgba(255,255,255,0.70)
+      ),
+      url("https://images.unsplash.com/photo-1490750967868-88aa4486c946");
+
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      background-attachment:fixed;
+
+    }
+
+    /* ================= TITLE ================= */
+
+    .title-wrap{
+
+      text-align:center;
+      margin-bottom:20px;
+
+    }
+
+    .title{
+
+      display:inline-flex;
+      align-items:center;
+      gap:20px;
+
+      font-size:54px;
+      font-weight:bold;
+
+      color:#c1121f;
+
+      text-shadow:
+      0 0 10px rgba(255,255,255,0.9),
+      0 0 20px rgba(255,182,193,0.8);
+
+      animation:titleFloat 3s ease-in-out infinite;
+
+    }
+
+    .pray{
+
+      font-size:42px;
+
+      animation:prayMove 1.8s ease-in-out infinite;
+
+      filter:drop-shadow(0 0 8px rgba(255,255,255,0.8));
+
+    }
+
+    .pray.right{
+
+      animation-delay:0.8s;
+
+    }
+
+    @keyframes prayMove{
+
+      0%{
+        transform:translateY(0px) rotate(0deg);
+      }
+
+      50%{
+        transform:translateY(-8px) rotate(-5deg);
+      }
+
+      100%{
+        transform:translateY(0px) rotate(0deg);
+      }
+
+    }
+
+    @keyframes titleFloat{
+
+      0%{
+        transform:translateY(0px);
+      }
+
+      50%{
+        transform:translateY(-4px);
+      }
+
+      100%{
+        transform:translateY(0px);
+      }
+
+    }
+
+    /* ================= INTRO RUNNING ================= */
+
+    .intro-marquee{
+
+      width:100%;
+
+      overflow:hidden;
+
+      margin-bottom:28px;
+
+      border-radius:18px;
+
+      background:
+      linear-gradient(
+        90deg,
+        rgba(255,255,255,0.95),
+        rgba(255,240,245,0.95)
+      );
+
+      box-shadow:
+      0 6px 18px rgba(0,0,0,0.08);
+
+      border:
+      2px solid rgba(255,182,193,0.7);
+
+      padding:14px 0;
+
+    }
+
+    .intro-text{
+
+      display:inline-block;
+
+      white-space:nowrap;
+
+      padding-left:100%;
+
+      font-size:20px;
+
+      font-weight:bold;
+
+      color:#c1121f;
+
+      text-shadow:
+      0 0 8px rgba(255,255,255,0.9);
+
+      animation:marqueeMove 40s linear infinite;
+
+    }
+
+    @keyframes marqueeMove{
+
+      0%{
+        transform:translateX(0%);
+      }
+
+      100%{
+        transform:translateX(-100%);
+      }
+
+    }
+
+    /* ================= SEARCH ================= */
+
+    .search-box{
+
+      max-width:760px;
+
+      margin:auto;
+      margin-bottom:35px;
+
+    }
+
+    .search-box input{
+
+      width:100%;
+
+      padding:16px 22px;
+
+      border:none;
+      outline:none;
+
+      border-radius:18px;
+
+      font-size:17px;
+
+      background:rgba(255,255,255,0.95);
+
+      box-shadow:
+      0 10px 25px rgba(0,0,0,0.08);
+
+    }
+
+    /* ================= GRID ================= */
+
+    .grid{
+
+      max-width:1200px;
+
+      margin:auto;
+
+      display:grid;
+
+      grid-template-columns:
+      repeat(auto-fit,minmax(180px,1fr));
+
+      gap:18px;
+
+    }
+
+    /* ================= CARD ================= */
+
+    .card{
+
+      min-height:110px;
+
+      border-radius:24px;
+
+      padding:18px;
+
+      display:flex;
+
+      align-items:center;
+      justify-content:center;
+
+      text-align:center;
+
+      font-size:18px;
+      font-weight:bold;
+
+      color:white;
+
+      cursor:pointer;
+
+      position:relative;
+
+      overflow:hidden;
+
+      transition:0.35s;
+
+      box-shadow:
+      0 10px 24px rgba(0,0,0,0.14);
+
+    }
+
+    .card:hover{
+
+      transform:
+      translateY(-5px)
+      scale(1.03);
+
+      box-shadow:
+      0 0 18px rgba(255,255,255,0.9),
+      0 0 35px rgba(255,192,203,0.8),
+      0 20px 35px rgba(0,0,0,0.2);
+
+    }
+
+    .lotus{
+
+      position:absolute;
+
+      font-size:26px;
+
+      opacity:0;
+
+      transition:0.4s;
+
+      pointer-events:none;
+
+    }
+
+    .card:hover .lotus{
+
+      opacity:1;
+
+    }
+
+    .lotus1{
+
+      top:8px;
+      left:10px;
+
+    }
+
+    .lotus2{
+
+      bottom:8px;
+      right:12px;
+
+    }
+
+    .lotus3{
+
+      top:40px;
+      right:18px;
+
+    }
+
+    /* ================= POPUP ================= */
+
+    .popup-overlay{
+
+      position:fixed;
+
+      inset:0;
+
+      background:rgba(0,0,0,0.55);
+
+      display:none;
+
+      align-items:center;
+      justify-content:center;
+
+      z-index:999999;
+
+      padding:20px;
+
+      backdrop-filter:blur(5px);
+
+    }
+
+    .popup-box{
+
+      width:100%;
+      max-width:850px;
+
+      max-height:86vh;
+
+      overflow-y:auto;
+
+      border-radius:30px;
+
+      padding:36px;
+
+      position:relative;
+
+      background:
+      linear-gradient(
+        rgba(255,255,255,0.88),
+        rgba(255,255,255,0.88)
+      ),
+      url("https://images.unsplash.com/photo-1506744038136-46273834b3fb");
+
+      background-size:cover;
+      background-position:center;
+
+      box-shadow:
+      0 25px 60px rgba(0,0,0,0.25);
+
+    }
+
+    .popup-title{
+
+      font-size:34px;
+      font-weight:bold;
+
+      color:#c1121f;
+
+      margin-bottom:28px;
+
+      padding-right:90px;
+
+      line-height:1.5;
+
+    }
+
+    .popup-content{
+
+      font-size:20px;
+
+      line-height:2;
+
+      color:#333;
+
+      white-space:pre-line;
+
+      word-break:break-word;
+
+    }
+
+    .popup-close{
+
+      position:absolute;
+
+      top:18px;
+      right:20px;
+
+      width:42px;
+      height:42px;
+
+      border-radius:12px;
+
+      background:#e5e7eb;
+
+      display:flex;
+
+      align-items:center;
+      justify-content:center;
+
+      cursor:pointer;
+
+      font-size:20px;
+
+    }
+
+    .popup-copy{
+
+      position:absolute;
+
+      top:18px;
+      right:72px;
+
+      width:42px;
+      height:42px;
+
+      border-radius:12px;
+
+      background:#2563eb;
+
+      color:white;
+
+      display:flex;
+
+      align-items:center;
+      justify-content:center;
+
+      cursor:pointer;
+
+    }
+
+    /* ================= TOAST ================= */
+
+    .toast{
+
+      position:fixed;
+
+      left:50%;
+      bottom:40px;
+
+      transform:translateX(-50%);
+
+      background:rgba(37,99,235,0.95);
+
+      color:white;
+
+      padding:14px 24px;
+
+      border-radius:16px;
+
+      font-size:15px;
+
+      opacity:0;
+
+      pointer-events:none;
+
+      transition:0.3s;
+
+      z-index:9999999;
+
+    }
+
+    .toast.show{
+
+      opacity:1;
+
+      bottom:60px;
+
+    }
+
+    mark{
+
+      background:yellow;
+      color:black;
+
+      border-radius:4px;
+
+      padding:0 4px;
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- TITLE -->
+
+  <div class="title-wrap">
+
+    <div class="title">
+
+      <span class="pray">🙏</span>
+
+      <span>Kinh Pháp Cú</span>
+
+      <span class="pray right">🙏</span>
+
+    </div>
+
+  </div>
+
+  <!-- INTRO RUNNING -->
+
+  <div class="intro-marquee">
+
+    <div class="intro-text"
+         id="introText">
+
+    </div>
+
+  </div>
+
+  <!-- SEARCH -->
+
+  <div class="search-box">
+
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Tìm kiếm nội dung..."
+    >
+
+  </div>
+
+  <!-- GRID -->
+
+  <div class="grid"
+       id="grid">
+
+  </div>
+
+  <!-- POPUP -->
+
+  <div class="popup-overlay"
+       id="popupOverlay">
+
+    <div class="popup-box">
+
+      <div class="popup-close"
+           onclick="closePopup()">
+
+        ✕
+
+      </div>
+
+      <div class="popup-copy"
+           onclick="copyPopupContent()">
+
+        <i class="fa-regular fa-copy"></i>
+
+      </div>
+
+      <div class="popup-title"
+           id="popupTitle">
+
+      </div>
+
+      <div class="popup-content"
+           id="popupContent">
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- TOAST -->
+
+  <div class="toast"
+       id="toast">
+
+    Đã sao chép nội dung
+
+  </div>
+
+  <!-- MUSIC -->
+
+  <audio id="bgMusic"
+         autoplay
+         loop>
+
+    <source src="nhacthien2.mp3"
+            type="audio/mpeg">
+
+  </audio>
+
+  <script>
+
+    let allData = [];
+    let keyword = "";
+
+    const grid =
+    document.getElementById("grid");
+
+    const introText =
+    document.getElementById("introText");
+
+    const popupOverlay =
+    document.getElementById("popupOverlay");
+
+    const popupTitle =
+    document.getElementById("popupTitle");
+
+    const popupContent =
+    document.getElementById("popupContent");
+
+    const toast =
+    document.getElementById("toast");
+
+    const colors = [
+
+    "linear-gradient(135deg,#ff9a9e,#fad0c4)",
+    "linear-gradient(135deg,#a18cd1,#fbc2eb)",
+    "linear-gradient(135deg,#f6d365,#fda085)",
+    "linear-gradient(135deg,#84fab0,#8fd3f4)",
+    "linear-gradient(135deg,#fccb90,#d57eeb)",
+    "linear-gradient(135deg,#30cfd0,#330867)",
+    "linear-gradient(135deg,#f093fb,#f5576c)",
+    "linear-gradient(135deg,#4facfe,#00f2fe)"
+
+    ];
+
+    /* ================= LOAD JSON ================= */
+
+    fetch("./jsonkpc2.json")
+
+    .then(response => response.json())
+
+    .then(data => {
+
+      if(data.intro){
+
+        introText.innerHTML =
+        data.intro.content;
+
+      }
+
+      if(Array.isArray(data.items)){
+
+        allData = data.items;
+
+        renderCards(allData);
+
+      }
+
+    });
+
+    /* ================= RENDER ================= */
+
+    function renderCards(list){
+
+      grid.innerHTML = "";
+
+      list.forEach(item => {
+
+        const card =
+        document.createElement("div");
+
+        card.className = "card";
+
+        card.style.background =
+        colors[
+          Math.floor(
+            Math.random() * colors.length
+          )
+        ];
+
+        card.innerHTML = `
+
+          <div class="lotus lotus1">🪷</div>
+
+          <div class="lotus lotus2">🌸</div>
+
+          <div class="lotus lotus3">🪷</div>
+
+          <div>
+
+            ${highlightText(item.title)}
+
+          </div>
+
+        `;
+
+        card.onclick = () => {
+
+          openPopup(
+            item.title,
+            item.content
+          );
+
+        };
+
+        grid.appendChild(card);
+
+      });
+
+    }
+
+    /* ================= SEARCH ================= */
+
+    document
+    .getElementById("searchInput")
+
+    .addEventListener("input", function(e){
+
+      keyword =
+      e.target.value
+      .toLowerCase()
+      .trim();
+
+      if(keyword === ""){
+
+        renderCards(allData);
+
+        return;
+
+      }
+
+      const filtered =
+      allData.filter(item => {
+
+        return (
+
+          item.title
+          .toLowerCase()
+          .includes(keyword)
+
+          ||
+
+          item.content
+          .toLowerCase()
+          .includes(keyword)
+
+        );
+
+      });
+
+      renderCards(filtered);
+
+    });
+
+    /* ================= POPUP ================= */
+
+    function openPopup(title, content){
+
+      popupTitle.innerHTML = title;
+
+      popupContent.innerHTML =
+      formatText(
+        highlightText(content)
+      );
+
+      popupOverlay.style.display =
+      "flex";
+
+    }
+
+    function closePopup(){
+
+      popupOverlay.style.display =
+      "none";
+
+    }
+
+    popupOverlay.addEventListener("click", e => {
+
+      if(e.target === popupOverlay){
+
+        closePopup();
+
+      }
+
+    });
+
+    /* ================= COPY ================= */
+
+    function copyPopupContent(){
+
+      navigator.clipboard.writeText(
+        popupContent.innerText.trim()
+      );
+
+      toast.classList.add("show");
+
+      setTimeout(() => {
+
+        toast.classList.remove("show");
+
+      },2000);
+
+    }
+
+    /* ================= FORMAT ================= */
+
+    function formatText(text){
+
+      return text
+
+      .replace(/\n/g,"<br>")
+
+      .replace(/<red>(.*?)<\/red>/g,
+      '<span style="color:red;">$1</span>')
+
+      .replace(/<blue>(.*?)<\/blue>/g,
+      '<span style="color:blue;">$1</span>')
+
+      .replace(/<green>(.*?)<\/green>/g,
+      '<span style="color:green;">$1</span>')
+
+      .replace(/<purple>(.*?)<\/purple>/g,
+      '<span style="color:purple;">$1</span>')
+
+      .replace(/<orange>(.*?)<\/orange>/g,
+      '<span style="color:orange;">$1</span>');
+
+    }
+
+    /* ================= HIGHLIGHT ================= */
+
+    function highlightText(text){
+
+      if(!keyword) return text;
+
+      return text.replace(
+
+        new RegExp(`(${keyword})`, "gi"),
+
+        `<mark>$1</mark>`
+
+      );
+
+    }
+
+    /* ================= MUSIC ================= */
+
+    const bgMusic =
+    document.getElementById("bgMusic");
+
+    bgMusic.volume = 0.2;
+
+    window.addEventListener("click", () => {
+
+      bgMusic.play();
+
+    },{ once:true });
+
+  </script>
+
+</body>
+
+</html>
