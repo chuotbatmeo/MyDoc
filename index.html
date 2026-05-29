@@ -5,602 +5,355 @@
 
   <meta charset="UTF-8">
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Kinh Pháp Cú</title>
+  <title>Mưa Tĩnh Lặng</title>
 
-  <!-- FONT -->
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap"
-    rel="stylesheet"
-  >
-
-  <!-- ICON -->
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
 
-    * {
-
-      margin: 0;
-
-      padding: 0;
-
-      box-sizing: border-box;
-
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
     }
 
-    body {
+    body{
 
-      min-height: 100vh;
+      font-family:'Quicksand',sans-serif;
 
-      font-family: 'Quicksand', sans-serif;
+      min-height:100vh;
 
-      padding: 30px;
-
-      overflow-x: hidden;
+      overflow-x:hidden;
 
       background:
+      linear-gradient(
+        rgba(255,255,255,0.45),
+        rgba(255,255,255,0.45)
+      ),
+      url("https://images.unsplash.com/photo-1515694346937-94d85e41e6f0");
 
-        linear-gradient(
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      background-attachment:fixed;
 
-          rgba(255,255,255,0.80),
-
-          rgba(255,255,255,0.80)
-
-        ),
-
-        url("https://images.unsplash.com/photo-1528715471579-d1bcf0ba5e83");
-
-      background-size: cover;
-
-      background-position: center;
-
-      background-repeat: no-repeat;
-
-      background-attachment: fixed;
+      padding:30px;
 
     }
 
-    h1 {
+    /* ================= TOP BAR ================= */
 
-      text-align: center;
+    .top-bar{
 
-      font-size: 40px;
+      position:fixed;
 
-      margin-bottom: 24px;
+      top:20px;
+      left:20px;
+      right:20px;
 
-      color: #b91c1c;
+      display:flex;
+
+      justify-content:space-between;
+      align-items:flex-start;
+
+      z-index:999999;
+
+    }
+
+    /* ================= MENU ================= */
+
+    .menu-container{
+
+      position:relative;
+
+    }
+
+    .menu-btn{
+
+      width:58px;
+      height:58px;
+
+      border:none;
+
+      border-radius:18px;
+
+      background:
+      rgba(255,255,255,0.95);
+
+      font-size:28px;
+
+      cursor:pointer;
+
+      box-shadow:
+      0 8px 24px rgba(0,0,0,0.18);
+
+      transition:0.3s;
+
+    }
+
+    .menu-btn:hover{
+
+      transform:scale(1.06);
+
+    }
+
+    .dropdown{
+
+      position:absolute;
+
+      top:70px;
+      left:0;
+
+      width:240px;
+
+      background:
+      rgba(255,255,255,0.96);
+
+      border-radius:24px;
+
+      padding:18px;
+
+      display:none;
+
+      flex-direction:column;
+
+      gap:14px;
+
+      box-shadow:
+      0 14px 30px rgba(0,0,0,0.18);
+
+      backdrop-filter:blur(10px);
+
+    }
+
+    .dropdown a{
+
+      text-decoration:none;
+
+      color:#444;
+
+      font-size:18px;
+      font-weight:bold;
+
+      padding:14px 16px;
+
+      border-radius:14px;
+
+      transition:0.3s;
+
+      background:
+      rgba(230,240,255,0.7);
+
+    }
+
+    .dropdown a:hover{
+
+      background:
+      linear-gradient(
+        135deg,
+        #89f7fe,
+        #66a6ff
+      );
+
+      color:white;
+
+      transform:translateX(4px);
+
+    }
+
+    .dropdown.show{
+
+      display:flex;
+
+    }
+
+    /* ================= CLOCK ================= */
+
+    .clock-text{
+
+      font-size:17px;
+
+      color:#222;
+
+      font-weight:bold;
 
       text-shadow:
-        0 2px 10px rgba(255,255,255,0.8);
+      0 0 8px rgba(255,255,255,0.9);
+
+      line-height:1.8;
+
+      text-align:right;
 
     }
 
-    /* ========================= */
-    /* SEARCH */
-    /* ========================= */
+    /* ================= HERO ================= */
 
-    .search-box {
+    .hero{
 
-      max-width: 700px;
+      text-align:center;
 
-      margin: auto;
-
-      margin-bottom: 35px;
+      margin-top:120px;
+      margin-bottom:45px;
 
     }
 
-    .search-box input {
+    .hero h1{
 
-      width: 100%;
+      font-size:72px;
 
-      padding: 15px 20px;
+      color:#3a86ff;
 
-      border: none;
+      text-shadow:
+      0 0 14px rgba(255,255,255,0.95),
+      0 0 28px rgba(173,216,230,0.9);
 
-      outline: none;
+      animation:floatTitle 3s ease-in-out infinite;
 
-      border-radius: 18px;
+    }
 
-      font-size: 16px;
+    .hero p{
 
-      font-family: inherit;
+      margin-top:18px;
 
-      background: rgba(255,255,255,0.92);
+      font-size:22px;
+
+      color:#333;
+
+    }
+
+    @keyframes floatTitle{
+
+      0%{
+        transform:translateY(0px);
+      }
+
+      50%{
+        transform:translateY(-6px);
+      }
+
+      100%{
+        transform:translateY(0px);
+      }
+
+    }
+
+    /* ================= SLIDER ================= */
+
+    .slider{
+
+      width:100%;
+
+      overflow:hidden;
+
+      margin-top:45px;
+      margin-bottom:65px;
+
+      position:relative;
+
+    }
+
+    .slide-track{
+
+      display:flex;
+
+      width:max-content;
+
+      animation:scrollSlide 90s linear infinite;
+
+      gap:22px;
+
+    }
+
+    .slide{
+
+      width:340px;
+      height:220px;
+
+      border-radius:28px;
+
+      overflow:hidden;
+
+      flex-shrink:0;
 
       box-shadow:
-        0 8px 25px rgba(0,0,0,0.08);
+      0 14px 30px rgba(0,0,0,0.2);
 
     }
 
-    /* ========================= */
-    /* GRID */
-    /* ========================= */
+    .slide img{
 
-    .grid {
+      width:100%;
+      height:100%;
 
-      max-width: 1200px;
+      object-fit:cover;
 
-      margin: auto;
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(auto-fit, minmax(150px, 1fr));
-
-      gap: 16px;
+      transition:0.5s;
 
     }
 
-    /* ========================= */
-    /* CARD */
-    /* ========================= */
+    .slide:hover img{
 
-    .card {
+      transform:scale(1.08);
 
-      min-height: 95px;
+    }
 
-      border-radius: 20px;
+    @keyframes scrollSlide{
 
-      padding: 16px;
+      0%{
+        transform:translateX(0);
+      }
 
-      cursor: pointer;
+      100%{
+        transform:translateX(-50%);
+      }
 
-      display: flex;
+    }
 
-      align-items: center;
+    /* ================= QUOTE ================= */
 
-      justify-content: center;
+    .quote{
 
-      text-align: center;
+      max-width:1100px;
 
-      font-size: 18px;
+      margin:auto;
 
-      font-weight: 700;
+      margin-bottom:60px;
 
-      color: white;
+      background:
+      rgba(255,255,255,0.88);
 
-      line-height: 1.5;
+      border-radius:28px;
 
-      transition: 0.3s;
+      padding:34px;
+
+      text-align:center;
+
+      font-size:30px;
+
+      color:#3a86ff;
+
+      font-weight:bold;
+
+      line-height:1.8;
 
       box-shadow:
-        0 10px 24px rgba(0,0,0,0.12);
-
-      backdrop-filter: blur(10px);
-
-      user-select: none;
-
-      position: relative;
-
-      overflow: hidden;
+      0 12px 30px rgba(0,0,0,0.12);
 
     }
 
-    /* ========================= */
-    /* HOA SEN */
-    /* ========================= */
+    /* ================= FOOTER ================= */
 
-    .lotus {
+    footer{
 
-      position: absolute;
+      text-align:center;
 
-      font-size: 22px;
+      color:#333;
 
-      opacity: 0;
+      font-size:18px;
 
-      pointer-events: none;
-
-      animation:
-        lotusFloat 2.6s linear infinite;
-
-    }
-
-    .card:hover .lotus {
-
-      opacity: 1;
-
-    }
-
-    .lotus1 {
-
-      top: 10px;
-      left: 10px;
-
-      animation-delay: 0s;
-
-    }
-
-    .lotus2 {
-
-      top: 40px;
-      right: 18px;
-
-      animation-delay: 0.5s;
-
-    }
-
-    .lotus3 {
-
-      bottom: 14px;
-      left: 26px;
-
-      animation-delay: 1s;
-
-    }
-
-    .lotus4 {
-
-      bottom: 8px;
-      right: 10px;
-
-      animation-delay: 1.5s;
-
-    }
-
-    @keyframes lotusFloat {
-
-      0% {
-
-        transform:
-          translateY(0px)
-          rotate(0deg);
-
-      }
-
-      50% {
-
-        transform:
-          translateY(-10px)
-          rotate(8deg);
-
-      }
-
-      100% {
-
-        transform:
-          translateY(0px)
-          rotate(0deg);
-
-      }
-
-    }
-
-    /* ========================= */
-    /* HOVER */
-    /* ========================= */
-
-    .card:hover {
-
-      transform:
-        translateY(-5px)
-        scale(1.03);
-
-      box-shadow:
-        0 0 18px rgba(255,255,255,0.8),
-        0 0 35px rgba(255,192,203,0.7),
-        0 18px 35px rgba(0,0,0,0.18);
-
-      filter: brightness(1.08);
-
-    }
-
-    /* ========================= */
-    /* RANDOM COLORS */
-    /* ========================= */
-
-    .color1 {
-      background: linear-gradient(135deg,#ef4444,#dc2626);
-    }
-
-    .color2 {
-      background: linear-gradient(135deg,#f59e0b,#d97706);
-    }
-
-    .color3 {
-      background: linear-gradient(135deg,#10b981,#059669);
-    }
-
-    .color4 {
-      background: linear-gradient(135deg,#3b82f6,#2563eb);
-    }
-
-    .color5 {
-      background: linear-gradient(135deg,#8b5cf6,#7c3aed);
-    }
-
-    .color6 {
-      background: linear-gradient(135deg,#ec4899,#db2777);
-    }
-
-    /* ========================= */
-    /* HIGHLIGHT */
-    /* ========================= */
-
-    mark {
-
-      background: yellow;
-
-      color: #111;
-
-      padding: 0 4px;
-
-      border-radius: 4px;
-
-    }
-
-    /* ========================= */
-    /* PAGINATION */
-    /* ========================= */
-
-    .pagination {
-
-      margin-top: 40px;
-
-      display: flex;
-
-      justify-content: center;
-
-      gap: 10px;
-
-      flex-wrap: wrap;
-
-    }
-
-    .page-btn {
-
-      width: 42px;
-
-      height: 42px;
-
-      border-radius: 12px;
-
-      border: none;
-
-      cursor: pointer;
-
-      font-weight: 700;
-
-      background: rgba(255,255,255,0.92);
-
-      box-shadow:
-        0 6px 16px rgba(0,0,0,0.08);
-
-      transition: 0.2s;
-
-    }
-
-    .page-btn:hover {
-
-      transform: scale(1.08);
-
-    }
-
-    .page-btn.active {
-
-      background: #2563eb;
-
-      color: white;
-
-    }
-
-    /* ========================= */
-    /* POPUP */
-    /* ========================= */
-
-    .popup-overlay {
-
-      position: fixed;
-
-      inset: 0;
-
-      background: rgba(0,0,0,0.5);
-
-      display: none;
-
-      align-items: center;
-
-      justify-content: center;
-
-      z-index: 999999;
-
-      padding: 20px;
-
-      backdrop-filter: blur(5px);
-
-    }
-
-    .popup-box {
-
-      width: 100%;
-
-      max-width: 820px;
-
-      background: rgba(255,255,255,0.97);
-
-      border-radius: 30px;
-
-      padding: 36px;
-
-      position: relative;
-
-      max-height: 85vh;
-
-      overflow-y: auto;
-
-      box-shadow:
-        0 25px 60px rgba(0,0,0,0.2);
-
-    }
-
-    .popup-title {
-
-      font-size: 34px;
-
-      font-weight: 700;
-
-      margin-bottom: 28px;
-
-      color: #dc2626;
-
-      padding-right: 90px;
-
-      line-height: 1.5;
-
-    }
-
-    .popup-content {
-
-      font-size: 20px;
-
-      line-height: 2;
-
-      color: #333;
-
-      white-space: pre-line;
-
-      word-break: break-word;
-
-    }
-
-    .popup-close {
-
-      position: absolute;
-
-      top: 18px;
-
-      right: 20px;
-
-      width: 42px;
-
-      height: 42px;
-
-      border-radius: 12px;
-
-      background: #e5e7eb;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      cursor: pointer;
-
-      font-size: 20px;
-
-    }
-
-    .popup-copy {
-
-      position: absolute;
-
-      top: 18px;
-
-      right: 72px;
-
-      width: 42px;
-
-      height: 42px;
-
-      border-radius: 12px;
-
-      background: #2563eb;
-
-      color: white;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      cursor: pointer;
-
-    }
-
-    /* ========================= */
-    /* TOAST */
-    /* ========================= */
-
-    .toast {
-
-      position: fixed;
-
-      left: 50%;
-
-      bottom: 40px;
-
-      transform: translateX(-50%);
-
-      background: rgba(37,99,235,0.96);
-
-      color: white;
-
-      padding: 14px 24px;
-
-      border-radius: 16px;
-
-      font-size: 15px;
-
-      opacity: 0;
-
-      pointer-events: none;
-
-      transition: 0.3s;
-
-      z-index: 9999999;
-
-    }
-
-    .toast.show {
-
-      opacity: 1;
-
-      bottom: 60px;
-
-    }
-
-    @media (max-width: 768px) {
-
-      body {
-
-        padding: 18px;
-
-      }
-
-      h1 {
-
-        font-size: 32px;
-
-      }
-
-      .card {
-
-        min-height: 85px;
-
-        font-size: 16px;
-
-      }
-
-      .popup-title {
-
-        font-size: 28px;
-
-      }
-
-      .popup-content {
-
-        font-size: 18px;
-
-      }
+      padding-bottom:25px;
 
     }
 
@@ -610,514 +363,206 @@
 
 <body>
 
-  <h1>
-    🌸 Kinh Pháp Cú 🌸
-  </h1>
+  <!-- TOP BAR -->
 
-  <!-- SEARCH -->
+  <div class="top-bar">
 
-  <div class="search-box">
+    <!-- MENU -->
 
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="Tìm kiếm nội dung..."
-    >
+    <div class="menu-container">
 
-  </div>
+      <button class="menu-btn"
+              id="menuBtn">
 
-  <!-- GRID -->
+        ☰
 
-  <div class="grid"
-       id="grid">
+      </button>
 
-  </div>
+      <div class="dropdown"
+           id="dropdownMenu">
 
-  <!-- PAGINATION -->
+        <a href="index.html">
+          🏠 Trang Chủ
+        </a>
 
-  <div class="pagination"
-       id="pagination">
+        <a href="kinhphapcu.html">
+          📖 Kinh Pháp Cú
+        </a>
 
-  </div>
-
-  <!-- POPUP -->
-
-  <div
-    class="popup-overlay"
-    id="popupOverlay">
-
-    <div class="popup-box">
-
-      <div
-        class="popup-close"
-        onclick="closePopup()">
-
-        ✕
-
-      </div>
-
-      <div
-        class="popup-copy"
-        onclick="copyPopupContent()">
-
-        <i class="fa-regular fa-copy"></i>
-
-      </div>
-
-      <div
-        class="popup-title"
-        id="popupTitle">
-
-      </div>
-
-      <div
-        class="popup-content"
-        id="popupContent">
+        <a href="timkiem.html">
+          🔍 Tìm Kiếm
+        </a>
 
       </div>
 
     </div>
 
-  </div>
+    <!-- CLOCK -->
 
-  <!-- TOAST -->
+    <div class="clock-text"
+         id="clockText">
 
-  <div
-    class="toast"
-    id="toast">
-
-    Đã copy nội dung
+    </div>
 
   </div>
 
-  <!-- NHẠC -->
+  <!-- HERO -->
 
-  <audio
-    id="bgMusic"
-    autoplay
-    loop>
+  <section class="hero">
 
-    <source
-      src="nhacthien.mp3"
-      type="audio/mpeg">
+    <h1>☔ Mưa Tĩnh Lặng ☔</h1>
+
+    <p>
+      Một khoảng trời bình yên giữa những cơn mưa nhẹ
+    </p>
+
+  </section>
+
+  <!-- SLIDER -->
+
+  <section class="slider">
+
+    <div class="slide-track"
+         id="slideTrack">
+
+    </div>
+
+  </section>
+
+  <!-- QUOTE -->
+
+  <section class="quote">
+
+    “Ngồi nghe mưa rơi, lòng cũng dịu lại.”
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    Chúc bạn luôn bình yên giữa những ngày mưa ☔
+
+  </footer>
+
+  <!-- AUDIO -->
+
+  <audio id="bgMusic"
+         autoplay
+         loop>
+
+    <source src="nhacnen/nhacthien0.mp3"
+            type="audio/mpeg">
 
   </audio>
 
   <script>
 
-    let data = [];
+    /* ================= CLOCK ================= */
 
-    let keyword = "";
+    function updateClock(){
 
-    let currentPage = 1;
+      const now = new Date();
 
-    const rowsPerPage = 7;
+      const weekdays = [
+        "Chủ Nhật",
+        "Thứ Hai",
+        "Thứ Ba",
+        "Thứ Tư",
+        "Thứ Năm",
+        "Thứ Sáu",
+        "Thứ Bảy"
+      ];
 
-    const colors = [
+      const weekday =
+      weekdays[now.getDay()];
 
-      "color1",
-      "color2",
-      "color3",
-      "color4",
-      "color5",
-      "color6"
+      const time =
+      now.toLocaleTimeString("vi-VN");
 
-    ];
+      const date =
+      now.toLocaleDateString("vi-VN");
 
-    const grid =
-      document.getElementById("grid");
+      document.getElementById("clockText")
+      .innerHTML =
 
-    const pagination =
-      document.getElementById("pagination");
+      `${weekday}, ${date} • ${time}`;
 
-    const popupOverlay =
-      document.getElementById("popupOverlay");
+    }
 
-    const popupTitle =
-      document.getElementById("popupTitle");
+    setInterval(updateClock,1000);
 
-    const popupContent =
-      document.getElementById("popupContent");
+    updateClock();
 
-    const toast =
-      document.getElementById("toast");
+    /* ================= MENU ================= */
 
-    const searchInput =
-      document.getElementById("searchInput");
+    const menuBtn =
+    document.getElementById("menuBtn");
 
-    // =========================
-    // LOAD JSON
-    // =========================
+    const dropdownMenu =
+    document.getElementById("dropdownMenu");
 
-    fetch("jsonkpc.json")
+    menuBtn.addEventListener("click", () => {
 
-      .then(response => response.json())
-
-      .then(json => {
-
-        data = json;
-
-        renderPage();
-
-      });
-
-    // =========================
-    // SEARCH
-    // =========================
-
-    searchInput.addEventListener("input", () => {
-
-      keyword =
-        searchInput.value.toLowerCase();
-
-      currentPage = 1;
-
-      renderPage();
+      dropdownMenu.classList.toggle("show");
 
     });
 
-    // =========================
-    // FILTER
-    // =========================
-
-    function getFilteredData() {
-
-      return data.filter(item => {
-
-        return (
-
-          item.title
-            .toLowerCase()
-            .includes(keyword)
-
-          ||
-
-          item.content
-            .toLowerCase()
-            .includes(keyword)
-
-        );
-
-      });
-
-    }
-
-    // =========================
-    // PAGE
-    // =========================
-
-    function renderPage() {
-
-      const filtered =
-        getFilteredData();
-
-      const columns =
-        getColumnCount();
-
-      const itemsPerPage =
-        columns * rowsPerPage;
-
-      const start =
-        (currentPage - 1) * itemsPerPage;
-
-      const end =
-        start + itemsPerPage;
-
-      const pageData =
-        filtered.slice(start, end);
-
-      renderCards(pageData);
-
-      renderPagination(
-        filtered.length,
-        itemsPerPage
-      );
-
-    }
-
-    // =========================
-    // COLUMN COUNT
-    // =========================
-
-    function getColumnCount() {
-
-      const width =
-        window.innerWidth;
-
-      if (width <= 500) return 2;
-
-      if (width <= 768) return 3;
-
-      if (width <= 1100) return 5;
-
-      return 6;
-
-    }
-
-    // =========================
-    // RENDER CARDS
-    // =========================
-
-    function renderCards(list) {
-
-      grid.innerHTML = "";
-
-      list.forEach(item => {
-
-        const card =
-          document.createElement("div");
-
-        // RANDOM COLOR
-
-        const randomColor =
-          colors[
-            Math.floor(
-              Math.random() * colors.length
-            )
-          ];
-
-        card.className =
-          `card ${randomColor}`;
-
-        card.innerHTML = `
-
-          <div class="lotus lotus1">🌸</div>
-          <div class="lotus lotus2">🪷</div>
-          <div class="lotus lotus3">🌸</div>
-          <div class="lotus lotus4">🪷</div>
-
-          <div>
-
-            ${highlightText(item.title)}
-
-          </div>
-
-        `;
-
-        card.onclick = () => {
-
-          openPopup(
-            item.title,
-            item.content
-          );
-
-        };
-
-        grid.appendChild(card);
-
-      });
-
-    }
-
-    // =========================
-    // PAGINATION
-    // =========================
-
-    function renderPagination(totalItems, itemsPerPage) {
-
-      pagination.innerHTML = "";
-
-      const totalPages =
-        Math.ceil(
-          totalItems / itemsPerPage
-        );
-
-      for (let i = 1; i <= totalPages; i++) {
-
-        const btn =
-          document.createElement("button");
-
-        btn.className =
-          "page-btn";
-
-        if (i === currentPage) {
-
-          btn.classList.add("active");
-
-        }
-
-        btn.innerText = i;
-
-        btn.onclick = () => {
-
-          currentPage = i;
-
-          renderPage();
-
-          window.scrollTo({
-
-            top: 0,
-
-            behavior: "smooth"
-
-          });
-
-        };
-
-        pagination.appendChild(btn);
-
-      }
-
-    }
-
-    // =========================
-    // HIGHLIGHT
-    // =========================
-
-    function highlightText(text) {
-
-      if (!keyword) return text;
-
-      const regex =
-        new RegExp(`(${keyword})`, "gi");
-
-      return text.replace(
-        regex,
-        `<mark>$1</mark>`
-      );
-
-    }
-
-    // =========================
-    // POPUP
-    // =========================
-
-    function openPopup(title, content) {
-
-      popupTitle.innerHTML =
-        highlightText(title);
-
-      popupContent.innerHTML =
-        formatText(
-          highlightText(content)
-        );
-
-      popupOverlay.style.display =
-        "flex";
-
-    }
-
-    function closePopup() {
-
-      popupOverlay.style.display =
-        "none";
-
-    }
-
-    popupOverlay.addEventListener("click", e => {
-
-      if (e.target === popupOverlay) {
-
-        closePopup();
+    window.addEventListener("click", e => {
+
+      if(
+        !menuBtn.contains(e.target)
+        &&
+        !dropdownMenu.contains(e.target)
+      ){
+
+        dropdownMenu.classList.remove("show");
 
       }
 
     });
 
-    // =========================
-    // COPY
-    // =========================
-
-    function copyPopupContent() {
-
-      const text =
-        popupContent.innerText.trim();
-
-      navigator.clipboard.writeText(text)
-
-        .then(() => {
-
-          showToast();
-
-        });
-
-    }
-
-    // =========================
-    // TOAST
-    // =========================
-
-    function showToast() {
-
-      toast.classList.add("show");
-
-      setTimeout(() => {
-
-        toast.classList.remove("show");
-
-      }, 2000);
-
-    }
-
-    // =========================
-    // FORMAT
-    // =========================
-
-    function formatText(text) {
-
-      return text
-
-        .replace(/\n/g, "<br>")
-
-        .replace(/<red>(.*?)<\/red>/g,
-          '<span style="color:red;">$1</span>')
-
-        .replace(/<blue>(.*?)<\/blue>/g,
-          '<span style="color:blue;">$1</span>')
-
-        .replace(/<green>(.*?)<\/green>/g,
-          '<span style="color:green;">$1</span>')
-
-        .replace(/<pink>(.*?)<\/pink>/g,
-          '<span style="color:hotpink;">$1</span>')
-
-        .replace(/<gray>(.*?)<\/gray>/g,
-          '<span style="color:gray;">$1</span>')
-
-        .replace(/<purple>(.*?)<\/purple>/g,
-          '<span style="color:purple;">$1</span>')
-
-        .replace(/<orange>(.*?)<\/orange>/g,
-          '<span style="color:orange;">$1</span>');
-
-    }
-
-    // =========================
-    // MUSIC
-    // =========================
+    /* ================= MUSIC ================= */
 
     const bgMusic =
-      document.getElementById("bgMusic");
+    document.getElementById("bgMusic");
 
-    bgMusic.volume = 0.18;
+    bgMusic.volume = 0.22;
 
-    window.addEventListener("load", () => {
+    window.addEventListener("click", () => {
 
-      bgMusic.play()
+      bgMusic.play();
 
-        .catch(() => {
+    },{ once:true });
 
-          document.body.addEventListener(
-            "click",
-            () => {
+    /* ================= LOAD IMAGES ================= */
 
-              bgMusic.play();
+    fetch("images.json")
 
-            },
-            { once: true }
-          );
+    .then(response => response.json())
 
-        });
+    .then(images => {
 
-    });
+      const slideTrack =
+      document.getElementById("slideTrack");
 
-    // =========================
-    // RESIZE
-    // =========================
+      const duplicated =
+      [...images, ...images];
 
-    window.addEventListener("resize", () => {
+      duplicated.forEach(src => {
 
-      renderPage();
+        const slide =
+        document.createElement("div");
+
+        slide.className = "slide";
+
+        slide.innerHTML =
+
+        `<img src="${src}">`;
+
+        slideTrack.appendChild(slide);
+
+      });
 
     });
 

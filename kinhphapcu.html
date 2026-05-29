@@ -16,6 +16,56 @@
 
   <style>
 
+    /* THAY TOÀN BỘ .home-btn CŨ THÀNH */
+
+.home-btn{
+
+  position:fixed;
+
+  top:20px;
+  left:20px;
+
+  width:72px;
+  height:72px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  font-size:38px;
+
+  text-decoration:none;
+
+  border-radius:22px;
+
+  background:
+  rgba(255,255,255,0.92);
+
+  backdrop-filter:blur(8px);
+
+  box-shadow:
+  0 8px 24px rgba(0,0,0,0.18);
+
+  z-index:999999;
+
+  transition:0.3s;
+
+}
+
+.home-btn:hover{
+
+  transform:
+  scale(1.12)
+  rotate(-5deg);
+
+  background:white;
+
+  box-shadow:
+  0 0 20px rgba(255,255,255,0.9),
+  0 0 35px rgba(173,216,230,0.8);
+
+}
     *{
       margin:0;
       padding:0;
@@ -509,6 +559,13 @@
 
 <body>
 
+  <!-- THÊM ĐOẠN NÀY NGAY SAU <body> -->
+
+<a href="index.html" class="home-btn">
+  🏠
+</a>
+
+
   <!-- TITLE -->
 
   <div class="title-wrap">
@@ -605,7 +662,7 @@
          autoplay
          loop>
 
-    <source src="nhacthien2.mp3"
+    <source src="nhacnen/nhacthien2.mp3"
             type="audio/mpeg">
 
   </audio>
