@@ -1,467 +1,69 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Mưa Tĩnh Lặng</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
-
-  <style>
-
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
-
-    body{
-
-      font-family:'Quicksand',sans-serif;
-
-      min-height:100vh;
-
-      overflow-x:hidden;
-
-      background:
-      linear-gradient(
-        rgba(255,255,255,0.45),
-        rgba(255,255,255,0.45)
-      ),
-      url("https://images.unsplash.com/photo-1515694346937-94d85e41e6f0");
-
-      background-size:cover;
-      background-position:center;
-      background-repeat:no-repeat;
-      background-attachment:fixed;
-
-      padding:30px;
-
-    }
-
-    /* ================= TOP BAR ================= */
-
-    .top-bar{
-
-      position:fixed;
-
-      top:20px;
-      left:20px;
-      right:20px;
-
-      display:flex;
-
-      justify-content:space-between;
-      align-items:flex-start;
-
-      z-index:999999;
-
-    }
-
-    /* ================= MENU ================= */
-
-    .menu-container{
-
-      position:relative;
-
-    }
-
-    .menu-btn{
-
-      width:58px;
-      height:58px;
-
-      border:none;
-
-      border-radius:18px;
-
-      background:
-      rgba(255,255,255,0.95);
-
-      font-size:28px;
-
-      cursor:pointer;
-
-      box-shadow:
-      0 8px 24px rgba(0,0,0,0.18);
-
-      transition:0.3s;
-
-    }
-
-    .menu-btn:hover{
-
-      transform:scale(1.06);
-
-    }
-
-    .dropdown{
-
-      position:absolute;
-
-      top:70px;
-      left:0;
-
-      width:240px;
-
-      background:
-      rgba(255,255,255,0.96);
-
-      border-radius:24px;
-
-      padding:18px;
-
-      display:none;
-
-      flex-direction:column;
-
-      gap:14px;
-
-      box-shadow:
-      0 14px 30px rgba(0,0,0,0.18);
-
-      backdrop-filter:blur(10px);
-
-    }
-
-    .dropdown a{
-
-      text-decoration:none;
-
-      color:#444;
-
-      font-size:18px;
-      font-weight:bold;
-
-      padding:14px 16px;
-
-      border-radius:14px;
-
-      transition:0.3s;
-
-      background:
-      rgba(230,240,255,0.7);
-
-    }
-
-    .dropdown a:hover{
-
-      background:
-      linear-gradient(
-        135deg,
-        #89f7fe,
-        #66a6ff
-      );
-
-      color:white;
-
-      transform:translateX(4px);
-
-    }
-
-    .dropdown.show{
-
-      display:flex;
-
-    }
-
-    /* ================= CLOCK ================= */
-
-    .clock-text{
-
-      font-size:17px;
-
-      color:#222;
-
-      font-weight:bold;
-
-      text-shadow:
-      0 0 8px rgba(255,255,255,0.9);
-
-      line-height:1.8;
-
-      text-align:right;
-
-    }
-
-    /* ================= HERO ================= */
-
-    .hero{
-
-      text-align:center;
-
-      margin-top:120px;
-      margin-bottom:45px;
-
-    }
-
-    .hero h1{
-
-      font-size:72px;
-
-      color:#3a86ff;
-
-      text-shadow:
-      0 0 14px rgba(255,255,255,0.95),
-      0 0 28px rgba(173,216,230,0.9);
-
-      animation:floatTitle 3s ease-in-out infinite;
-
-    }
-
-    .hero p{
-
-      margin-top:18px;
-
-      font-size:22px;
-
-      color:#333;
-
-    }
-
-    @keyframes floatTitle{
-
-      0%{
-        transform:translateY(0px);
-      }
-
-      50%{
-        transform:translateY(-6px);
-      }
-
-      100%{
-        transform:translateY(0px);
-      }
-
-    }
-
-    /* ================= SLIDER ================= */
-
-    .slider{
-
-      width:100%;
-
-      overflow:hidden;
-
-      margin-top:45px;
-      margin-bottom:65px;
-
-      position:relative;
-
-    }
-
-    .slide-track{
-
-      display:flex;
-
-      width:max-content;
-
-      animation:scrollSlide 90s linear infinite;
-
-      gap:22px;
-
-    }
-
-    .slide{
-
-      width:340px;
-      height:220px;
-
-      border-radius:28px;
-
-      overflow:hidden;
-
-      flex-shrink:0;
-
-      box-shadow:
-      0 14px 30px rgba(0,0,0,0.2);
-
-    }
-
-    .slide img{
-
-      width:100%;
-      height:100%;
-
-      object-fit:cover;
-
-      transition:0.5s;
-
-    }
-
-    .slide:hover img{
-
-      transform:scale(1.08);
-
-    }
-
-    @keyframes scrollSlide{
-
-      0%{
-        transform:translateX(0);
-      }
-
-      100%{
-        transform:translateX(-50%);
-      }
-
-    }
-
-    /* ================= QUOTE ================= */
-
-    .quote{
-
-      max-width:1100px;
-
-      margin:auto;
-
-      margin-bottom:60px;
-
-      background:
-      rgba(255,255,255,0.88);
-
-      border-radius:28px;
-
-      padding:34px;
-
-      text-align:center;
-
-      font-size:30px;
-
-      color:#3a86ff;
-
-      font-weight:bold;
-
-      line-height:1.8;
-
-      box-shadow:
-      0 12px 30px rgba(0,0,0,0.12);
-
-    }
-
-    /* ================= FOOTER ================= */
-
-    footer{
-
-      text-align:center;
-
-      color:#333;
-
-      font-size:18px;
-
-      padding-bottom:25px;
-
-    }
-
-  </style>
-
+  <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
 
-  <!-- TOP BAR -->
+  <div id="loading">
+    ☔ Mưa Tĩnh Lặng
+    <div style="font-size:17px;margin-top:12px;">
+      Đang chuẩn bị khoảng trời bình yên...
+    </div>
+  </div>
 
   <div class="top-bar">
 
-    <!-- MENU -->
-
     <div class="menu-container">
+      <button class="menu-btn" id="menuBtn">☰</button>
 
-      <button class="menu-btn"
-              id="menuBtn">
-
-        ☰
-
-      </button>
-
-      <div class="dropdown"
-           id="dropdownMenu">
-
-        <a href="index.html">
-          🏠 Trang Chủ
-        </a>
-
-        <a href="kinhphapcu.html">
-          📖 Kinh Pháp Cú
-        </a>
-
-        <a href="timkiem.html">
-          🔍 Tìm Kiếm
-        </a>
-
+      <div class="dropdown" id="dropdownMenu">
+        <a href="index.html">🏠 Trang Chủ</a>
+        <a href="kinhphapcu.html">📖 Kinh Pháp Cú</a>
+        <a href="timkiem.html">🔍 Tìm Kiếm</a>
       </div>
-
     </div>
 
-    <!-- CLOCK -->
-
-    <div class="clock-text"
-         id="clockText">
-
-    </div>
+    <div class="clock-text" id="clockText"></div>
 
   </div>
 
-  <!-- HERO -->
-
   <section class="hero">
-
     <h1>☔ Mưa Tĩnh Lặng ☔</h1>
-
-    <p>
-      Một khoảng trời bình yên giữa những cơn mưa nhẹ
-    </p>
-
+    <p>Một khoảng trời bình yên giữa những cơn mưa nhẹ</p>
   </section>
 
-  <!-- SLIDER -->
+  <div class="greeting" id="greeting"></div>
 
   <section class="slider">
-
-    <div class="slide-track"
-         id="slideTrack">
-
-    </div>
-
+    <div class="slide-track" id="slideTrack"></div>
   </section>
 
-  <!-- QUOTE -->
-
-  <section class="quote">
-
-    “Ngồi nghe mưa rơi, lòng cũng dịu lại.”
-
-  </section>
-
-  <!-- FOOTER -->
+  <section class="quote" id="quoteBox"></section>
 
   <footer>
-
     Chúc bạn luôn bình yên giữa những ngày mưa ☔
-
   </footer>
 
-  <!-- AUDIO -->
-
-  <audio id="bgMusic"
-         autoplay
-         loop>
-
-    <source src="audio/nhacnen/00.mp3"
-            type="audio/mpeg">
-
+  <audio id="bgMusic" autoplay loop>
+    <source src="audio/nhacnen/00.mp3" type="audio/mpeg">
   </audio>
 
   <script>
 
-    /* ================= CLOCK ================= */
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("loading").classList.add("hide");
+      }, 900);
+    });
 
     function updateClock(){
-
       const now = new Date();
 
       const weekdays = [
@@ -474,100 +76,139 @@
         "Thứ Bảy"
       ];
 
-      const weekday =
-      weekdays[now.getDay()];
+      const weekday = weekdays[now.getDay()];
+      const time = now.toLocaleTimeString("vi-VN");
+      const date = now.toLocaleDateString("vi-VN");
 
-      const time =
-      now.toLocaleTimeString("vi-VN");
-
-      const date =
-      now.toLocaleDateString("vi-VN");
-
-      document.getElementById("clockText")
-      .innerHTML =
-
+      document.getElementById("clockText").innerHTML =
       `${weekday}, ${date} • ${time}`;
-
     }
 
     setInterval(updateClock,1000);
-
     updateClock();
 
-    /* ================= MENU ================= */
-
-    const menuBtn =
-    document.getElementById("menuBtn");
-
-    const dropdownMenu =
-    document.getElementById("dropdownMenu");
+    const menuBtn = document.getElementById("menuBtn");
+    const dropdownMenu = document.getElementById("dropdownMenu");
 
     menuBtn.addEventListener("click", () => {
-
       dropdownMenu.classList.toggle("show");
-
     });
 
     window.addEventListener("click", e => {
-
-      if(
-        !menuBtn.contains(e.target)
-        &&
-        !dropdownMenu.contains(e.target)
-      ){
-
+      if(!menuBtn.contains(e.target) && !dropdownMenu.contains(e.target)){
         dropdownMenu.classList.remove("show");
-
       }
-
     });
 
-    /* ================= MUSIC ================= */
+    const hour = new Date().getHours();
+    const greeting = document.getElementById("greeting");
 
-    const bgMusic =
-    document.getElementById("bgMusic");
+    if(hour < 11){
+      greeting.innerHTML = "☀️ Chào buổi sáng nhẹ nhàng";
+    }
+    else if(hour < 18){
+      greeting.innerHTML = "🌤️ Chúc bạn một ngày an yên";
+    }
+    else{
+      greeting.innerHTML = "🌙 Chúc bạn một buổi tối bình yên";
+    }
 
+    const quotes = [
+      "Ngồi nghe mưa rơi, lòng cũng dịu lại",
+      "Tĩnh lặng là nơi bình an bắt đầu",
+      "Buông xuống cũng là một loại tự do",
+      "Mưa rơi ngoài hiên, tâm thôi vội vã",
+      "Bình yên không ở đâu xa, chỉ ở trong lòng"
+    ];
+
+    document.getElementById("quoteBox").innerText =
+    quotes[Math.floor(Math.random() * quotes.length)];
+
+    fetch("json/imageshome.json")
+    .then(response => response.json())
+    .then(images => {
+      const slideTrack = document.getElementById("slideTrack");
+      const duplicated = [...images, ...images];
+
+      duplicated.forEach(src => {
+        const slide = document.createElement("div");
+        slide.className = "slide";
+        slide.innerHTML = `<img src="${src}">`;
+        slideTrack.appendChild(slide);
+      });
+    });
+
+    const bgMusic = document.getElementById("bgMusic");
     bgMusic.volume = 0.22;
 
     window.addEventListener("click", () => {
-
       bgMusic.play();
-
     },{ once:true });
 
-    /* ================= LOAD IMAGES ================= */
+    for(let i = 0; i < 80; i++){
+      const r = document.createElement("div");
+      r.className = "rain";
+      r.style.left = Math.random() * 100 + "vw";
+      r.style.animationDuration = (0.7 + Math.random() * 1.2) + "s";
+      r.style.opacity = Math.random();
+      document.body.appendChild(r);
+    }
 
-    fetch("json/imageshome.json")
+    for(let i = 0; i < 14; i++){
+      const f = document.createElement("div");
+      f.className = "firefly";
+      f.style.left = Math.random() * 100 + "vw";
+      f.style.top = Math.random() * 100 + "vh";
+      f.style.animationDelay = Math.random() * 8 + "s";
+      document.body.appendChild(f);
+    }
 
-    .then(response => response.json())
+    document.addEventListener("mousemove", e => {
+      if(Math.random() > 0.94){
+        const p = document.createElement("div");
+        p.innerText = "🪷";
+        p.style.position = "fixed";
+        p.style.left = e.clientX + "px";
+        p.style.top = e.clientY + "px";
+        p.style.pointerEvents = "none";
+        p.style.zIndex = "999999";
+        p.style.animation = "petalMove 1.2s forwards";
 
-    .then(images => {
+        document.body.appendChild(p);
 
-      const slideTrack =
-      document.getElementById("slideTrack");
+        setTimeout(() => {
+          p.remove();
+        }, 1200);
+      }
+    });
 
-      const duplicated =
-      [...images, ...images];
+    const style = document.createElement("style");
 
-      duplicated.forEach(src => {
+    style.innerHTML = `
+      @keyframes petalMove{
+        to{
+          transform:translateY(-60px) rotate(80deg);
+          opacity:0;
+        }
+      }
+    `;
 
-        const slide =
-        document.createElement("div");
+    document.head.appendChild(style);
 
-        slide.className = "slide";
+    document.addEventListener("click", e => {
+      const ripple = document.createElement("div");
+      ripple.className = "ripple";
+      ripple.style.left = e.clientX + "px";
+      ripple.style.top = e.clientY + "px";
 
-        slide.innerHTML =
+      document.body.appendChild(ripple);
 
-        `<img src="${src}">`;
-
-        slideTrack.appendChild(slide);
-
-      });
-
+      setTimeout(() => {
+        ripple.remove();
+      },800);
     });
 
   </script>
 
 </body>
-
 </html>
