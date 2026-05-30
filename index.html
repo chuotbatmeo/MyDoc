@@ -124,17 +124,7 @@
       greeting.innerHTML = "🌙 Chúc bạn một buổi tối bình yên";
     }
 
-    fetch("json/quotes.json")
-    .then(response => response.json())
-    .then(quotes => {
-    if (!quotes.length) return;
-
-    document.getElementById("quoteBox").innerHTML =
-      quotes[Math.floor(Math.random() * quotes.length)];
-  })
-  .catch(error => {
-    console.error("Không tải được quotes.json", error);
-  });
+    
 
     fetch("json/imageshome.json")
     .then(response => response.json())
@@ -142,7 +132,48 @@
       const slideTrack = document.getElementById("slideTrack");
       const duplicated = [...images, ...images];
 
-      duplicated.forEach(src => {
+      duplicated.forEach(src => {let quoteList = [];
+let currentQuoteIndex = -1;
+
+function showRandomQuote() {
+  if (!quoteList.length) return;
+
+  let randomIndex;
+
+  do {
+    randomIndex = Math.floor(Math.random() * quoteList.length);
+  } while (randomIndex === currentQuoteIndex && quoteList.length > 1);
+
+  currentQuoteIndex = randomIndex;
+
+  const quoteBox = document.getElementById("quoteBox");
+
+quoteBox.classList.add("fade-out");
+
+setTimeout(() => {
+
+  quoteBox.innerHTML =
+    quoteList[currentQuoteIndex];
+
+  quoteBox.classList.remove("fade-out");
+
+}, 800);
+}
+
+fetch("json/quotes.json")
+.then(response => response.json())
+.then(quotes => {
+  quoteList = quotes;
+
+  showRandomQuote();
+
+  setInterval(() => {
+    showRandomQuote();
+  }, 10000);
+})
+.catch(error => {
+  console.error("Không tải được quotes.json", error);
+});
         const slide = document.createElement("div");
         slide.className = "slide";
         slide.innerHTML = `<img src="${src}">`;
