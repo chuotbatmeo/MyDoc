@@ -1,0 +1,322 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #edf5ff;
+  background:
+    linear-gradient(rgba(2, 7, 14, 0.78), rgba(2, 6, 12, 0.9)),
+    url("../images/imageshome/8.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(10px);
+  z-index: 0;
+}
+
+.rain-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.rain-layer::before,
+.rain-layer::after {
+  content: "";
+  position: absolute;
+  inset: -220px;
+  background-image:
+    repeating-linear-gradient(
+      -18deg,
+      rgba(255, 255, 255, 0.18) 0px,
+      rgba(255, 255, 255, 0.18) 1px,
+      transparent 1px,
+      transparent 19px
+    );
+}
+
+.rain-layer::before {
+  animation: rainFall 0.85s linear infinite;
+  opacity: 0.24;
+}
+
+.rain-layer::after {
+  animation: rainFall 1.35s linear infinite;
+  opacity: 0.12;
+}
+
+@keyframes rainFall {
+  from {
+    transform: translateY(-130px);
+  }
+
+  to {
+    transform: translateY(130px);
+  }
+}
+
+.home-button {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 29px;
+  color: #ffffff;
+  background: rgba(14, 28, 46, 0.68);
+  border: 1px solid rgba(180, 215, 255, 0.22);
+  border-radius: 19px;
+  backdrop-filter: blur(9px);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.42);
+  z-index: 10;
+  transition: 0.25s;
+}
+
+.home-button:hover {
+  transform: translateY(-2px);
+  background: rgba(36, 62, 88, 0.88);
+}
+
+.datetime-box {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  text-align: right;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #e8f3ff;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  z-index: 10;
+  text-shadow:
+    0 0 8px rgba(170, 215, 255, 0.82),
+    0 0 18px rgba(120, 180, 255, 0.5),
+    0 0 30px rgba(80, 140, 220, 0.28);
+}
+
+.music-page {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  padding: 112px 18px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.music-player {
+  width: min(520px, 100%);
+  padding: 38px 28px 32px;
+  text-align: center;
+  background:
+    linear-gradient(180deg, rgba(16, 32, 52, 0.72), rgba(6, 13, 23, 0.82));
+  border: 1px solid rgba(190, 220, 255, 0.17);
+  border-radius: 34px;
+  backdrop-filter: blur(16px);
+  box-shadow:
+    0 26px 70px rgba(0, 0, 0, 0.56),
+    inset 0 0 38px rgba(116, 165, 220, 0.08);
+}
+
+.rain-mark {
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(115, 160, 210, 0.2), rgba(255, 255, 255, 0.04));
+  box-shadow:
+    0 0 30px rgba(130, 180, 245, 0.2),
+    inset 0 0 22px rgba(255, 255, 255, 0.05);
+}
+
+.music-player h1 {
+  margin-bottom: 26px;
+  font-size: clamp(32px, 6vw, 48px);
+  color: #f3f8ff;
+  text-shadow: 0 0 24px rgba(150, 195, 255, 0.28);
+}
+
+.now-playing-label {
+  margin-bottom: 10px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #9fb8d3;
+}
+
+.song-title {
+  min-height: 64px;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(25px, 5vw, 36px);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+}
+
+.next-song-box {
+  margin: 0 auto 28px;
+  padding: 15px 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.next-song-box span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: #9fb3c9;
+}
+
+.next-song-box strong {
+  display: block;
+  font-size: 17px;
+  color: #e9f3ff;
+}
+
+.progress-area {
+  margin-bottom: 30px;
+}
+
+.time-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 9px;
+  color: #b8c9dd;
+  font-size: 13px;
+}
+
+#progressBar {
+  width: 100%;
+  height: 7px;
+  cursor: pointer;
+  accent-color: #9fc9ff;
+}
+
+.main-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  flex-wrap: wrap;
+}
+
+.main-controls button {
+  width: 52px;
+  height: 52px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 21px;
+  color: #f5faff;
+  background: linear-gradient(145deg, #1a2d44, #0a1522);
+  box-shadow:
+    0 9px 24px rgba(0, 0, 0, 0.46),
+    inset 0 0 13px rgba(255, 255, 255, 0.08);
+  transition: 0.22s;
+}
+
+.main-controls button:hover {
+  transform: translateY(-3px) scale(1.04);
+  background: linear-gradient(145deg, #294d70, #101f33);
+}
+
+.play-button {
+  width: 72px !important;
+  height: 72px !important;
+  font-size: 30px !important;
+  background: linear-gradient(145deg, #4f7faa, #193553) !important;
+  box-shadow:
+    0 0 30px rgba(120, 178, 245, 0.35),
+    0 14px 32px rgba(0, 0, 0, 0.48),
+    inset 0 0 15px rgba(255, 255, 255, 0.1) !important;
+}
+
+.play-button.playing {
+  box-shadow:
+    0 0 42px rgba(142, 203, 255, 0.52),
+    0 14px 32px rgba(0, 0, 0, 0.48),
+    inset 0 0 15px rgba(255, 255, 255, 0.1) !important;
+}
+
+.active-control {
+  color: #ffffff !important;
+  outline: 2px solid #9fc9ff;
+  background: linear-gradient(145deg, #315d87, #142942) !important;
+  box-shadow:
+    0 0 22px rgba(159, 201, 255, 0.48),
+    inset 0 0 12px rgba(255, 255, 255, 0.08) !important;
+}
+
+@media (max-width: 600px) {
+  .home-button {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+
+  .datetime-box {
+    font-size: 12px;
+    top: 18px;
+    right: 16px;
+  }
+
+  .music-page {
+    padding-top: 118px;
+  }
+
+  .music-player {
+    padding: 32px 18px 28px;
+    border-radius: 28px;
+  }
+
+  .rain-mark {
+    width: 76px;
+    height: 76px;
+    font-size: 42px;
+  }
+
+  .main-controls {
+    gap: 10px;
+  }
+
+  .main-controls button {
+    width: 46px;
+    height: 46px;
+    font-size: 18px;
+  }
+
+  .play-button {
+    width: 62px !important;
+    height: 62px !important;
+    font-size: 26px !important;
+  }
+}

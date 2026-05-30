@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cùng nghe nào</title>
+  <link rel="stylesheet" href="../css/nghenhac.css" />
+</head>
+<body>
+
+  <div class="rain-layer"></div>
+
+  <a href="../index.html" class="home-button" title="Về trang chủ">🏠</a>
+
+  <div class="datetime-box">
+    <div id="dayText">Thứ</div>
+    <div id="dateText">Ngày</div>
+    <div id="timeText">Giờ</div>
+  </div>
+
+  <main class="music-page">
+    <section class="music-player">
+      <div class="rain-mark">🌧️</div>
+
+      <h1>Cùng nghe nào</h1>
+
+      <div class="now-playing-label">🎵 Đang phát</div>
+      <div id="songTitle" class="song-title">Đang tải danh sách nhạc...</div>
+
+      <div class="next-song-box">
+        <span>⏭ Tiếp theo</span>
+        <strong id="nextSongTitle">Đang chờ...</strong>
+      </div>
+
+      <audio id="audioPlayer"></audio>
+
+      <div class="progress-area">
+        <div class="time-row">
+          <span id="currentTime">00:00</span>
+          <span id="durationTime">00:00</span>
+        </div>
+        <input type="range" id="progressBar" value="0" min="0" max="100" />
+      </div>
+
+      <div class="main-controls">
+        <button id="shuffleBtn" title="Phát ngẫu nhiên">🔀</button>
+        <button id="prevBtn" title="Bài trước">⏮</button>
+        <button id="playBtn" class="play-button" title="Phát / Tạm dừng">▶</button>
+        <button id="nextBtn" title="Bài tiếp">⏭</button>
+        <button id="repeatBtn" title="Lặp lại">🔁</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const audioPlayer = document.getElementById("audioPlayer");
+    const songTitle = document.getElementById("songTitle");
+    const nextSongTitle = document.getElementById("nextSongTitle");
+
+    const playBtn = document.getElementById("playBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const repeatBtn = document.getElementById("repeatBtn");
+    const shuffleBtn = document.getElementById("shuffleBtn");
+
+    const progressBar = document.getElementById("progressBar");
+    const currentTimeEl = document.getElementById("currentTime");
+    const durationTimeEl = document.getElementById("durationTime");
+
+    let songs = [];
+    let currentIndex = 0;
+    let isPlaying = false;
+    let isRepeat = false;
+    let isShuffle = false;
+
+    function updateDateTime() {
+      const now = new Date();
+
+      const days = [
+        "Chủ nhật",
+        "Thứ hai",
+        "Thứ ba",
+        "Thứ tư",
+        "Thứ năm",
+        "Thứ sáu",
+        "Thứ bảy"
+      ];
+
+      document.getElementById("dayText").textContent = days[now.getDay()];
+      document.getElementById("dateText").textContent = now.toLocaleDateString("vi-VN");
+      document.getElementById("timeText").textContent = now.toLocaleTimeString("vi-VN");
+    }
+
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+
+    async function loadMusicList() {
+      try {
+        const response = await fetch("../json/music-list.json");
+
+        if (!response.ok) {
+          throw new Error("Không tải được music-list.json");
+        }
+
+        songs = await response.json();
+
+        if (!Array.isArray(songs) || songs.length === 0) {
+          songTitle.textContent = "Danh sách nhạc đang trống";
+          nextSongTitle.textContent = "Chưa có bài tiếp theo";
+          return;
+        }
+
+        loadSong(0);
+      } catch (error) {
+        songTitle.textContent = "Không tải được danh sách nhạc";
+        nextSongTitle.textContent = "Kiểm tra file json/music-list.json";
+        console.error(error);
+      }
+    }
+
+    function loadSong(index) {
+      if (!songs.length) return;
+
+      currentIndex = index;
+      audioPlayer.src = "../audio/lists/" + songs[currentIndex].file;
+
+      songTitle.textContent = songs[currentIndex].title || songs[currentIndex].file;
+      updateNextSongTitle();
+
+      progressBar.value = 0;
+      currentTimeEl.textContent = "00:00";
+      durationTimeEl.textContent = "00:00";
+    }
+
+    function updateNextSongTitle() {
+      if (!songs.length) return;
+
+      let nextIndex;
+
+      if (isShuffle && songs.length > 1) {
+        nextIndex = getRandomIndex();
+      } else {
+        nextIndex = (currentIndex + 1) % songs.length;
+      }
+
+      nextSongTitle.textContent = songs[nextIndex].title || songs[nextIndex].file;
+    }
+
+    function getRandomIndex() {
+      if (songs.length <= 1) return currentIndex;
+
+      let randomIndex;
+
+      do {
+        randomIndex = Math.floor(Math.random() * songs.length);
+      } while (randomIndex === currentIndex);
+
+      return randomIndex;
+    }
+
+    function playSong() {
+      if (!songs.length) return;
+
+      audioPlayer.play();
+      isPlaying = true;
+      playBtn.textContent = "⏸";
+      playBtn.classList.add("playing");
+    }
+
+    function pauseSong() {
+      audioPlayer.pause();
+      isPlaying = false;
+      playBtn.textContent = "▶";
+      playBtn.classList.remove("playing");
+    }
+
+    function nextSong() {
+      if (!songs.length) return;
+
+      if (isShuffle) {
+        currentIndex = getRandomIndex();
+      } else {
+        currentIndex = (currentIndex + 1) % songs.length;
+      }
+
+      loadSong(currentIndex);
+      playSong();
+    }
+
+    function prevSong() {
+      if (!songs.length) return;
+
+      currentIndex = (currentIndex - 1 + songs.length) % songs.length;
+
+      loadSong(currentIndex);
+      playSong();
+    }
+
+    function formatTime(seconds) {
+      if (isNaN(seconds)) return "00:00";
+
+      const min = Math.floor(seconds / 60);
+      const sec = Math.floor(seconds % 60);
+
+      return `${String(min).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
+    }
+
+    playBtn.addEventListener("click", () => {
+      if (isPlaying) {
+        pauseSong();
+      } else {
+        playSong();
+      }
+    });
+
+    nextBtn.addEventListener("click", nextSong);
+    prevBtn.addEventListener("click", prevSong);
+
+    shuffleBtn.addEventListener("click", () => {
+      isShuffle = !isShuffle;
+      shuffleBtn.classList.toggle("active-control", isShuffle);
+      updateNextSongTitle();
+    });
+
+    repeatBtn.addEventListener("click", () => {
+      isRepeat = !isRepeat;
+      repeatBtn.classList.toggle("active-control", isRepeat);
+    });
+
+    audioPlayer.addEventListener("timeupdate", () => {
+      if (!audioPlayer.duration) return;
+
+      progressBar.value = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+      currentTimeEl.textContent = formatTime(audioPlayer.currentTime);
+      durationTimeEl.textContent = formatTime(audioPlayer.duration);
+    });
+
+    progressBar.addEventListener("input", () => {
+      if (!audioPlayer.duration) return;
+
+      audioPlayer.currentTime = (progressBar.value / 100) * audioPlayer.duration;
+    });
+
+    audioPlayer.addEventListener("ended", () => {
+      if (isRepeat) {
+        audioPlayer.currentTime = 0;
+        playSong();
+      } else {
+        nextSong();
+      }
+    });
+
+    loadMusicList();
+  </script>
+
+</body>
+</html>

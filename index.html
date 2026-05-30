@@ -24,9 +24,7 @@
       <button class="menu-btn" id="menuBtn">☰</button>
 
       <div class="dropdown" id="dropdownMenu">
-        <a href="index.html">🏠 Trang Chủ</a>
         <a href="kinhphapcu.html">📖 Kinh Pháp Cú</a>
-        <a href="timkiem.html">🔍 Tìm Kiếm</a>
       </div>
     </div>
 
@@ -38,7 +36,14 @@
     <h1>☔ Mưa Tĩnh Lặng ☔</h1>
     <p>Một khoảng trời bình yên giữa những cơn mưa nhẹ</p>
   </section>
-
+  <a
+  href="https://zalo.me/0878007900"
+  target="_blank"
+  class="zalo-float"
+  title="Chat Zalo"
+>
+  <img src="images/zalo.png" alt="Zalo">
+</a>
   <div class="greeting" id="greeting"></div>
 
   <section class="slider">
@@ -51,9 +56,15 @@
     Chúc bạn luôn bình yên giữa những ngày mưa ☔
   </footer>
 
-  <audio id="bgMusic" autoplay loop>
-    <source src="audio/lists/muathuychi.mp3" type="audio/mpeg">
-  </audio>
+  <div class="mini-music-player">
+    <button id="miniShuffleBtn" title="Phát ngẫu nhiên">🔀</button>
+    <button id="miniPrevBtn" title="Bài trước">⏮</button>
+    <button id="miniPlayBtn" class="mini-play" title="Phát / Tạm dừng">▶</button>
+    <button id="miniNextBtn" title="Bài tiếp">⏭</button>
+    <button id="miniRepeatBtn" title="Lặp lại">🔁</button>
+  </div>
+
+  <audio id="bgMusic"></audio>
 
   <script>
 
@@ -113,16 +124,17 @@
       greeting.innerHTML = "🌙 Chúc bạn một buổi tối bình yên";
     }
 
-    const quotes = [
-      "Ngồi nghe mưa rơi, lòng cũng dịu lại",
-      "Tĩnh lặng là nơi bình an bắt đầu",
-      "Buông xuống cũng là một loại tự do",
-      "Mưa rơi ngoài hiên, tâm thôi vội vã",
-      "Bình yên không ở đâu xa, chỉ ở trong lòng"
-    ];
+    fetch("json/quotes.json")
+    .then(response => response.json())
+    .then(quotes => {
+    if (!quotes.length) return;
 
-    document.getElementById("quoteBox").innerText =
-    quotes[Math.floor(Math.random() * quotes.length)];
+    document.getElementById("quoteBox").innerHTML =
+      quotes[Math.floor(Math.random() * quotes.length)];
+  })
+  .catch(error => {
+    console.error("Không tải được quotes.json", error);
+  });
 
     fetch("json/imageshome.json")
     .then(response => response.json())
@@ -139,11 +151,145 @@
     });
 
     const bgMusic = document.getElementById("bgMusic");
-    bgMusic.volume = 0.22;
+    const miniPlayBtn = document.getElementById("miniPlayBtn");
+    const miniPrevBtn = document.getElementById("miniPrevBtn");
+    const miniNextBtn = document.getElementById("miniNextBtn");
+    const miniShuffleBtn = document.getElementById("miniShuffleBtn");
+    const miniRepeatBtn = document.getElementById("miniRepeatBtn");
 
-    window.addEventListener("click", () => {
-      bgMusic.play();
-    },{ once:true });
+    let musicList = [];
+    let currentMusicIndex = 0;
+    let isMiniPlaying = false;
+    let isMiniShuffle = false;
+    let isMiniRepeat = false;
+
+    bgMusic.volume = 1;
+
+    async function loadMusicList() {
+      try {
+        const response = await fetch("json/music-list.json");
+
+        if (!response.ok) {
+          throw new Error("Không tải được music-list.json");
+        }
+
+        musicList = await response.json();
+
+        if (!Array.isArray(musicList) || musicList.length === 0) {
+          return;
+        }
+
+        bgMusic.src = "audio/lists/" + musicList[currentMusicIndex].file;
+        bgMusic.load();
+      }
+      catch(error){
+        console.error(error);
+      }
+    }
+
+    function loadMiniSong(index) {
+      if (!musicList.length) return;
+
+      currentMusicIndex = index;
+      bgMusic.src = "audio/lists/" + musicList[currentMusicIndex].file;
+      bgMusic.load();
+    }
+
+    function playMiniMusic() {
+      if (!musicList.length) return;
+
+      bgMusic.play()
+      .then(() => {
+        isMiniPlaying = true;
+        miniPlayBtn.innerHTML = "Ⅱ";
+      })
+      .catch(error => {
+        console.log("Trình duyệt chặn phát nhạc:", error);
+      });
+    }
+
+    function pauseMiniMusic() {
+      bgMusic.pause();
+      isMiniPlaying = false;
+      miniPlayBtn.innerHTML = "▶";
+    }
+
+    function getRandomMusicIndex() {
+      if (!musicList.length) return 0;
+      if (musicList.length <= 1) return currentMusicIndex;
+
+      let randomIndex;
+
+      do {
+        randomIndex = Math.floor(Math.random() * musicList.length);
+      } while (randomIndex === currentMusicIndex);
+
+      return randomIndex;
+    }
+
+    function nextMiniSong() {
+      if (!musicList.length) return;
+
+      if (isMiniShuffle) {
+        currentMusicIndex = getRandomMusicIndex();
+      } else {
+        currentMusicIndex = (currentMusicIndex + 1) % musicList.length;
+      }
+
+      loadMiniSong(currentMusicIndex);
+      playMiniMusic();
+    }
+
+    function prevMiniSong() {
+      if (!musicList.length) return;
+
+      currentMusicIndex = (currentMusicIndex - 1 + musicList.length) % musicList.length;
+      loadMiniSong(currentMusicIndex);
+      playMiniMusic();
+    }
+
+    miniPlayBtn.addEventListener("click", e => {
+      e.stopPropagation();
+
+      if (isMiniPlaying) {
+        pauseMiniMusic();
+      } else {
+        playMiniMusic();
+      }
+    });
+
+    miniNextBtn.addEventListener("click", e => {
+      e.stopPropagation();
+      nextMiniSong();
+    });
+
+    miniPrevBtn.addEventListener("click", e => {
+      e.stopPropagation();
+      prevMiniSong();
+    });
+
+    miniShuffleBtn.addEventListener("click", e => {
+      e.stopPropagation();
+      isMiniShuffle = !isMiniShuffle;
+      miniShuffleBtn.classList.toggle("active-mini", isMiniShuffle);
+    });
+
+    miniRepeatBtn.addEventListener("click", e => {
+      e.stopPropagation();
+      isMiniRepeat = !isMiniRepeat;
+      miniRepeatBtn.classList.toggle("active-mini", isMiniRepeat);
+    });
+
+    bgMusic.addEventListener("ended", () => {
+      if (isMiniRepeat) {
+        bgMusic.currentTime = 0;
+        playMiniMusic();
+      } else {
+        nextMiniSong();
+      }
+    });
+
+    loadMusicList();
 
     for(let i = 0; i < 80; i++){
       const r = document.createElement("div");

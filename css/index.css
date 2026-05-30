@@ -228,6 +228,94 @@ body{
   box-shadow:0 10px 24px rgba(0,0,0,0.10);
 }
 
+red{
+  color:#ef4444;
+  font-weight:bold;
+}
+
+blue{
+  color:#60a5fa;
+  font-weight:bold;
+}
+
+green{
+  color:#22c55e;
+  font-weight:bold;
+}
+
+gold{
+  color:#fbbf24;
+  font-weight:bold;
+}
+
+purple{
+  color:#c084fc;
+  font-weight:bold;
+}
+
+big{
+  font-size:1.3em;
+  font-weight:bold;
+}
+
+small{
+  font-size:0.8em;
+}
+
+glow{
+  color:#fff;
+  text-shadow:0 0 10px #60a5fa;
+}
+
+/* MINI MUSIC PLAYER */
+
+.mini-music-player{
+  position:fixed;
+  right:12px;
+  bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:5px;
+  padding:6px 7px;
+  background:rgba(4,13,25,0.82);
+  border:1px solid rgba(160,210,255,0.16);
+  border-radius:999px;
+  backdrop-filter:blur(12px);
+  box-shadow:0 10px 28px rgba(0,0,0,0.45);
+  z-index:999999;
+}
+
+.mini-music-player button{
+  width:28px;
+  height:28px;
+  border:none;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:12px;
+  color:#ffffff;
+  background:radial-gradient(circle at top,#284662,#0d1b2d);
+  box-shadow:inset 0 0 8px rgba(255,255,255,0.08);
+  transition:.2s;
+}
+
+.mini-music-player button:hover{
+  transform:scale(1.08);
+  background:radial-gradient(circle at top,#3d658b,#12243a);
+}
+
+.mini-music-player .mini-play{
+  width:36px;
+  height:36px;
+  font-size:15px;
+  background:radial-gradient(circle at top,#5f8fbd,#254b73);
+  box-shadow:0 0 18px rgba(120,180,245,0.35);
+}
+
+.mini-music-player .active-mini{
+  outline:1px solid rgba(150,215,255,0.9);
+  box-shadow:0 0 12px rgba(120,190,255,0.55);
+}
+
 /* RAIN EFFECT */
 
 .rain{
@@ -293,6 +381,26 @@ footer{
   color:#333;
   font-size:18px;
   padding-bottom:25px;
+}
+
+.zalo-float{
+  position:fixed;
+  right:18px;
+  bottom:95px;
+  z-index:99999;
+}
+
+.zalo-float img{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  transition:.25s;
+  box-shadow:
+    0 0 18px rgba(0,104,255,.45);
+}
+
+.zalo-float img:hover{
+  transform:scale(1.08);
 }
 
 /* MOBILE */
@@ -362,6 +470,25 @@ footer{
     font-size:20px;
     padding:20px;
     margin-bottom:30px;
+  }
+
+  .mini-music-player{
+    right:8px;
+    bottom:8px;
+    gap:4px;
+    padding:5px 6px;
+  }
+
+  .mini-music-player button{
+    width:25px;
+    height:25px;
+    font-size:11px;
+  }
+
+  .mini-music-player .mini-play{
+    width:32px;
+    height:32px;
+    font-size:14px;
   }
 
 }
