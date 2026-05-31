@@ -73,35 +73,11 @@
   <div class="current-song-label" id="currentSongLabel">🎵 Đang tải nhạc...</div>
 
   <div class="mini-music-player">
-    <div class="mini-cover">
-      <img src="images/imageshome/8.jpg" alt="Music Cover">
-    </div>
-
-    <div class="mini-song-info">
-      <div class="mini-song-title" id="miniSongTitle">Đang tải nhạc...</div>
-      <div class="mini-song-status" id="miniSongStatus">Sẵn sàng</div>
-    </div>
-
-    <button id="miniShuffleBtn" title="Phát ngẫu nhiên">⤨</button>
+    <button id="miniShuffleBtn" title="Phát ngẫu nhiên">🔀</button>
     <button id="miniPrevBtn" title="Bài trước">⏮</button>
     <button id="miniPlayBtn" class="mini-play" title="Phát / Tạm dừng">▶</button>
     <button id="miniNextBtn" title="Bài tiếp">⏭</button>
-    <button id="miniRepeatBtn" title="Lặp lại">↻</button>
-
-    <div class="mini-volume">
-      <button id="miniVolumeBtn" class="mini-volume-btn" title="Âm lượng">🔊</button>
-
-      <div class="volume-popup" id="volumePopup">
-        <input
-          id="miniVolumeSlider"
-          type="range"
-          min="0"
-          max="100"
-          value="100"
-          title="Âm lượng"
-        >
-      </div>
-    </div>
+    <button id="miniRepeatBtn" title="Lặp lại">🔁</button>
   </div>
   <div class="floating-tools">
     <button id="themeBtn" class="theme-float" title="Đổi giao diện">🎨</button>
@@ -510,11 +486,6 @@
     const miniRepeatBtn = document.getElementById("miniRepeatBtn");
     const rainSoundBtn = document.getElementById("rainSoundBtn");
     const currentSongLabel = document.getElementById("currentSongLabel");
-    const miniSongTitle = document.getElementById("miniSongTitle");
-    const miniSongStatus = document.getElementById("miniSongStatus");
-    const miniVolumeBtn = document.getElementById("miniVolumeBtn");
-    const miniVolumeSlider = document.getElementById("miniVolumeSlider");
-    const volumePopup = document.getElementById("volumePopup");
 
     let musicList = [];
     let currentMusicIndex = 0;
@@ -526,53 +497,6 @@
 
     bgMusic.volume = 1;
     rainSound.volume = 1;
-
-    let lastMiniVolume = 1;
-
-    function updateMiniVolumeIcon(){
-      if (!miniVolumeBtn) return;
-
-      if (bgMusic.muted || bgMusic.volume === 0) {
-        miniVolumeBtn.innerHTML = "🔇";
-      } else if (bgMusic.volume < 0.5) {
-        miniVolumeBtn.innerHTML = "🔉";
-      } else {
-        miniVolumeBtn.innerHTML = "🔊";
-      }
-    }
-
-    if (miniVolumeSlider) {
-      miniVolumeSlider.value = "100";
-
-      miniVolumeSlider.addEventListener("input", () => {
-        const value = Number(miniVolumeSlider.value) / 100;
-        bgMusic.volume = value;
-        bgMusic.muted = value === 0;
-
-        if (value > 0) {
-          lastMiniVolume = value;
-        }
-
-        updateMiniVolumeIcon();
-      });
-    }
-
-    if (miniVolumeBtn && volumePopup) {
-      miniVolumeBtn.addEventListener("click", e => {
-        e.stopPropagation();
-        volumePopup.classList.toggle("show");
-      });
-
-      volumePopup.addEventListener("click", e => {
-        e.stopPropagation();
-      });
-
-      document.addEventListener("click", () => {
-        volumePopup.classList.remove("show");
-      });
-    }
-
-    updateMiniVolumeIcon();
 
     async function loadMusicList() {
       try {
@@ -586,8 +510,6 @@
 
         if (!Array.isArray(musicList) || musicList.length === 0) {
           currentSongLabel.textContent = "🎵 Chưa có danh sách nhạc";
-          miniSongTitle.textContent = "Chưa có nhạc";
-          miniSongStatus.textContent = "Danh sách trống";
           return;
         }
 
@@ -598,25 +520,17 @@
       catch(error){
         console.error(error);
         currentSongLabel.textContent = "🎵 Không tải được nhạc";
-        miniSongTitle.textContent = "Không tải được nhạc";
-        miniSongStatus.textContent = "Kiểm tra music-list.json";
       }
     }
 
     function updateCurrentSongLabel() {
       if (!musicList.length) {
         currentSongLabel.textContent = "🎵 Chưa có nhạc";
-        miniSongTitle.textContent = "Chưa có nhạc";
-        miniSongStatus.textContent = "Danh sách trống";
         return;
       }
 
-      const currentTitle =
-        musicList[currentMusicIndex].title || musicList[currentMusicIndex].file;
-
-      currentSongLabel.textContent = "🎵 " + currentTitle;
-      miniSongTitle.textContent = currentTitle;
-      miniSongStatus.textContent = isMiniPlaying ? "Đang phát..." : "Sẵn sàng";
+      currentSongLabel.textContent =
+        "🎵 " + (musicList[currentMusicIndex].title || musicList[currentMusicIndex].file);
     }
 
     function loadMiniSong(index) {
@@ -635,7 +549,6 @@
       .then(() => {
         isMiniPlaying = true;
         miniPlayBtn.innerHTML = "Ⅱ";
-        miniSongStatus.textContent = "Đang phát...";
       })
       .catch(error => {
         console.log("Trình duyệt chặn phát nhạc:", error);
@@ -646,7 +559,6 @@
       bgMusic.pause();
       isMiniPlaying = false;
       miniPlayBtn.innerHTML = "▶";
-      miniSongStatus.textContent = "Tạm dừng";
     }
 
     function getRandomMusicIndex() {
