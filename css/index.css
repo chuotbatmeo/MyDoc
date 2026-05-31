@@ -1185,13 +1185,6 @@ body.theme-sun.focus-mode{
   }
 }
 
-@media(max-width:390px){
-  .mini-song-info{
-    display:none;
-  }
-}
-
-
 /* COMPACT PLAYER FINAL FIX */
 .mini-music-player{
   width:430px !important;
@@ -1305,21 +1298,6 @@ body.theme-sun.focus-mode{
   }
 }
 
-@media(max-width:520px){
-  .mini-cover{
-    display:none !important;
-  }
-
-  .mini-song-info{
-    display:none !important;
-  }
-
-  .mini-volume input{
-    display:none !important;
-  }
-}
-
-
 /* VERTICAL VOLUME POPUP FIX */
 .mini-volume{
   position:relative !important;
@@ -1391,5 +1369,172 @@ body.theme-sun.focus-mode{
   #miniVolumeSlider{
     display:block !important;
     height:86px !important;
+  }
+}
+
+
+/* MOBILE PLAYER SAME AS DESKTOP - FINAL */
+@media(max-width:720px){
+
+  .mini-music-player{
+    left:8px !important;
+    right:8px !important;
+    bottom:8px !important;
+    width:auto !important;
+    min-height:64px !important;
+    display:flex !important;
+    flex-direction:row !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    gap:7px !important;
+    padding:8px 10px !important;
+    border-radius:36px !important;
+  }
+
+  .mini-cover{
+    display:block !important;
+    width:42px !important;
+    height:42px !important;
+    flex:0 0 42px !important;
+  }
+
+  .mini-cover img{
+    width:100% !important;
+    height:100% !important;
+    object-fit:cover !important;
+    display:block !important;
+  }
+
+  .mini-song-info{
+    display:block !important;
+    min-width:78px !important;
+    max-width:95px !important;
+    flex:0 1 95px !important;
+    overflow:hidden !important;
+  }
+
+  .mini-song-title{
+    font-size:12px !important;
+    white-space:nowrap !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+  }
+
+  .mini-song-status{
+    font-size:10px !important;
+    margin-top:2px !important;
+    white-space:nowrap !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+  }
+
+  .mini-music-player button{
+    width:26px !important;
+    height:26px !important;
+    font-size:13px !important;
+    flex:0 0 26px !important;
+  }
+
+  .mini-music-player .mini-play{
+    width:42px !important;
+    height:42px !important;
+    font-size:17px !important;
+    flex:0 0 42px !important;
+  }
+
+  .mini-volume{
+    display:flex !important;
+    position:relative !important;
+    flex:0 0 26px !important;
+    margin-left:0 !important;
+  }
+
+  .mini-volume .mini-volume-btn{
+    width:26px !important;
+    height:26px !important;
+    font-size:13px !important;
+  }
+
+  .volume-popup{
+    bottom:48px !important;
+    left:50% !important;
+    width:44px !important;
+    height:122px !important;
+  }
+
+  #miniVolumeSlider{
+    display:block !important;
+    width:8px !important;
+    height:88px !important;
+  }
+
+  .floating-tools{
+    left:14px !important;
+    right:auto !important;
+    bottom:86px !important;
+    display:flex !important;
+    flex-direction:row !important;
+    gap:10px !important;
+  }
+
+  .floating-tools button,
+  .theme-float{
+    width:54px !important;
+    height:54px !important;
+    font-size:23px !important;
+  }
+
+  .zalo-float{
+    right:18px !important;
+    bottom:96px !important;
+  }
+}
+
+@media(max-width:390px){
+
+  .mini-music-player{
+    gap:5px !important;
+    padding:7px 8px !important;
+  }
+
+  .mini-cover{
+    width:38px !important;
+    height:38px !important;
+    flex-basis:38px !important;
+  }
+
+  .mini-song-info{
+    min-width:66px !important;
+    max-width:76px !important;
+    flex-basis:76px !important;
+  }
+
+  .mini-song-title{
+    font-size:11px !important;
+  }
+
+  .mini-song-status{
+    font-size:9px !important;
+  }
+
+  .mini-music-player button{
+    width:24px !important;
+    height:24px !important;
+    font-size:12px !important;
+    flex-basis:24px !important;
+  }
+
+  .mini-music-player .mini-play{
+    width:38px !important;
+    height:38px !important;
+    font-size:16px !important;
+    flex-basis:38px !important;
+  }
+
+  .mini-volume,
+  .mini-volume .mini-volume-btn{
+    flex-basis:24px !important;
+    width:24px !important;
+    height:24px !important;
   }
 }
