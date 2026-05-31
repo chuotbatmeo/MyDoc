@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mưa Tĩnh Lặng</title>
+  <title>Mưa</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/index.css">
@@ -12,7 +12,7 @@
 <body>
 
   <div id="loading">
-    ☔ Mưa Tĩnh Lặng
+    ☔ Mưa
     <div style="font-size:17px;margin-top:12px;">
       Đang chuẩn bị khoảng trời bình yên...
     </div>
@@ -28,33 +28,49 @@
       </div>
     </div>
 
-    <div class="clock-text" id="clockText"></div>
+    <div class="clock-wrap">
+      <div class="clock-text" id="clockText"></div>
+      <div class="lunar-text" id="lunarText"></div>
+    </div>
 
   </div>
 
   <section class="hero">
-    <h1>☔ Mưa Tĩnh Lặng ☔</h1>
+    <h1>☔ Mưa ☔</h1>
     <p>Một khoảng trời bình yên giữa những cơn mưa nhẹ</p>
   </section>
+
   <a
-  href="https://zalo.me/0878007900"
-  target="_blank"
-  class="zalo-float"
-  title="Chat Zalo"
->
-  <img src="images/zalo.png" alt="Zalo">
-</a>
+    href="https://zalo.me/0878007900"
+    target="_blank"
+    class="zalo-float"
+    title="Chat Zalo"
+  >
+    <img src="images/zalo.png" alt="Zalo">
+  </a>
+
   <div class="greeting" id="greeting"></div>
 
   <section class="slider">
     <div class="slide-track" id="slideTrack"></div>
   </section>
 
-  <section class="quote" id="quoteBox"></section>
+  <section class="quote" id="quoteCard">
+    <div class="quote-actions">
+      <button id="copyQuoteBtn" title="Sao chép quote">📋</button>
+      <button id="favQuoteBtn" title="Lưu quote yêu thích">♡</button>
+      <button id="newQuoteBtn" title="Đổi quote ngay">🎁</button>
+    </div>
+
+    <div class="quote-content" id="quoteBox"></div>
+    <div class="quote-toast" id="quoteToast"></div>
+  </section>
 
   <footer>
     Chúc bạn luôn bình yên giữa những ngày mưa ☔
   </footer>
+
+  <div class="current-song-label" id="currentSongLabel">🎵 Đang tải nhạc...</div>
 
   <div class="mini-music-player">
     <button id="miniShuffleBtn" title="Phát ngẫu nhiên">🔀</button>
@@ -63,8 +79,13 @@
     <button id="miniNextBtn" title="Bài tiếp">⏭</button>
     <button id="miniRepeatBtn" title="Lặp lại">🔁</button>
   </div>
-
+  <div class="floating-tools">
+    <button id="themeBtn" class="theme-float" title="Đổi giao diện">🎨</button>
+    <button id="focusModeBtn" title="Ngồi nghe mưa">🧘</button>
+    <button id="rainSoundBtn" title="Bật / tắt tiếng mưa">🌧️</button>
+  </div>
   <audio id="bgMusic"></audio>
+  <audio id="rainSound" src="audio/nhacnen/rain.mp3" loop></audio>
 
   <script>
 
@@ -73,6 +94,190 @@
         document.getElementById("loading").classList.add("hide");
       }, 900);
     });
+
+    function INT(d) {
+      return Math.floor(d);
+    }
+
+    function jdFromDate(dd, mm, yy) {
+      const a = INT((14 - mm) / 12);
+      const y = yy + 4800 - a;
+      const m = mm + 12 * a - 3;
+      let jd = dd + INT((153 * m + 2) / 5) + 365 * y + INT(y / 4) - INT(y / 100) + INT(y / 400) - 32045;
+
+      if (jd < 2299161) {
+        jd = dd + INT((153 * m + 2) / 5) + 365 * y + INT(y / 4) - 32083;
+      }
+
+      return jd;
+    }
+
+    function jdToDate(jd) {
+      let a, b, c;
+
+      if (jd > 2299160) {
+        a = jd + 32044;
+        b = INT((4 * a + 3) / 146097);
+        c = a - INT((b * 146097) / 4);
+      } else {
+        b = 0;
+        c = jd + 32082;
+      }
+
+      const d = INT((4 * c + 3) / 1461);
+      const e = c - INT((1461 * d) / 4);
+      const m = INT((5 * e + 2) / 153);
+
+      const day = e - INT((153 * m + 2) / 5) + 1;
+      const month = m + 3 - 12 * INT(m / 10);
+      const year = b * 100 + d - 4800 + INT(m / 10);
+
+      return [day, month, year];
+    }
+
+    function getNewMoonDay(k, timeZone) {
+      const T = k / 1236.85;
+      const T2 = T * T;
+      const T3 = T2 * T;
+      const dr = Math.PI / 180;
+
+      let Jd1 = 2415020.75933 + 29.53058868 * k + 0.0001178 * T2 - 0.000000155 * T3;
+      Jd1 += 0.00033 * Math.sin((166.56 + 132.87 * T - 0.009173 * T2) * dr);
+
+      const M = 359.2242 + 29.10535608 * k - 0.0000333 * T2 - 0.00000347 * T3;
+      const Mpr = 306.0253 + 385.81691806 * k + 0.0107306 * T2 + 0.00001236 * T3;
+      const F = 21.2964 + 390.67050646 * k - 0.0016528 * T2 - 0.00000239 * T3;
+
+      let C1 =
+        (0.1734 - 0.000393 * T) * Math.sin(M * dr)
+        + 0.0021 * Math.sin(2 * dr * M)
+        - 0.4068 * Math.sin(Mpr * dr)
+        + 0.0161 * Math.sin(2 * dr * Mpr)
+        - 0.0004 * Math.sin(3 * dr * Mpr)
+        + 0.0104 * Math.sin(2 * dr * F)
+        - 0.0051 * Math.sin((M + Mpr) * dr)
+        - 0.0074 * Math.sin((M - Mpr) * dr)
+        + 0.0004 * Math.sin((2 * F + M) * dr)
+        - 0.0004 * Math.sin((2 * F - M) * dr)
+        - 0.0006 * Math.sin((2 * F + Mpr) * dr)
+        + 0.0010 * Math.sin((2 * F - Mpr) * dr)
+        + 0.0005 * Math.sin((2 * Mpr + M) * dr);
+
+      let deltaT;
+
+      if (T < -11) {
+        deltaT = 0.001 + 0.000839 * T + 0.0002261 * T2 - 0.00000845 * T3 - 0.000000081 * T * T3;
+      } else {
+        deltaT = -0.000278 + 0.000265 * T + 0.000262 * T2;
+      }
+
+      const JdNew = Jd1 + C1 - deltaT;
+
+      return INT(JdNew + 0.5 + timeZone / 24);
+    }
+
+    function getSunLongitude(jdn, timeZone) {
+      const T = (jdn - 2451545.5 - timeZone / 24) / 36525;
+      const T2 = T * T;
+      const dr = Math.PI / 180;
+      const M = 357.52910 + 35999.05030 * T - 0.0001559 * T2 - 0.00000048 * T * T2;
+      const L0 = 280.46645 + 36000.76983 * T + 0.0003032 * T2;
+
+      let DL =
+        (1.914600 - 0.004817 * T - 0.000014 * T2) * Math.sin(dr * M)
+        + (0.019993 - 0.000101 * T) * Math.sin(dr * 2 * M)
+        + 0.000290 * Math.sin(dr * 3 * M);
+
+      let L = L0 + DL;
+      L = L * dr;
+      L = L - Math.PI * 2 * INT(L / (Math.PI * 2));
+
+      return INT(L / Math.PI * 6);
+    }
+
+    function getLunarMonth11(yy, timeZone) {
+      const off = jdFromDate(31, 12, yy) - 2415021;
+      const k = INT(off / 29.530588853);
+      let nm = getNewMoonDay(k, timeZone);
+      const sunLong = getSunLongitude(nm, timeZone);
+
+      if (sunLong >= 9) {
+        nm = getNewMoonDay(k - 1, timeZone);
+      }
+
+      return nm;
+    }
+
+    function getLeapMonthOffset(a11, timeZone) {
+      const k = INT((a11 - 2415021.076998695) / 29.530588853 + 0.5);
+      let last = 0;
+      let i = 1;
+      let arc = getSunLongitude(getNewMoonDay(k + i, timeZone), timeZone);
+
+      do {
+        last = arc;
+        i++;
+        arc = getSunLongitude(getNewMoonDay(k + i, timeZone), timeZone);
+      } while (arc !== last && i < 14);
+
+      return i - 1;
+    }
+
+    function convertSolar2Lunar(dd, mm, yy, timeZone) {
+      const dayNumber = jdFromDate(dd, mm, yy);
+      const k = INT((dayNumber - 2415021.076998695) / 29.530588853);
+      let monthStart = getNewMoonDay(k + 1, timeZone);
+
+      if (monthStart > dayNumber) {
+        monthStart = getNewMoonDay(k, timeZone);
+      }
+
+      let a11 = getLunarMonth11(yy, timeZone);
+      let b11 = a11;
+      let lunarYear;
+
+      if (a11 >= monthStart) {
+        lunarYear = yy;
+        a11 = getLunarMonth11(yy - 1, timeZone);
+      } else {
+        lunarYear = yy + 1;
+        b11 = getLunarMonth11(yy + 1, timeZone);
+      }
+
+      const lunarDay = dayNumber - monthStart + 1;
+      const diff = INT((monthStart - a11) / 29);
+      let lunarLeap = 0;
+      let lunarMonth = diff + 11;
+
+      if (b11 - a11 > 365) {
+        const leapMonthDiff = getLeapMonthOffset(a11, timeZone);
+
+        if (diff >= leapMonthDiff) {
+          lunarMonth = diff + 10;
+
+          if (diff === leapMonthDiff) {
+            lunarLeap = 1;
+          }
+        }
+      }
+
+      if (lunarMonth > 12) {
+        lunarMonth = lunarMonth - 12;
+      }
+
+      if (lunarMonth >= 11 && diff < 4) {
+        lunarYear -= 1;
+      }
+
+      return [lunarDay, lunarMonth, lunarYear, lunarLeap];
+    }
+
+    function getCanChiYear(year) {
+      const can = ["Canh", "Tân", "Nhâm", "Quý", "Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ"];
+      const chi = ["Thân", "Dậu", "Tuất", "Hợi", "Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi"];
+
+      return can[year % 10] + " " + chi[year % 12];
+    }
 
     function updateClock(){
       const now = new Date();
@@ -92,7 +297,16 @@
       const date = now.toLocaleDateString("vi-VN");
 
       document.getElementById("clockText").innerHTML =
-      `${weekday}, ${date} • ${time}`;
+        `${weekday}, ${date} • ${time}`;
+
+      const lunar = convertSolar2Lunar(now.getDate(), now.getMonth() + 1, now.getFullYear(), 7);
+      const lunarDay = String(lunar[0]).padStart(2, "0");
+      const lunarMonth = String(lunar[1]).padStart(2, "0");
+      const lunarYearName = getCanChiYear(lunar[2]);
+      const leapText = lunar[3] === 1 ? " nhuận" : "";
+
+      document.getElementById("lunarText").innerHTML =
+        `🌙 Âm lịch: ${lunarDay}/${lunarMonth}${leapText} năm ${lunarYearName}`;
     }
 
     setInterval(updateClock,1000);
@@ -115,7 +329,7 @@
     const greeting = document.getElementById("greeting");
 
     if(hour < 11){
-      greeting.innerHTML = "☀️ Chào buổi sáng nhẹ nhàng";
+      greeting.innerHTML = "☀️ Chúc bạn một ngày an yên";
     }
     else if(hour < 18){
       greeting.innerHTML = "🌤️ Chúc bạn một ngày an yên";
@@ -124,7 +338,128 @@
       greeting.innerHTML = "🌙 Chúc bạn một buổi tối bình yên";
     }
 
-    
+    let quoteList = [];
+    let currentQuoteIndex = -1;
+
+    const quoteCard = document.getElementById("quoteCard");
+    const quoteBox = document.getElementById("quoteBox");
+    const copyQuoteBtn = document.getElementById("copyQuoteBtn");
+    const favQuoteBtn = document.getElementById("favQuoteBtn");
+    const newQuoteBtn = document.getElementById("newQuoteBtn");
+    const quoteToast = document.getElementById("quoteToast");
+
+    function getFavoriteQuotes() {
+      return JSON.parse(localStorage.getItem("favoriteQuotes") || "[]");
+    }
+
+    function saveFavoriteQuotes(favorites) {
+      localStorage.setItem("favoriteQuotes", JSON.stringify(favorites));
+    }
+
+    function showQuoteToast(text) {
+      quoteToast.textContent = text;
+      quoteToast.classList.add("show");
+
+      setTimeout(() => {
+        quoteToast.classList.remove("show");
+      }, 1600);
+    }
+
+    function updateFavButton() {
+      const currentQuote = quoteBox.innerHTML.trim();
+      const favorites = getFavoriteQuotes();
+
+      if (favorites.includes(currentQuote)) {
+        favQuoteBtn.innerHTML = "❤️";
+        favQuoteBtn.classList.add("saved");
+      } else {
+        favQuoteBtn.innerHTML = "♡";
+        favQuoteBtn.classList.remove("saved");
+      }
+    }
+
+    function showRandomQuote() {
+      if (!quoteList.length) return;
+
+      let randomIndex;
+
+      do {
+        randomIndex = Math.floor(Math.random() * quoteList.length);
+      } while (randomIndex === currentQuoteIndex && quoteList.length > 1);
+
+      currentQuoteIndex = randomIndex;
+
+      quoteCard.classList.add("fade-out");
+
+      setTimeout(() => {
+        quoteBox.innerHTML = quoteList[currentQuoteIndex];
+        quoteCard.classList.remove("fade-out");
+        updateFavButton();
+      }, 800);
+    }
+
+    fetch("json/quotes.json")
+    .then(response => response.json())
+    .then(quotes => {
+      quoteList = quotes;
+
+      showRandomQuote();
+
+      setInterval(() => {
+        showRandomQuote();
+      }, 10000);
+    })
+    .catch(error => {
+      console.error("Không tải được quotes.json", error);
+      quoteBox.innerHTML = "Bình yên không ở đâu xa, chỉ ở trong lòng";
+    });
+
+    copyQuoteBtn.addEventListener("click", e => {
+      e.stopPropagation();
+
+      const text = quoteBox.innerText.trim();
+
+      if (!text) return;
+
+      navigator.clipboard.writeText(text)
+      .then(() => {
+        showQuoteToast("Đã sao chép quote 📋");
+      })
+      .catch(() => {
+        showQuoteToast("Không sao chép được");
+      });
+    });
+
+    favQuoteBtn.addEventListener("click", e => {
+      e.stopPropagation();
+
+      const currentQuote = quoteBox.innerHTML.trim();
+
+      if (!currentQuote) return;
+
+      let favorites = getFavoriteQuotes();
+
+      if (favorites.includes(currentQuote)) {
+        favorites = favorites.filter(item => item !== currentQuote);
+        showQuoteToast("Đã bỏ khỏi yêu thích");
+      } else {
+        favorites.push(currentQuote);
+        showQuoteToast("Đã lưu quote yêu thích ❤️");
+      }
+
+      saveFavoriteQuotes(favorites);
+      updateFavButton();
+    });
+
+    newQuoteBtn.addEventListener("click", e => {
+      e.stopPropagation();
+      showRandomQuote();
+      quoteCard.classList.add("peace-pulse");
+
+      setTimeout(() => {
+        quoteCard.classList.remove("peace-pulse");
+      }, 850);
+    });
 
     fetch("json/imageshome.json")
     .then(response => response.json())
@@ -132,48 +467,7 @@
       const slideTrack = document.getElementById("slideTrack");
       const duplicated = [...images, ...images];
 
-      duplicated.forEach(src => {let quoteList = [];
-let currentQuoteIndex = -1;
-
-function showRandomQuote() {
-  if (!quoteList.length) return;
-
-  let randomIndex;
-
-  do {
-    randomIndex = Math.floor(Math.random() * quoteList.length);
-  } while (randomIndex === currentQuoteIndex && quoteList.length > 1);
-
-  currentQuoteIndex = randomIndex;
-
-  const quoteBox = document.getElementById("quoteBox");
-
-quoteBox.classList.add("fade-out");
-
-setTimeout(() => {
-
-  quoteBox.innerHTML =
-    quoteList[currentQuoteIndex];
-
-  quoteBox.classList.remove("fade-out");
-
-}, 800);
-}
-
-fetch("json/quotes.json")
-.then(response => response.json())
-.then(quotes => {
-  quoteList = quotes;
-
-  showRandomQuote();
-
-  setInterval(() => {
-    showRandomQuote();
-  }, 10000);
-})
-.catch(error => {
-  console.error("Không tải được quotes.json", error);
-});
+      duplicated.forEach(src => {
         const slide = document.createElement("div");
         slide.className = "slide";
         slide.innerHTML = `<img src="${src}">`;
@@ -182,19 +476,27 @@ fetch("json/quotes.json")
     });
 
     const bgMusic = document.getElementById("bgMusic");
+    const rainSound = document.getElementById("rainSound");
+
+    const focusModeBtn = document.getElementById("focusModeBtn");
     const miniPlayBtn = document.getElementById("miniPlayBtn");
     const miniPrevBtn = document.getElementById("miniPrevBtn");
     const miniNextBtn = document.getElementById("miniNextBtn");
     const miniShuffleBtn = document.getElementById("miniShuffleBtn");
     const miniRepeatBtn = document.getElementById("miniRepeatBtn");
+    const rainSoundBtn = document.getElementById("rainSoundBtn");
+    const currentSongLabel = document.getElementById("currentSongLabel");
 
     let musicList = [];
     let currentMusicIndex = 0;
     let isMiniPlaying = false;
     let isMiniShuffle = false;
     let isMiniRepeat = false;
+    let isRainPlaying = false;
+    let isFocusMode = false;
 
     bgMusic.volume = 1;
+    rainSound.volume = 1;
 
     async function loadMusicList() {
       try {
@@ -207,15 +509,28 @@ fetch("json/quotes.json")
         musicList = await response.json();
 
         if (!Array.isArray(musicList) || musicList.length === 0) {
+          currentSongLabel.textContent = "🎵 Chưa có danh sách nhạc";
           return;
         }
 
         bgMusic.src = "audio/lists/" + musicList[currentMusicIndex].file;
         bgMusic.load();
+        updateCurrentSongLabel();
       }
       catch(error){
         console.error(error);
+        currentSongLabel.textContent = "🎵 Không tải được nhạc";
       }
+    }
+
+    function updateCurrentSongLabel() {
+      if (!musicList.length) {
+        currentSongLabel.textContent = "🎵 Chưa có nhạc";
+        return;
+      }
+
+      currentSongLabel.textContent =
+        "🎵 " + (musicList[currentMusicIndex].title || musicList[currentMusicIndex].file);
     }
 
     function loadMiniSong(index) {
@@ -224,6 +539,7 @@ fetch("json/quotes.json")
       currentMusicIndex = index;
       bgMusic.src = "audio/lists/" + musicList[currentMusicIndex].file;
       bgMusic.load();
+      updateCurrentSongLabel();
     }
 
     function playMiniMusic() {
@@ -279,6 +595,15 @@ fetch("json/quotes.json")
       playMiniMusic();
     }
 
+    focusModeBtn.addEventListener("click", e => {
+      e.stopPropagation();
+
+      isFocusMode = !isFocusMode;
+
+      document.body.classList.toggle("focus-mode", isFocusMode);
+      focusModeBtn.classList.toggle("active-mini", isFocusMode);
+    });
+
     miniPlayBtn.addEventListener("click", e => {
       e.stopPropagation();
 
@@ -309,6 +634,25 @@ fetch("json/quotes.json")
       e.stopPropagation();
       isMiniRepeat = !isMiniRepeat;
       miniRepeatBtn.classList.toggle("active-mini", isMiniRepeat);
+    });
+
+    rainSoundBtn.addEventListener("click", e => {
+      e.stopPropagation();
+
+      if (isRainPlaying) {
+        rainSound.pause();
+        isRainPlaying = false;
+        rainSoundBtn.classList.remove("active-mini");
+      } else {
+        rainSound.play()
+        .then(() => {
+          isRainPlaying = true;
+          rainSoundBtn.classList.add("active-mini");
+        })
+        .catch(error => {
+          console.log("Không phát được tiếng mưa:", error);
+        });
+      }
     });
 
     bgMusic.addEventListener("ended", () => {
@@ -371,6 +715,62 @@ fetch("json/quotes.json")
     `;
 
     document.head.appendChild(style);
+    const themeBtn = document.getElementById("themeBtn");
+
+const themes = [
+  {
+    name: "theme-rain",
+    icon: "🌧️"
+  },
+  {
+    name: "theme-night",
+    icon: "🌙"
+  },
+  {
+    name: "theme-flower",
+    icon: "🌸"
+  },
+  {
+    name: "theme-sun",
+    icon: "☀️"
+  }
+];
+
+let currentThemeIndex =
+Number(localStorage.getItem("mydocThemeIndex") || 0);
+
+function applyTheme(index){
+
+  themes.forEach(theme => {
+    document.body.classList.remove(theme.name);
+  });
+
+  document.body.classList.add(
+    themes[index].name
+  );
+
+  themeBtn.innerHTML =
+    themes[index].icon;
+
+  localStorage.setItem(
+    "mydocThemeIndex",
+    index
+  );
+}
+
+themeBtn.addEventListener("click", e => {
+
+  e.stopPropagation();
+
+  currentThemeIndex =
+    (currentThemeIndex + 1) %
+    themes.length;
+
+  applyTheme(currentThemeIndex);
+
+});
+
+  applyTheme(currentThemeIndex);
 
     document.addEventListener("click", e => {
       const ripple = document.createElement("div");
