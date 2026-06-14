@@ -1,0 +1,874 @@
+[
+  {
+    "title": "Đi học muộn",
+    "content": "Thầy giáo hỏi:\n- Sao em đi học muộn?\nHọc sinh đáp:\n- Dạ tại biển báo trước cổng trường ạ.\n- Biển gì?\n- 'Chậm lại, trường học phía trước'."
+  },
+  {
+    "title": "Làm bài kiểm tra",
+    "content": "Cô giáo hỏi:\n- Sao bài em giống hệt bài bạn bên cạnh?\nHọc sinh nói:\n- Dạ vì câu hỏi giống nhau nên tụi em tôn trọng đáp án giống nhau ạ."
+  },
+  {
+    "title": "Không thuộc bài",
+    "content": "Thầy hỏi:\n- Em có thuộc bài không?\nTrò đáp:\n- Dạ có ạ.\n- Vậy đọc đi.\n- Dạ... em thuộc dạng im lặng ạ."
+  },
+  {
+    "title": "Điểm mười",
+    "content": "Mẹ hỏi:\n- Hôm nay con được điểm mấy?\nCon đáp:\n- Dạ, con được điểm mười.\nMẹ mừng rỡ:\n- Môn gì?\nCon nói:\n- Tổng cộng ba môn ạ."
+  },
+  {
+    "title": "Bài văn tả bố",
+    "content": "Cô giáo phê bài văn:\n- Em viết 'bố em rất hiền vì mẹ em nói gì bố cũng im'. Sao lại thế?\nHọc sinh đáp:\n- Dạ đó là bằng chứng rõ nhất ạ."
+  },
+  {
+    "title": "Tập làm văn",
+    "content": "Đề bài: 'Hãy tả con vật em yêu thích'.\nHọc sinh viết:\n'Em thích con gà. Nó gáy sáng sớm để cả nhà biết vẫn còn buồn ngủ.'"
+  },
+  {
+    "title": "Sợ kiểm tra",
+    "content": "Bạn hỏi:\n- Mai kiểm tra, cậu học chưa?\n- Rồi.\n- Học gì?\n- Học cách bình tĩnh khi nhìn đề."
+  },
+  {
+    "title": "Bài toán khó",
+    "content": "Thầy hỏi:\n- Nếu có 5 quả táo, em ăn 2 quả, còn mấy quả?\nTrò đáp:\n- Dạ còn thèm ạ."
+  },
+  {
+    "title": "Đọc sách",
+    "content": "Mẹ hỏi:\n- Sao con mở sách mà không đọc?\nCon đáp:\n- Dạ con đang cho kiến thức tự thấm vào người."
+  },
+  {
+    "title": "Học nhóm",
+    "content": "Bạn rủ:\n- Tối nay học nhóm nha.\n- Học môn gì?\n- Môn giữ tinh thần lạc quan trước kỳ thi."
+  },
+  {
+    "title": "Lý do ngủ gật",
+    "content": "Thầy hỏi:\n- Sao em ngủ trong lớp?\nTrò đáp:\n- Dạ em đang ôn bài trong mơ cho sinh động ạ."
+  },
+  {
+    "title": "Không làm bài tập",
+    "content": "Cô hỏi:\n- Sao em không làm bài tập?\nTrò đáp:\n- Dạ em sợ làm sai nên bảo vệ sự trong trắng của vở ạ."
+  },
+  {
+    "title": "Chữ đẹp",
+    "content": "Cô giáo nói:\n- Chữ em khó đọc quá.\nHọc sinh đáp:\n- Dạ sau này em muốn làm bác sĩ ạ."
+  },
+  {
+    "title": "Học lịch sử",
+    "content": "Thầy hỏi:\n- Vì sao chúng ta phải học lịch sử?\nTrò đáp:\n- Để biết ngày xưa cũng có người khổ vì học bài như tụi em ạ."
+  },
+  {
+    "title": "Thi vấn đáp",
+    "content": "Thầy hỏi:\n- Em chuẩn bị bài chưa?\nTrò đáp:\n- Dạ em chuẩn bị tinh thần rồi ạ.\n- Còn kiến thức?\n- Dạ phần đó em đang chờ thầy gợi ý."
+  },
+  {
+    "title": "Học online",
+    "content": "Cô hỏi:\n- Sao em tắt camera?\nHọc sinh đáp:\n- Dạ mạng yếu quá, chỉ đủ truyền trí tuệ thôi ạ."
+  },
+  {
+    "title": "Điểm thấp",
+    "content": "Mẹ hỏi:\n- Sao con lại được 2 điểm?\nCon đáp:\n- Dạ vì con sống khiêm tốn, không muốn khoe khoang điểm cao."
+  },
+  {
+    "title": "Câu hỏi dễ",
+    "content": "Thầy nói:\n- Câu này rất dễ.\nHọc sinh thở dài:\n- Dễ với thầy, chứ với tụi em nó đang giả vờ thân thiện."
+  },
+  {
+    "title": "Bảng cửu chương",
+    "content": "Mẹ hỏi:\n- Con thuộc bảng cửu chương chưa?\nCon đáp:\n- Dạ thuộc tâm trạng sợ nó rồi ạ."
+  },
+  {
+    "title": "Giờ ra chơi",
+    "content": "Thầy hỏi:\n- Em thích môn nào nhất?\nHọc sinh đáp:\n- Dạ môn ra chơi, vì môn đó em hiểu bài nhất."
+  },
+  {
+    "title": "Sếp và deadline",
+    "content": "Sếp hỏi:\n- Báo cáo xong chưa?\nNhân viên đáp:\n- Dạ xong phần lo lắng rồi, còn phần nội dung em đang làm."
+  },
+  {
+    "title": "Làm việc nhóm",
+    "content": "Trưởng nhóm hỏi:\n- Ai phụ trách phần này?\nCả nhóm im lặng.\nMột người nói:\n- Đây là tinh thần đồng đội: cùng nhau không biết."
+  },
+  {
+    "title": "Đi làm sớm",
+    "content": "Sếp khen:\n- Hôm nay em đến sớm quá.\nNhân viên đáp:\n- Dạ, em ngủ quên ở công ty từ hôm qua."
+  },
+  {
+    "title": "Email công việc",
+    "content": "Đồng nghiệp hỏi:\n- Sao email của cậu bắt đầu bằng 'Kính gửi' mà kết thúc bằng 'thân ái'? \n- Vì lúc đầu còn bình tĩnh, đọc đến cuối thì muốn hòa giải."
+  },
+  {
+    "title": "Họp dài",
+    "content": "Sếp nói:\n- Cuộc họp hôm nay sẽ ngắn thôi.\nNhân viên thì thầm:\n- Câu này có tính chất tham khảo, không có giá trị thực tế."
+  },
+  {
+    "title": "Nghỉ phép",
+    "content": "Nhân viên hỏi:\n- Em xin nghỉ một ngày để phục hồi năng lượng.\nSếp hỏi:\n- Em mệt à?\n- Dạ không, em thấy năng lượng của công ty đang dùng em hơi nhiều."
+  },
+  {
+    "title": "Máy in",
+    "content": "Nhân viên hỏi IT:\n- Máy in không in được.\nIT hỏi:\n- Có báo lỗi gì không?\n- Có, nó im lặng đầy thái độ."
+  },
+  {
+    "title": "Tăng ca",
+    "content": "Sếp hỏi:\n- Em có thể ở lại thêm chút không?\nNhân viên đáp:\n- Dạ được, chút của sếp tính bằng đơn vị giờ hay đơn vị tuổi ạ?"
+  },
+  {
+    "title": "Báo cáo đẹp",
+    "content": "Sếp nói:\n- Báo cáo này nhìn đẹp đó.\nNhân viên mừng rỡ.\nSếp nói tiếp:\n- Nội dung thì mình bàn lại từ đầu nha."
+  },
+  {
+    "title": "Cà phê sáng",
+    "content": "Đồng nghiệp hỏi:\n- Sao sáng nào cậu cũng uống cà phê?\n- Vì nếu không, cơ thể tôi vẫn đi làm nhưng linh hồn chưa chấm công."
+  },
+  {
+    "title": "Lương tháng",
+    "content": "Bạn hỏi:\n- Lương tháng này sao rồi?\n- Vừa nhận xong đã hóa thành kỷ niệm."
+  },
+  {
+    "title": "Chấm công",
+    "content": "Máy chấm công báo lỗi.\nNhân viên thở dài:\n- Đến cái máy còn không tin là mình đi làm đúng giờ."
+  },
+  {
+    "title": "Việc gấp",
+    "content": "Sếp nhắn:\n- Việc này không gấp.\nNhân viên thở phào.\nSếp nhắn tiếp:\n- Nhưng cần xong trong hôm nay."
+  },
+  {
+    "title": "Họp online",
+    "content": "Sếp hỏi:\n- Mọi người nghe rõ không?\nCả phòng chat: Rõ ạ.\nSếp nói:\n- Vậy sao chưa ai hiểu?"
+  },
+  {
+    "title": "Công việc ổn định",
+    "content": "Bạn hỏi:\n- Công việc ổn không?\n- Ổn lắm, ngày nào cũng ổn định trong trạng thái hoang mang."
+  },
+  {
+    "title": "Sửa file",
+    "content": "Sếp nói:\n- Em sửa nhẹ file này thôi.\nNhân viên mở file ra thấy 48 comment.\n- Dạ, nhẹ theo nghĩa không cần xe nâng ạ."
+  },
+  {
+    "title": "Năng suất",
+    "content": "Sếp hỏi:\n- Làm sao tăng năng suất?\nNhân viên đáp:\n- Dạ giảm số cuộc họp hỏi cách tăng năng suất."
+  },
+  {
+    "title": "Định hướng",
+    "content": "Sếp nói:\n- Công ty đang cần người chủ động.\nNhân viên hỏi:\n- Chủ động nghỉ hay chủ động tăng lương ạ?"
+  },
+  {
+    "title": "Deadline thân thiện",
+    "content": "Đồng nghiệp hỏi:\n- Deadline có đáng sợ không?\n- Không, nó rất thân thiện. Nó luôn đến thăm đúng hẹn."
+  },
+  {
+    "title": "Bận rộn",
+    "content": "Bạn hỏi:\n- Hôm nay bận không?\n- Bận lắm, bận giả vờ bình tĩnh."
+  },
+  {
+    "title": "Mật khẩu",
+    "content": "Nhân viên IT nói:\n- Mật khẩu phải khó đoán.\nSếp hỏi:\n- Đặt 'matkhaukhoDoan' được không?\nIT im lặng rất lâu."
+  },
+  {
+    "title": "Wi-Fi yếu",
+    "content": "Khách hỏi:\n- Wi-Fi ở đây mạnh không?\nChủ quán đáp:\n- Mạnh lắm, chỉ có điều nó sống nội tâm nên ít khi xuất hiện."
+  },
+  {
+    "title": "Điện thoại thông minh",
+    "content": "Bạn hỏi:\n- Điện thoại thông minh là sao?\n- Là nó biết hết về mình, còn mình thì không biết tiền trong tài khoản đi đâu."
+  },
+  {
+    "title": "Máy tính chậm",
+    "content": "Người dùng nói:\n- Máy em chậm quá.\nIT hỏi:\n- Em mở bao nhiêu tab?\n- Dạ ít thôi, khoảng đủ để máy có suy nghĩ riêng."
+  },
+  {
+    "title": "Sạc pin",
+    "content": "Điện thoại báo pin yếu.\nTôi nói:\n- Cố lên, tao cũng vậy."
+  },
+  {
+    "title": "Tự động sửa lỗi",
+    "content": "Bạn nhắn: 'Tôi rất vui'.\nĐiện thoại tự sửa thành: 'Tôi rất vùi'.\nBạn nhìn điện thoại:\n- Đúng, đời tôi đang bị vùi thật."
+  },
+  {
+    "title": "AI trả lời",
+    "content": "Người hỏi AI:\n- Làm sao để hết lười?\nAI đáp:\n- Tôi có 10 cách.\nNgười hỏi:\n- Tóm tắt một chữ thôi.\nAI: Làm."
+  },
+  {
+    "title": "Camera trước",
+    "content": "Bạn hỏi:\n- Sao camera trước ác vậy?\n- Không ác đâu, nó chỉ trung thực vào thời điểm mình chưa sẵn sàng."
+  },
+  {
+    "title": "Tin nhắn đã xem",
+    "content": "Bạn hỏi:\n- Sao đã xem mà không trả lời?\n- Vì tôi đang trả lời bằng năng lượng im lặng."
+  },
+  {
+    "title": "Cập nhật phần mềm",
+    "content": "Máy báo: 'Cập nhật trong 5 phút'.\n30 phút sau tôi hiểu ra: máy tính tính thời gian bằng cảm xúc."
+  },
+  {
+    "title": "Bộ nhớ đầy",
+    "content": "Điện thoại báo bộ nhớ đầy.\nTôi xóa 3 tấm ảnh.\nĐiện thoại vẫn đầy.\nTôi hiểu: nó muốn tôi xóa quá khứ."
+  },
+  {
+    "title": "Mất mạng",
+    "content": "Mạng vừa mất, cả nhà bỗng ngồi nói chuyện với nhau.\nBa phút sau ai cũng công nhận: cần sửa mạng gấp."
+  },
+  {
+    "title": "Google biết hết",
+    "content": "Bạn hỏi:\n- Google biết hết không?\n- Biết. Nhưng đôi khi nó vẫn hỏi 'Bạn có chắc không?' để mình tự nghi ngờ bản thân."
+  },
+  {
+    "title": "Tai nghe rối",
+    "content": "Tai nghe để trong túi 5 phút.\nLấy ra thấy nó đã tự học thắt nút nâng cao."
+  },
+  {
+    "title": "Mua laptop",
+    "content": "Người bán hỏi:\n- Anh cần laptop làm gì?\nKhách đáp:\n- Làm việc nhẹ.\n- Nhẹ thế nào?\n- Nhẹ nhàng chờ nó hết lag."
+  },
+  {
+    "title": "Bàn phím",
+    "content": "Bạn hỏi:\n- Sao phím Enter hay hư?\n- Vì nó chịu áp lực quyết định nhiều nhất."
+  },
+  {
+    "title": "Chuột máy tính",
+    "content": "Con chuột máy tính rơi xuống đất.\nTôi nhặt lên hỏi:\n- Sao mày không biết tự bò?"
+  },
+  {
+    "title": "Email chưa gửi",
+    "content": "Tôi soạn email rất dài, đọc lại thấy hay quá.\nXong phát hiện gửi nhầm cho chính mình.\nÍt nhất cũng có một người hiểu tôi."
+  },
+  {
+    "title": "Sao lưu dữ liệu",
+    "content": "IT nói:\n- Hãy sao lưu dữ liệu thường xuyên.\nTôi gật đầu.\nĐến khi mất file mới hiểu 'thường xuyên' không có nghĩa là mỗi năm một lần."
+  },
+  {
+    "title": "Thông báo",
+    "content": "Điện thoại rung.\nTôi tưởng ai nhớ mình.\nHóa ra ứng dụng nhắc uống nước.\nÍt nhất cũng có cái quan tâm."
+  },
+  {
+    "title": "Đi chợ",
+    "content": "Vợ dặn:\n- Anh mua rau, nếu có trứng thì mua 10 quả.\nChồng về với 10 bó rau.\nVợ hỏi.\nChồng đáp:\n- Vì ngoài chợ có trứng."
+  },
+  {
+    "title": "Nấu ăn",
+    "content": "Mẹ hỏi:\n- Con nấu cơm chưa?\nCon đáp:\n- Dạ rồi.\nMẹ mở nồi ra:\n- Sao toàn nước?\n- Dạ con đang nấu cháo theo hướng cơm."
+  },
+  {
+    "title": "Dọn phòng",
+    "content": "Mẹ nói:\n- Phòng con bừa quá.\nCon đáp:\n- Dạ đây là phong cách nghệ thuật sắp đặt.\nMẹ nói:\n- Vậy mẹ sẽ sắp đặt lại bằng chổi."
+  },
+  {
+    "title": "Tiết kiệm",
+    "content": "Vợ nói:\n- Tháng này phải tiết kiệm.\nChồng gật đầu:\n- Anh sẽ không mua gì hết.\nVợ hỏi:\n- Kể cả đồ em thích?\nChồng: À, tiết kiệm có ngoại lệ."
+  },
+  {
+    "title": "Đi siêu thị",
+    "content": "Chồng nói:\n- Anh chỉ mua đúng một món thôi.\nMột tiếng sau về với ba túi đồ.\nVợ hỏi.\nChồng đáp:\n- Một món là 'đi siêu thị'."
+  },
+  {
+    "title": "Ngủ trưa",
+    "content": "Mẹ hỏi:\n- Con ngủ trưa lâu vậy?\nCon đáp:\n- Dạ con ngủ bù cho những giấc mơ dang dở."
+  },
+  {
+    "title": "Tập thể dục",
+    "content": "Ba nói:\n- Con nên vận động nhiều hơn.\nCon đáp:\n- Dạ con vận động trí não khi nghĩ cách tránh vận động."
+  },
+  {
+    "title": "Cân nặng",
+    "content": "Vợ hỏi:\n- Anh thấy em mập không?\nChồng đáp:\n- Anh thấy cân mới là người có vấn đề."
+  },
+  {
+    "title": "Ăn kiêng",
+    "content": "Bạn hỏi:\n- Cậu đang ăn kiêng à?\n- Ừ.\n- Sao vẫn ăn bánh?\n- Vì bánh này nhỏ, chắc không được tính là ăn."
+  },
+  {
+    "title": "Rửa chén",
+    "content": "Mẹ hỏi:\n- Sao con chưa rửa chén?\nCon đáp:\n- Dạ con đang chờ cảm hứng.\nMẹ: Vậy để mẹ tạo cảm hứng bằng ánh mắt."
+  },
+  {
+    "title": "Mua đồ online",
+    "content": "Chồng hỏi:\n- Sao em mua nhiều vậy?\nVợ đáp:\n- Em đâu mua, em chỉ giải cứu sản phẩm khỏi cô đơn."
+  },
+  {
+    "title": "Trồng cây",
+    "content": "Bạn hỏi:\n- Cây của cậu sao héo?\n- Nó không héo, nó đang thể hiện tâm trạng của chủ."
+  },
+  {
+    "title": "Nuôi cá",
+    "content": "Người bán nói:\n- Cá này dễ nuôi lắm.\nMột tuần sau cá nhìn tôi, tôi nhìn cá.\nCả hai cùng không hiểu ai đang nuôi ai."
+  },
+  {
+    "title": "Nuôi mèo",
+    "content": "Tôi mua giường cho mèo.\nMèo ngủ trong thùng carton.\nTôi hiểu: mèo không cần tiện nghi, mèo cần quyền lựa chọn."
+  },
+  {
+    "title": "Nuôi chó",
+    "content": "Chó nhà tôi rất ngoan.\nTôi bảo ngồi là nó ngồi.\nTôi bảo im là nó nhìn tôi như thể tôi mới là người cần huấn luyện."
+  },
+  {
+    "title": "Dọn tủ lạnh",
+    "content": "Tôi mở tủ lạnh tìm đồ ăn.\nTủ lạnh trống.\nTôi đóng lại rồi mở lần nữa.\nHy vọng là gia vị của cuộc sống."
+  },
+  {
+    "title": "Mất điều khiển",
+    "content": "Cả nhà tìm điều khiển TV.\nCuối cùng thấy nó nằm trên bàn.\nMọi người đồng ý: đồ vật biết tàng hình khi ta cần."
+  },
+  {
+    "title": "Báo thức",
+    "content": "Báo thức reo lúc 6 giờ.\nTôi tắt đi để suy nghĩ về cuộc đời.\nTỉnh lại, cuộc đời đã sang 8 giờ."
+  },
+  {
+    "title": "Đi ngủ sớm",
+    "content": "Tôi quyết tâm ngủ sớm.\nĐặt điện thoại xuống.\nNăm phút sau cầm lên kiểm tra xem quyết tâm còn không."
+  },
+  {
+    "title": "Rửa xe",
+    "content": "Vừa rửa xe xong trời mưa.\nTôi không buồn.\nTôi chỉ thấy trời rất biết cách tham gia."
+  },
+  {
+    "title": "Bác sĩ khuyên",
+    "content": "Bác sĩ nói:\n- Anh nên giảm căng thẳng.\nBệnh nhân hỏi:\n- Bác sĩ có thuốc không?\n- Có, nhưng hóa đơn sẽ làm anh căng thẳng lại."
+  },
+  {
+    "title": "Khám mắt",
+    "content": "Bác sĩ hỏi:\n- Anh nhìn thấy dòng chữ này không?\nBệnh nhân đáp:\n- Thấy.\n- Vậy đọc đi.\n- Dạ em không biết chữ bác sĩ ạ."
+  },
+  {
+    "title": "Khám răng",
+    "content": "Nha sĩ hỏi:\n- Anh có đánh răng đều không?\nBệnh nhân đáp:\n- Dạ đều.\n- Mấy lần một ngày?\n- Dạ đều đều khi nhớ."
+  },
+  {
+    "title": "Uống thuốc",
+    "content": "Bác sĩ dặn:\n- Thuốc này uống sau bữa ăn.\nBệnh nhân hỏi:\n- Nếu không ăn thì khỏi uống luôn hả bác sĩ?"
+  },
+  {
+    "title": "Ăn rau",
+    "content": "Bác sĩ nói:\n- Anh phải ăn nhiều rau.\nBệnh nhân đáp:\n- Dạ em uống trà xanh có tính không?"
+  },
+  {
+    "title": "Giảm cân",
+    "content": "Bác sĩ hỏi:\n- Anh có tuân thủ chế độ ăn không?\nBệnh nhân đáp:\n- Dạ có, nhưng chế độ ăn lại không tuân thủ em."
+  },
+  {
+    "title": "Mất ngủ",
+    "content": "Bệnh nhân nói:\n- Tôi bị mất ngủ.\nBác sĩ hỏi:\n- Anh thử đếm cừu chưa?\n- Rồi, nhưng đếm xong lại lo tiền mua cừu."
+  },
+  {
+    "title": "Sợ tiêm",
+    "content": "Y tá nói:\n- Đừng sợ, chỉ đau như kiến cắn thôi.\nBệnh nhân hỏi:\n- Kiến thường hay kiến tập gym ạ?"
+  },
+  {
+    "title": "Đau lưng",
+    "content": "Bác sĩ hỏi:\n- Anh đau lưng từ khi nào?\nBệnh nhân đáp:\n- Từ lúc vợ bảo bê đồ nhẹ thôi."
+  },
+  {
+    "title": "Khám tai",
+    "content": "Bác sĩ hỏi:\n- Anh nghe kém từ bao giờ?\nBệnh nhân đáp:\n- Từ khi vợ nói chuyện tiền lương."
+  },
+  {
+    "title": "Dinh dưỡng",
+    "content": "Bác sĩ nói:\n- Anh nên ăn uống lành mạnh.\nBệnh nhân hỏi:\n- Bánh ngọt ăn vui vẻ có tính là lành mạnh tinh thần không?"
+  },
+  {
+    "title": "Đi tái khám",
+    "content": "Bác sĩ hỏi:\n- Thuốc lần trước có hiệu quả không?\nBệnh nhân đáp:\n- Dạ hiệu quả, em nhìn hóa đơn là tỉnh hẳn."
+  },
+  {
+    "title": "Huyết áp",
+    "content": "Bác sĩ nói:\n- Huyết áp anh hơi cao.\nBệnh nhân đáp:\n- Dạ do em vừa thấy giá thuốc ngoài quầy."
+  },
+  {
+    "title": "Cảm cúm",
+    "content": "Bệnh nhân hỏi:\n- Bao lâu thì tôi khỏi?\nBác sĩ đáp:\n- Uống thuốc thì bảy ngày, không uống thì một tuần."
+  },
+  {
+    "title": "Khám sức khỏe",
+    "content": "Bác sĩ hỏi:\n- Anh có thói quen xấu nào không?\nBệnh nhân đáp:\n- Dạ có, em hay hứa bỏ thói quen xấu."
+  },
+  {
+    "title": "Thuốc ngủ",
+    "content": "Bệnh nhân hỏi:\n- Thuốc ngủ này mạnh không?\nDược sĩ đáp:\n- Mạnh lắm, đọc hướng dẫn sử dụng là buồn ngủ rồi."
+  },
+  {
+    "title": "Bệnh lười",
+    "content": "Bệnh nhân nói:\n- Tôi nghĩ mình mắc bệnh lười.\nBác sĩ đáp:\n- Anh tự điền hồ sơ nhé.\nBệnh nhân: Thôi chắc bệnh nặng rồi."
+  },
+  {
+    "title": "Đau đầu",
+    "content": "Bác sĩ hỏi:\n- Anh đau đầu khi nào?\nBệnh nhân đáp:\n- Khi ai đó nói 'có việc nhỏ nhờ anh'."
+  },
+  {
+    "title": "Nước uống",
+    "content": "Bác sĩ dặn:\n- Uống đủ nước mỗi ngày.\nBệnh nhân hỏi:\n- Cà phê có nước mà bác sĩ?\nBác sĩ im lặng đầy thất vọng."
+  },
+  {
+    "title": "Đi nhà hàng",
+    "content": "Khách hỏi:\n- Món này cay không?\nPhục vụ đáp:\n- Dạ nhẹ thôi.\nKhách ăn xong:\n- Nhẹ kiểu gì?\n- Dạ nhẹ nhàng đưa anh sang thế giới khác."
+  },
+  {
+    "title": "Quán phở",
+    "content": "Khách hỏi:\n- Tô đặc biệt có gì đặc biệt?\nChủ quán đáp:\n- Đặc biệt là anh hỏi câu này ai cũng hỏi."
+  },
+  {
+    "title": "Cà phê đá",
+    "content": "Khách nói:\n- Cho ly cà phê ít đá.\nPhục vụ mang ra.\nKhách hỏi:\n- Sao vẫn nhiều đá?\n- Dạ em đã ít cà phê lại rồi ạ."
+  },
+  {
+    "title": "Món mới",
+    "content": "Khách hỏi:\n- Món này ngon không?\nPhục vụ đáp:\n- Dạ tùy tâm trạng.\n- Tâm trạng ai?\n- Dạ đầu bếp."
+  },
+  {
+    "title": "Tính tiền",
+    "content": "Khách hỏi:\n- Sao hóa đơn cao vậy?\nChủ quán đáp:\n- Dạ vì tụi em tính cả trải nghiệm bất ngờ."
+  },
+  {
+    "title": "Bánh mì",
+    "content": "Khách nói:\n- Cho ổ bánh mì không cay.\nNgười bán hỏi:\n- Anh có muốn ớt không?\nKhách im lặng vì thấy câu hỏi có chiều sâu."
+  },
+  {
+    "title": "Ăn buffet",
+    "content": "Bạn hỏi:\n- Đi buffet lời không?\n- Lời nhất là nhà hàng khi mình no sớm."
+  },
+  {
+    "title": "Gọi món",
+    "content": "Khách hỏi:\n- Món nào nhanh nhất?\nPhục vụ đáp:\n- Dạ món chờ ạ, lúc nào cũng có sẵn."
+  },
+  {
+    "title": "Trà sữa",
+    "content": "Bạn hỏi:\n- Sao uống trà sữa hoài vậy?\n- Vì cuộc đời đắng, phải có topping để cân bằng."
+  },
+  {
+    "title": "Ăn khuya",
+    "content": "Tôi tự nhủ không ăn khuya.\nRồi tủ lạnh gọi.\nTôi là người lịch sự, ai gọi thì phải trả lời."
+  },
+  {
+    "title": "Đồ ăn healthy",
+    "content": "Bạn hỏi:\n- Món này healthy không?\n- Có, vì ăn xong ví nhẹ, người cũng nhẹ theo."
+  },
+  {
+    "title": "Nấu mì",
+    "content": "Mẹ hỏi:\n- Con biết nấu gì?\nCon đáp:\n- Mì gói.\n- Ngoài mì gói?\n- Mì gói có trứng."
+  },
+  {
+    "title": "Quán đông",
+    "content": "Khách hỏi:\n- Sao quán đông mà phục vụ chậm?\nChủ quán đáp:\n- Dạ vì tụi em muốn khách có thời gian quý trọng món ăn."
+  },
+  {
+    "title": "Mua rau",
+    "content": "Người bán nói:\n- Rau này sạch lắm.\nKhách hỏi:\n- Sao biết?\n- Dạ vì chưa ai mua nên chưa dính bụi đường."
+  },
+  {
+    "title": "Uống nước",
+    "content": "Bạn hỏi:\n- Sao cậu uống nước nhiều vậy?\n- Vì tôi đang cố làm người có chiều sâu, ít nhất là trong dạ dày."
+  },
+  {
+    "title": "Cơm văn phòng",
+    "content": "Đồng nghiệp hỏi:\n- Cơm hôm nay ngon không?\n- Ngon nhất là lúc chưa mở hộp."
+  },
+  {
+    "title": "Ăn cay",
+    "content": "Bạn hỏi:\n- Cậu ăn cay giỏi không?\n- Giỏi lắm, giỏi chịu đựng hậu quả."
+  },
+  {
+    "title": "Đặt đồ ăn",
+    "content": "App báo giao trong 20 phút.\nTôi mừng.\n30 phút sau app báo tài xế đang tìm nhà.\nTôi hiểu nhà mình đã thành mê cung."
+  },
+  {
+    "title": "Món tủ",
+    "content": "Bạn hỏi:\n- Món tủ của cậu là gì?\n- Mở tủ lạnh rồi đóng lại."
+  },
+  {
+    "title": "Kem tan",
+    "content": "Trời nóng, kem tan nhanh.\nTôi không buồn.\nTôi chỉ ăn nhanh hơn để hợp tác với thiên nhiên."
+  },
+  {
+    "title": "Người thật thà",
+    "content": "Bạn hỏi:\n- Cậu có nói dối bao giờ không?\n- Không.\n- Thật không?\n- Ừ, câu vừa rồi là lần đầu."
+  },
+  {
+    "title": "Người kiên nhẫn",
+    "content": "Bạn nói:\n- Tôi rất kiên nhẫn.\nNgười kia hỏi:\n- Chứng minh đi.\n- Đợi chút."
+  },
+  {
+    "title": "Tìm chìa khóa",
+    "content": "Tôi tìm chìa khóa khắp nhà.\nCuối cùng thấy nó trong tay.\nTôi quyết định không trách mình, vì ít nhất tay tôi giữ đồ tốt."
+  },
+  {
+    "title": "Tự tin",
+    "content": "Bạn hỏi:\n- Sao cậu tự tin vậy?\n- Vì nếu mình không tin mình, ít nhất vẫn có mật khẩu tự động lưu tin mình."
+  },
+  {
+    "title": "Thời gian",
+    "content": "Tôi nói: 'Chỉ lướt điện thoại 5 phút thôi'.\nThời gian nghe vậy liền cười và chạy nước rút."
+  },
+  {
+    "title": "Dậy sớm",
+    "content": "Tôi đặt mục tiêu dậy lúc 5 giờ.\nKết quả dậy lúc 5 giờ... chiều.\nMục tiêu đạt được một nửa."
+  },
+  {
+    "title": "Tập trung",
+    "content": "Tôi ngồi xuống làm việc.\nNão hỏi:\n- Hay mình nhớ lại một chuyện quê từ năm lớp 7 trước?"
+  },
+  {
+    "title": "Trí nhớ",
+    "content": "Tôi có trí nhớ rất tốt.\nChỉ là nó thích lưu những thứ không cần thiết."
+  },
+  {
+    "title": "Cẩn thận",
+    "content": "Tôi là người rất cẩn thận.\nTrước khi quên, tôi luôn kiểm tra xem mình đã quên chưa."
+  },
+  {
+    "title": "Sống tích cực",
+    "content": "Bạn hỏi:\n- Cậu sống tích cực thật à?\n- Ừ, mỗi lần gặp vấn đề, tôi tích cực né nó."
+  },
+  {
+    "title": "Đi bộ",
+    "content": "Tôi định đi bộ cho khỏe.\nĐi được 200 mét thấy quán nước.\nSức khỏe tinh thần cũng quan trọng."
+  },
+  {
+    "title": "Mua sổ tay",
+    "content": "Tôi mua sổ để ghi kế hoạch.\nTrang đầu ghi: 'Bắt đầu từ mai'.\nĐến nay cuốn sổ vẫn giữ lời hứa."
+  },
+  {
+    "title": "Tự kỷ luật",
+    "content": "Tôi rất kỷ luật.\nMỗi ngày đúng giờ tôi đều trì hoãn."
+  },
+  {
+    "title": "Tối giản",
+    "content": "Bạn hỏi:\n- Cậu theo lối sống tối giản à?\n- Ừ, nhất là tài khoản ngân hàng."
+  },
+  {
+    "title": "Yêu đời",
+    "content": "Tôi yêu đời.\nĐời có yêu lại không thì đang trong giai đoạn xét duyệt."
+  },
+  {
+    "title": "Suy nghĩ sâu sắc",
+    "content": "Bạn hỏi:\n- Sao cậu hay ngồi im vậy?\n- Tôi đang suy nghĩ sâu sắc.\n- Nghĩ gì?\n- Nghĩ xem tối ăn gì."
+  },
+  {
+    "title": "Giữ lời",
+    "content": "Tôi hứa sẽ thay đổi.\nVà tôi đã thay đổi lời hứa nhiều lần."
+  },
+  {
+    "title": "Làm chủ cuộc đời",
+    "content": "Tôi muốn làm chủ cuộc đời.\nNhưng cuộc đời đang yêu cầu tôi nộp hồ sơ kinh nghiệm."
+  },
+  {
+    "title": "Cười cho qua",
+    "content": "Bạn hỏi:\n- Gặp khó khăn cậu làm gì?\n- Cười cho qua.\n- Có qua không?\n- Không, nhưng ít nhất nhìn đỡ bi thương."
+  },
+  {
+    "title": "Mua áo",
+    "content": "Khách hỏi:\n- Áo này mặc có đẹp không?\nNgười bán đáp:\n- Đẹp hay không phụ thuộc vào sự tự tin của anh.\nKhách: Vậy giảm giá phần tự tin được không?"
+  },
+  {
+    "title": "Đổi trả",
+    "content": "Khách hỏi:\n- Hàng này có đổi trả không?\nNgười bán đáp:\n- Có, nếu anh đổi ý trước khi trả tiền."
+  },
+  {
+    "title": "Mua giày",
+    "content": "Người bán nói:\n- Đôi này đi rất êm.\nKhách thử xong:\n- Đúng là êm, ví tôi rơi mà tôi không nghe."
+  },
+  {
+    "title": "Chợ giảm giá",
+    "content": "Khách hỏi:\n- Cái này giảm được không?\nNgười bán đáp:\n- Được, em giảm niềm hy vọng của anh trước."
+  },
+  {
+    "title": "Mua kính",
+    "content": "Khách hỏi:\n- Đeo kính này có nhìn đẹp hơn không?\nNgười bán đáp:\n- Có, ít nhất anh sẽ thấy giá rõ hơn."
+  },
+  {
+    "title": "Tư vấn nhiệt tình",
+    "content": "Khách hỏi:\n- Món này bền không?\nNgười bán đáp:\n- Bền lắm, nhất là khi anh không dùng."
+  },
+  {
+    "title": "Mua đồng hồ",
+    "content": "Khách hỏi:\n- Đồng hồ này chạy chính xác không?\nNgười bán đáp:\n- Chính xác 2 lần mỗi ngày nếu nó đứng."
+  },
+  {
+    "title": "Đặt hàng",
+    "content": "Khách hỏi:\n- Khi nào giao tới?\nShop đáp:\n- Tùy duyên vận chuyển, nhưng em sẽ cầu nguyện kèm mã đơn."
+  },
+  {
+    "title": "Mua gối",
+    "content": "Người bán nói:\n- Gối này ngủ rất ngon.\nKhách hỏi:\n- Có bảo hành giấc mơ đẹp không?"
+  },
+  {
+    "title": "Mua cân",
+    "content": "Khách hỏi:\n- Cân này chính xác không?\nNgười bán đáp:\n- Chính xác.\nKhách nói:\n- Vậy tôi không mua, tôi cần một cái biết an ủi."
+  },
+  {
+    "title": "Hỏi đường",
+    "content": "Người lạ hỏi:\n- Đường này đi đâu?\nTôi đáp:\n- Nếu đi thẳng thì đến chỗ khác."
+  },
+  {
+    "title": "Xe buýt",
+    "content": "Khách hỏi:\n- Xe này có đi qua bệnh viện không?\nTài xế đáp:\n- Nếu anh nhảy xuống giữa đường thì có thể qua đó nhanh hơn."
+  },
+  {
+    "title": "Kẹt xe",
+    "content": "Bạn hỏi:\n- Sao đến trễ?\n- Kẹt xe.\n- Nhưng đi bộ mà?\n- Kẹt suy nghĩ xem có nên đi hay không."
+  },
+  {
+    "title": "Đi du lịch",
+    "content": "Bạn hỏi:\n- Đi du lịch vui không?\n- Vui, nhất là lúc chưa nhìn sao kê."
+  },
+  {
+    "title": "Lạc đường",
+    "content": "Tôi bật bản đồ.\nBản đồ nói rẽ phải.\nTôi rẽ trái.\nBản đồ im lặng một lúc như đang thất vọng về nhân loại."
+  },
+  {
+    "title": "Đi taxi",
+    "content": "Tài xế hỏi:\n- Anh muốn đi đường nhanh hay đường đẹp?\nKhách đáp:\n- Đường rẻ ạ."
+  },
+  {
+    "title": "Leo núi",
+    "content": "Bạn hỏi:\n- Leo núi có mệt không?\n- Không mệt lúc xem ảnh người khác leo."
+  },
+  {
+    "title": "Chụp ảnh du lịch",
+    "content": "Đi du lịch 3 ngày.\nChụp 300 tấm ảnh.\nVề nhà dùng đúng 1 tấm đăng mạng, còn lại làm bằng chứng mình từng vui."
+  },
+  {
+    "title": "Ở khách sạn",
+    "content": "Khách hỏi:\n- Phòng này view đẹp không?\nLễ tân đáp:\n- Đẹp lắm, nếu anh nhìn vào trí tưởng tượng."
+  },
+  {
+    "title": "Đi biển",
+    "content": "Bạn hỏi:\n- Đi biển thích nhất gì?\n- Tiếng sóng.\n- Còn ghét nhất?\n- Tin nhắn ngân hàng sau chuyến đi."
+  },
+  {
+    "title": "Đố nhanh",
+    "content": "A hỏi B:\n- Cái gì càng chia càng nhiều?\nB đáp:\n- Hóa đơn đi ăn nhóm."
+  },
+  {
+    "title": "Tâm lý học",
+    "content": "Bạn nói:\n- Tôi hiểu bản thân mình.\nNgười kia hỏi:\n- Vậy sao cậu làm vậy?\n- Đó là phần bản thân tôi chưa kịp hiểu."
+  },
+  {
+    "title": "Triết lý",
+    "content": "Bạn hỏi:\n- Hạnh phúc là gì?\n- Là khi Wi-Fi mạnh, pin đầy và không ai hỏi 'bao giờ thành công'."
+  },
+  {
+    "title": "Sự thật",
+    "content": "Người ta nói tiền không mua được hạnh phúc.\nTôi đồng ý.\nNhưng nó mua được đồ ăn, mà đồ ăn thường rất gần hạnh phúc."
+  },
+  {
+    "title": "Lời khuyên",
+    "content": "Bạn hỏi:\n- Làm sao bớt overthinking?\n- Nghĩ ít lại.\n- Hay quá, sao tôi không nghĩ ra?\n- Vì cậu nghĩ nhiều quá."
+  },
+  {
+    "title": "Tương lai",
+    "content": "Bạn hỏi:\n- Tương lai của cậu thế nào?\n- Mờ mịt.\n- Sao bi quan vậy?\n- Không, tại tôi chưa đeo kính."
+  },
+  {
+    "title": "May mắn",
+    "content": "Tôi mua vé số.\nKhông trúng.\nNhưng tôi vẫn may mắn vì còn có lý do để mơ trong vài tiếng."
+  },
+  {
+    "title": "Giàu có",
+    "content": "Bạn hỏi:\n- Khi nào cậu giàu?\n- Khi nào ngân hàng nhầm tài khoản mà không phát hiện."
+  },
+  {
+    "title": "Động lực",
+    "content": "Tôi tìm động lực làm việc.\nNó trốn kỹ quá.\nChắc nó cũng đang nghỉ phép."
+  },
+  {
+    "title": "Kế hoạch",
+    "content": "Tôi có kế hoạch rất rõ ràng.\nBước 1: Lập kế hoạch.\nBước 2: Tự hào.\nBước 3: Để mai tính."
+  },
+  {
+    "title": "Gặp bạn cũ",
+    "content": "Bạn cũ hỏi:\n- Dạo này sao rồi?\nTôi đáp:\n- Vẫn ổn.\nNội tâm nói:\n- Xin đừng hỏi sâu."
+  },
+  {
+    "title": "Tin nhắn crush",
+    "content": "Crush nhắn 'ừ'.\nTôi phân tích 30 phút.\nKết luận: chắc người ta bận.\nSự thật: người ta chỉ nhắn 'ừ'."
+  },
+  {
+    "title": "Lần đầu hẹn hò",
+    "content": "Bạn hỏi:\n- Buổi hẹn sao rồi?\n- Tốt, tụi mình nói chuyện rất hợp.\n- Nói gì?\n- Nói về món ăn vì cả hai đều đói."
+  },
+  {
+    "title": "Bạn thân",
+    "content": "Bạn thân là người hỏi 'ổn không' rồi tự trả lời:\n- Nhìn mặt là biết không ổn rồi, kể đi."
+  },
+  {
+    "title": "Tỏ tình",
+    "content": "Anh hỏi:\n- Em có tin vào tình yêu sét đánh không?\nCô gái đáp:\n- Tin, nhưng em tin cột thu lôi hơn."
+  },
+  {
+    "title": "Lời hứa",
+    "content": "Người yêu hỏi:\n- Anh hứa sẽ thay đổi chứ?\nAnh đáp:\n- Anh hứa.\n- Đổi gì?\n- Đổi chủ đề."
+  },
+  {
+    "title": "Ghen",
+    "content": "Cô gái hỏi:\n- Anh có giấu em gì không?\nChàng trai đáp:\n- Có.\n- Gì?\n- Cảm giác sợ câu hỏi này."
+  },
+  {
+    "title": "Quà sinh nhật",
+    "content": "Bạn hỏi:\n- Muốn quà gì?\n- Bất ngờ.\nSinh nhật nhận được hóa đơn cũ.\nĐúng là bất ngờ."
+  },
+  {
+    "title": "Tình bạn",
+    "content": "Bạn tốt là người không phán xét bạn.\nBạn thân là người phán xét rất nhiệt tình nhưng vẫn ở lại."
+  },
+  {
+    "title": "Lời chúc",
+    "content": "Bạn chúc:\n- Chúc cậu luôn vui vẻ.\nTôi đáp:\n- Cảm ơn, cho xin thêm hướng dẫn sử dụng."
+  },
+  {
+    "title": "Mèo và chủ",
+    "content": "Tôi gọi mèo.\nMèo không lại.\nTôi mở gói thức ăn.\nMèo xuất hiện như đã đăng ký 4G riêng."
+  },
+  {
+    "title": "Chó giữ nhà",
+    "content": "Chó nhà tôi sủa rất dữ khi có người lạ.\nNhưng gặp đồ ăn thì nó chuyển sang bộ phận lễ tân."
+  },
+  {
+    "title": "Cá cảnh",
+    "content": "Tôi hỏi cá:\n- Mày chán không?\nCá bơi vòng vòng.\nTôi hiểu nó đang tập thể dục trong căn hộ studio."
+  },
+  {
+    "title": "Hamster",
+    "content": "Hamster chạy trong bánh xe cả đêm.\nTôi nhìn nó và thấy giống mình: bận rộn nhưng chưa chắc đi tới đâu."
+  },
+  {
+    "title": "Chim cảnh",
+    "content": "Con vẹt nhà tôi biết nói 'xin chào'.\nĐiều buồn là nó nói câu đó với đồ ăn nhiều hơn với tôi."
+  },
+  {
+    "title": "Mèo khó tính",
+    "content": "Tôi mua đồ chơi đắt tiền cho mèo.\nMèo chơi với túi nilon.\nBài học: hạnh phúc không phụ thuộc vào giá tiền."
+  },
+  {
+    "title": "Chó thông minh",
+    "content": "Tôi dạy chó bắt tay.\nNó học rất nhanh.\nGiờ mỗi lần muốn ăn, nó bắt tay tôi như ký hợp đồng."
+  },
+  {
+    "title": "Thỏ ăn rau",
+    "content": "Tôi cho thỏ ăn rau.\nNó nhìn tôi như đầu bếp chưa đạt sao Michelin."
+  },
+  {
+    "title": "Mèo ngủ",
+    "content": "Mèo ngủ 16 tiếng mỗi ngày.\nTôi gọi đó là lười.\nMèo gọi đó là phong cách sống cao cấp."
+  },
+  {
+    "title": "Nuôi cá vàng",
+    "content": "Cá vàng nhìn tôi qua bể kính.\nTôi nhìn lại.\nCả hai cùng tự hỏi: ai mới là người bị nhốt?"
+  },
+  {
+    "title": "Cái cân trung thực",
+    "content": "Tôi bước lên cân.\nCân hiện số.\nTôi bước xuống và quyết định: đồ điện tử đôi khi cũng cần được tha thứ."
+  },
+  {
+    "title": "Tự nấu ăn",
+    "content": "Bạn hỏi:\n- Cậu nấu ăn ngon không?\n- Ngon lắm, nhất là món gọi đồ ăn về."
+  },
+  {
+    "title": "Bài tập thể dục",
+    "content": "Tôi tập plank 30 giây.\nCơ thể nói: 'Chúng ta đã sống đủ rồi sao?'"
+  },
+  {
+    "title": "Lịch làm việc",
+    "content": "Tôi ghi lịch làm việc rất đẹp.\nNhưng công việc nhìn lịch rồi chọn xuất hiện ngoài giờ."
+  },
+  {
+    "title": "Giấc ngủ",
+    "content": "Tôi ngủ đủ 8 tiếng.\nVấn đề là chia đều trong 3 ngày."
+  },
+  {
+    "title": "Dọn máy tính",
+    "content": "Tôi tạo thư mục 'Sắp xếp sau'.\nBa năm sau, nó có thêm 17 thư mục con tên 'Sắp xếp sau nữa'."
+  },
+  {
+    "title": "Mưa bất ngờ",
+    "content": "Vừa ra khỏi nhà thì mưa.\nTôi quay vào lấy áo mưa thì hết mưa.\nTôi hiểu thời tiết đang đùa có kịch bản."
+  },
+  {
+    "title": "Tủ quần áo",
+    "content": "Tủ đầy đồ.\nTôi vẫn nói: 'Không có gì để mặc'.\nTủ im lặng vì quá quen bị oan."
+  },
+  {
+    "title": "Học ngoại ngữ",
+    "content": "Tôi học tiếng Anh mỗi ngày.\nHiện tại câu giỏi nhất là: 'I am trying'."
+  },
+  {
+    "title": "Cây cảnh",
+    "content": "Tôi mua cây để thư giãn.\nGiờ tôi căng thẳng vì sợ cây căng thẳng."
+  },
+  {
+    "title": "Hẹn báo thức",
+    "content": "Báo thức hỏi tôi mỗi sáng: 'Dậy chưa?'\nTôi đáp bằng hành động rất kiên định: tắt nó."
+  },
+  {
+    "title": "Tự thưởng",
+    "content": "Tôi tự thưởng vì đã làm việc chăm chỉ.\nSau đó nhận ra mình mới chỉ mở laptop."
+  },
+  {
+    "title": "Tập trung cao độ",
+    "content": "Tôi ngồi làm việc nghiêm túc.\nNăm phút sau, tôi nghiên cứu rất sâu về lý do chim bồ câu gật đầu."
+  },
+  {
+    "title": "Mua sách mới",
+    "content": "Tôi mua sách để thay đổi bản thân.\nKệ sách đã thay đổi, còn tôi đang quan sát."
+  },
+  {
+    "title": "Thứ Hai",
+    "content": "Thứ Hai không đáng sợ.\nĐáng sợ là nó tuần nào cũng quay lại."
+  },
+  {
+    "title": "Cuối tuần",
+    "content": "Tôi có rất nhiều kế hoạch cuối tuần.\nKế hoạch đầu tiên là ngủ, và nó thắng tất cả."
+  },
+  {
+    "title": "Ăn sáng",
+    "content": "Tôi định ăn sáng lành mạnh.\nRồi bánh mì nhìn tôi bằng ánh mắt cần được cứu giúp."
+  },
+  {
+    "title": "Lời nhắc",
+    "content": "Tôi đặt lời nhắc uống nước.\nĐiện thoại reo, tôi bấm bỏ qua.\nCơ thể thở dài."
+  },
+  {
+    "title": "Đồng hồ thông minh",
+    "content": "Đồng hồ thông minh bảo tôi đứng dậy.\nTôi bảo nó đừng can thiệp đời tư."
+  },
+  {
+    "title": "Dọn email",
+    "content": "Tôi xóa 50 email rác.\nHộp thư lập tức nhận thêm 51 email mới như đang trả thù."
+  },
+  {
+    "title": "Kế hoạch giảm cân",
+    "content": "Tôi bắt đầu giảm cân từ thứ Hai.\nChỉ chưa quyết định thứ Hai của tháng nào."
+  },
+  {
+    "title": "Tự học",
+    "content": "Tôi tự học rất tốt.\nNhất là tự học cách tìm lý do nghỉ học."
+  },
+  {
+    "title": "Đọc hướng dẫn",
+    "content": "Tôi luôn đọc hướng dẫn sử dụng.\nSau khi làm sai."
+  },
+  {
+    "title": "Đi thang máy",
+    "content": "Thang máy đông quá.\nTôi đứng im mà vẫn cảm thấy mình đang tham gia giao thông."
+  },
+  {
+    "title": "Hóa đơn",
+    "content": "Hóa đơn tiền điện tháng này làm tôi sáng mắt.\nĐúng là điện có tác dụng chiếu sáng."
+  },
+  {
+    "title": "Làm mới bản thân",
+    "content": "Tôi muốn làm mới bản thân.\nTrước mắt là đổi hình nền điện thoại."
+  },
+  {
+    "title": "Cất đồ kỹ",
+    "content": "Tôi cất đồ rất kỹ.\nKỹ đến mức chính tôi cũng không tìm ra."
+  },
+  {
+    "title": "Tối ưu thời gian",
+    "content": "Tôi tối ưu thời gian bằng cách làm nhiều việc cùng lúc.\nKết quả là quên nhiều việc cùng lúc."
+  },
+  {
+    "title": "Nghe nhạc làm việc",
+    "content": "Tôi bật nhạc để tập trung.\nMột tiếng sau tôi thuộc lời bài hát, còn việc vẫn ngồi chờ."
+  },
+  {
+    "title": "Sống chậm",
+    "content": "Tôi chọn sống chậm.\nDeadline nghe vậy liền tăng tốc."
+  }
+]

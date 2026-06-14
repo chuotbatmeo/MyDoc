@@ -1,0 +1,402 @@
+[
+  {
+    "question": "Cái gì có cổ mà không có đầu?",
+    "answer": "Cái chai"
+  },
+  {
+    "question": "Cái gì có răng mà không biết cắn?",
+    "answer": "Cái lược"
+  },
+  {
+    "question": "Cái gì có chân mà không biết đi?",
+    "answer": "Cái bàn"
+  },
+  {
+    "question": "Cái gì có mắt mà không nhìn thấy?",
+    "answer": "Cây kim"
+  },
+  {
+    "question": "Cái gì có lưỡi mà không nói được?",
+    "answer": "Cái dao"
+  },
+  {
+    "question": "Cái gì có mặt mà không có mũi?",
+    "answer": "Mặt đồng hồ"
+  },
+  {
+    "question": "Cái gì có lá mà không có cành?",
+    "answer": "Quyển sách"
+  },
+  {
+    "question": "Cái gì có giường mà không ngủ?",
+    "answer": "Dòng sông"
+  },
+  {
+    "question": "Cái gì có dòng mà không chảy?",
+    "answer": "Dòng chữ"
+  },
+  {
+    "question": "Cái gì có ổ mà không có khóa?",
+    "answer": "Ổ bánh mì"
+  },
+  {
+    "question": "Cái gì có khóa mà không có ổ?",
+    "answer": "Khóa nhạc"
+  },
+  {
+    "question": "Cái gì không chân mà vẫn chạy?",
+    "answer": "Dòng nước"
+  },
+  {
+    "question": "Cái gì không miệng mà nói được?",
+    "answer": "Cái loa"
+  },
+  {
+    "question": "Cái gì không tay mà biết vẽ?",
+    "answer": "Ánh sáng"
+  },
+  {
+    "question": "Cái gì không có cánh mà vẫn bay khi có gió?",
+    "answer": "Chiếc lá"
+  },
+  {
+    "question": "Cái gì rơi xuống nước mà không ướt?",
+    "answer": "Cái bóng"
+  },
+  {
+    "question": "Cái gì càng lấy ra càng lớn?",
+    "answer": "Cái hố"
+  },
+  {
+    "question": "Cái gì càng lau càng bẩn?",
+    "answer": "Cái khăn lau"
+  },
+  {
+    "question": "Cái gì càng ăn càng đói?",
+    "answer": "Ngọn lửa"
+  },
+  {
+    "question": "Cái gì càng thổi càng nhỏ?",
+    "answer": "Cây nến"
+  },
+  {
+    "question": "Cái gì càng kéo càng ngắn?",
+    "answer": "Điếu thuốc"
+  },
+  {
+    "question": "Cái gì càng đi càng mòn?",
+    "answer": "Đôi dép"
+  },
+  {
+    "question": "Cái gì càng đếm càng mất?",
+    "answer": "Thời gian"
+  },
+  {
+    "question": "Cái gì đi lên mà không bao giờ đi xuống?",
+    "answer": "Tuổi"
+  },
+  {
+    "question": "Cái gì luôn ở trước mắt nhưng không bao giờ nhìn thấy rõ?",
+    "answer": "Tương lai"
+  },
+  {
+    "question": "Cái gì luôn đi theo bạn vào ngày nắng?",
+    "answer": "Cái bóng"
+  },
+  {
+    "question": "Cái gì vừa mở mắt đã biến mất?",
+    "answer": "Giấc mơ"
+  },
+  {
+    "question": "Cái gì không có tim mà vẫn đập?",
+    "answer": "Cái trống"
+  },
+  {
+    "question": "Cái gì đập thì sống, không đập thì chết?",
+    "answer": "Trái tim"
+  },
+  {
+    "question": "Cái gì không sống mà biết lớn?",
+    "answer": "Quả bóng được thổi"
+  },
+  {
+    "question": "Cái gì không sống mà có thể chết?",
+    "answer": "Cục pin"
+  },
+  {
+    "question": "Cái gì không ai muốn mất nhưng ai cũng phải bỏ?",
+    "answer": "Rác"
+  },
+  {
+    "question": "Cái gì ai cũng có nhưng không ai nhìn thấy sau lưng mình?",
+    "answer": "Cái gáy"
+  },
+  {
+    "question": "Cái gì ai cũng nghe nhưng không ai thấy?",
+    "answer": "Âm thanh"
+  },
+  {
+    "question": "Cái gì có thể vỡ dù không rơi?",
+    "answer": "Lời hứa"
+  },
+  {
+    "question": "Cái gì càng giữ càng dễ mất?",
+    "answer": "Bí mật"
+  },
+  {
+    "question": "Cái gì càng tối càng sáng?",
+    "answer": "Ngôi sao"
+  },
+  {
+    "question": "Cái gì càng nóng càng chảy?",
+    "answer": "Nước đá"
+  },
+  {
+    "question": "Cái gì càng nhiều càng nhẹ?",
+    "answer": "Lỗ thủng"
+  },
+  {
+    "question": "Cái gì không có chân mà leo núi rất giỏi?",
+    "answer": "Con đường"
+  },
+  {
+    "question": "Cái gì đi khắp thế giới mà vẫn nằm một chỗ?",
+    "answer": "Con tem"
+  },
+  {
+    "question": "Cái gì đi một vòng rồi lại về chỗ cũ?",
+    "answer": "Kim đồng hồ"
+  },
+  {
+    "question": "Cái gì ở giữa trời và đất?",
+    "answer": "Chữ “và”"
+  },
+  {
+    "question": "Cái gì không mượn mà vẫn trả?",
+    "answer": "Trả lời"
+  },
+  {
+    "question": "Cái gì có nhiều chữ nhất?",
+    "answer": "Quyển từ điển"
+  },
+  {
+    "question": "Cái gì có nhiều răng nhưng không ăn được?",
+    "answer": "Cái cưa"
+  },
+  {
+    "question": "Cái gì có bụng mà không biết đói?",
+    "answer": "Cái trống"
+  },
+  {
+    "question": "Cái gì có mùi thơm nhưng không có mũi?",
+    "answer": "Bông hoa"
+  },
+  {
+    "question": "Cái gì không biết đi nhưng có thể dẫn đường?",
+    "answer": "Bản đồ"
+  },
+  {
+    "question": "Cái gì càng đọc càng nhiều nhưng không nặng thêm?",
+    "answer": "Kiến thức"
+  },
+  {
+    "question": "Cái gì không có da mà vẫn bị lột?",
+    "answer": "Củ hành"
+  },
+  {
+    "question": "Cái gì có áo mà không có quần?",
+    "answer": "Cái gối"
+  },
+  {
+    "question": "Cái gì có nhà mà không ở?",
+    "answer": "Con ốc"
+  },
+  {
+    "question": "Cái gì có cánh cửa nhưng không phải nhà?",
+    "answer": "Cái tủ"
+  },
+  {
+    "question": "Cái gì trắng ngoài xanh trong, trồng đậu trồng hành rồi thả heo vào?",
+    "answer": "Bánh chưng"
+  },
+  {
+    "question": "Cái gì vừa bằng hạt đậu mà ăn cỗ cả làng?",
+    "answer": "Con ruồi"
+  },
+  {
+    "question": "Cái gì không có miệng mà nuốt được?",
+    "answer": "Cái túi"
+  },
+  {
+    "question": "Cái gì có đuôi mà không có đầu?",
+    "answer": "Dấu phẩy"
+  },
+  {
+    "question": "Cái gì có đầu có đuôi mà không có thân?",
+    "answer": "Đồng xu"
+  },
+  {
+    "question": "Cái gì ban ngày đầy, ban đêm vơi?",
+    "answer": "Cái bóng"
+  },
+  {
+    "question": "Cái gì không chân không cánh mà bay khắp trời?",
+    "answer": "Đám mây"
+  },
+  {
+    "question": "Cái gì có thể đi qua kính mà không làm kính vỡ?",
+    "answer": "Ánh sáng"
+  },
+  {
+    "question": "Cái gì càng nắng càng rõ, càng mưa càng mờ?",
+    "answer": "Cái bóng"
+  },
+  {
+    "question": "Cái gì không có tay mà vẫn ôm được cả ngôi nhà?",
+    "answer": "Bóng tối"
+  },
+  {
+    "question": "Cái gì càng nói ra càng nhẹ lòng?",
+    "answer": "Tâm sự"
+  },
+  {
+    "question": "Con gì không có chân mà vẫn bò?",
+    "answer": "Con rắn"
+  },
+  {
+    "question": "Con gì sinh ra đã có áo giáp?",
+    "answer": "Con rùa"
+  },
+  {
+    "question": "Con gì ngủ đứng?",
+    "answer": "Con ngựa"
+  },
+  {
+    "question": "Con gì đi đâu cũng mang nhà theo?",
+    "answer": "Con ốc sên"
+  },
+  {
+    "question": "Con gì có cánh mà không biết bay?",
+    "answer": "Con gà"
+  },
+  {
+    "question": "Con gì không ăn cỏ mà vẫn gọi là bò?",
+    "answer": "Con bò cạp"
+  },
+  {
+    "question": "Con gì có mũi mà không thở?",
+    "answer": "Mũi thuyền"
+  },
+  {
+    "question": "Con gì không chân mà vẫn nhảy?",
+    "answer": "Con tim"
+  },
+  {
+    "question": "Con gì đẻ trứng mà không ấp?",
+    "answer": "Con cá"
+  },
+  {
+    "question": "Con gì có đuôi dài, thích ăn chuối?",
+    "answer": "Con khỉ"
+  },
+  {
+    "question": "Con gì không uống nước mà vẫn sống trong nước?",
+    "answer": "Con cá"
+  },
+  {
+    "question": "Con gì càng đánh càng chạy?",
+    "answer": "Con quay"
+  },
+  {
+    "question": "Con gì đầu dê mình ốc?",
+    "answer": "Con dốc"
+  },
+  {
+    "question": "Con gì không gáy mà vẫn gọi là gà?",
+    "answer": "Gà luộc"
+  },
+  {
+    "question": "Con gì có chân vịt nhưng không phải vịt?",
+    "answer": "Tàu thủy"
+  },
+  {
+    "question": "Con gì đi bằng bốn chân buổi sáng, hai chân buổi trưa, ba chân buổi tối?",
+    "answer": "Con người"
+  },
+  {
+    "question": "Con gì không biết nói mà hay mách lẻo?",
+    "answer": "Cái gương"
+  },
+  {
+    "question": "Con gì càng chạy càng nóng?",
+    "answer": "Động cơ"
+  },
+  {
+    "question": "Con gì không có cánh mà vẫn bay trong truyện cổ tích?",
+    "answer": "Con ngựa thần"
+  },
+  {
+    "question": "Con gì có cánh nhưng thích đi bộ hơn bay?",
+    "answer": "Con gà"
+  },
+  {
+    "question": "Con gì bé tí mà làm cả nhà mất ngủ?",
+    "answer": "Con muỗi"
+  },
+  {
+    "question": "Con gì có tám chân, giăng tơ rất giỏi?",
+    "answer": "Con nhện"
+  },
+  {
+    "question": "Con gì kêu meo meo nhưng không phải mèo thật?",
+    "answer": "Mèo máy / mèo đồ chơi"
+  },
+  {
+    "question": "Một cây cầu có 10 người đi qua, vì sao không ai bị ướt dù trời mưa?",
+    "answer": "Vì họ đi qua cầu có mái che"
+  },
+  {
+    "question": "Một người đi vào rừng sâu 10km, sau đó đi thêm 10km nữa. Hỏi người đó đang đi vào rừng hay ra khỏi rừng?",
+    "answer": "Đang ra khỏi rừng"
+  },
+  {
+    "question": "Có một căn nhà có 4 bức tường đều quay về hướng Nam. Hỏi con gấu đi ngang qua có màu gì?",
+    "answer": "Màu trắng"
+  },
+  {
+    "question": "Một người chạy quanh sân, càng chạy càng đứng yên trên bản đồ. Đó là gì?",
+    "answer": "Kim đồng hồ"
+  },
+  {
+    "question": "Thứ gì càng chia sẻ càng nhiều hơn?",
+    "answer": "Niềm vui"
+  },
+  {
+    "question": "Thứ gì càng học càng thấy mình chưa biết nhiều?",
+    "answer": "Kiến thức"
+  },
+  {
+    "question": "Thứ gì mất rồi vẫn có thể tìm lại, nhưng thời gian thì không?",
+    "answer": "Đồ vật"
+  },
+  {
+    "question": "Thứ gì có thể mở mọi câu chuyện nhưng không phải chìa khóa?",
+    "answer": "Một câu hỏi"
+  },
+  {
+    "question": "Thứ gì càng im lặng càng dễ nghe thấy?",
+    "answer": "Tiếng lòng"
+  },
+  {
+    "question": "Thứ gì càng nhẹ nhàng càng dễ đi xa?",
+    "answer": "Lời nói tử tế"
+  },
+  {
+    "question": "Thứ gì có thể làm sáng cả căn phòng mà không cần điện?",
+    "answer": "Nụ cười"
+  },
+  {
+    "question": "Thứ gì không cầm được nhưng có thể giữ rất lâu?",
+    "answer": "Kỷ niệm"
+  }
+]
