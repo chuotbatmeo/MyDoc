@@ -133,7 +133,7 @@
     .hero h1 {
       margin: 0;
       font-family: "Great Vibes", "Brush Script MT", cursive;
-      font-size: 52px;
+      font-size: clamp(40px, 10vw, 48px);
       white-space: nowrap;
       line-height: 1;
       font-weight: 500;
@@ -482,7 +482,7 @@
       }
 
       .hero h1 {
-        font-size: 63px;
+        font-size: 44px;
       }
 
       .tagline {
