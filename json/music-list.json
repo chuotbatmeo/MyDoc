@@ -1,16 +1,55 @@
 [
   {
-    "title": "Liên khúc Rumba",
-    "file": "audio/lists/00rumba.mp3"
+    "title": "Bông Điển Điển",
+    "file": "audio/lists/01bongdiendien.mp3"
+  },
+  
+  {
+    "title": "Biết Ơn Chị Võ Thị Sáu",
+    "file": "audio/lists/02bietonchivothisau.mp3"
+  },
+  {
+    "title": "Đêm Màu Hồng",
+    "file": "audio/lists/03demmauhong.mp3"
+  },
+
+  {
+    "title": "Nhật Ký Của Mẹ",
+    "file": "audio/lists/04nhatkycuame.mp3"
+  },
+  {
+    "title": "Bởi Tin Lời Thề",
+    "file": "audio/lists/05bihintinloithe.mp3"
+  },
+  {
+    "title": "Lời Nguyền",
+    "file": "audio/lists/06loinguyen.mp3"
+  },
+  {
+    "title": "Một Thời Đã Xa",
+    "file": "audio/lists/07motthoidaxa.mp3"
+  },
+
+  {
+    "title": "Bâng Khuâng Chiều Mưa",
+    "file": "audio/lists/08bangkhuangchieumua.mp3"
+  },
+  {
+    "title": "Tiễn Bước Phi Trường",
+    "file": "audio/lists/09tiepbuocphitruong.mp3"
+  },
+  {
+    "title": "Bậu Ơi Đừng Khóc",
+    "file": "audio/lists/10bauoidungkhoc.mp3"
   },
 
   {
     "title": "Mưa",
-    "file": "audio/lists/01mua.mp3"
+    "file": "audio/lists/11mua.mp3"
   },
-  
   {
-    "title": "Mối tình chiều mưa bay",
-    "file": "audio/lists/10moitinhchieumuabay.mp3"
+    "title": "Sông Quê",
+    "file": "audio/lists/12songque.mp3"
   }
+
 ]
