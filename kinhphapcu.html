@@ -1,934 +1,572 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-
-  <meta charset="UTF-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kinh Pháp Cú</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600;700&family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
+    *{box-sizing:border-box;margin:0;padding:0}
 
-    /* THAY TOÀN BỘ .home-btn CŨ THÀNH */
-
-.home-btn{
-
-  position:fixed;
-
-  top:20px;
-  left:20px;
-
-  width:72px;
-  height:72px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  font-size:38px;
-
-  text-decoration:none;
-
-  border-radius:22px;
-
-  background:
-  rgba(255,255,255,0.92);
-
-  backdrop-filter:blur(8px);
-
-  box-shadow:
-  0 8px 24px rgba(0,0,0,0.18);
-
-  z-index:999999;
-
-  transition:0.3s;
-
-}
-
-.home-btn:hover{
-
-  transform:
-  scale(1.12)
-  rotate(-5deg);
-
-  background:white;
-
-  box-shadow:
-  0 0 20px rgba(255,255,255,0.9),
-  0 0 35px rgba(173,216,230,0.8);
-
-}
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
+    :root{
+      --gold:#ffd98a;
+      --gold-soft:#fff0c8;
+      --text:#fff6de;
+      --line:rgba(255,217,138,.38);
+      --glass:rgba(10,8,6,.58);
+      --glass-dark:rgba(4,6,8,.72);
     }
+
+    html{scroll-behavior:smooth;background:#070504}
 
     body{
-
-      font-family:'Quicksand',sans-serif;
-
       min-height:100vh;
-
-      padding:30px;
-
+      background:#070504;
+      color:var(--text);
+      font-family:"Quicksand", Arial, sans-serif;
+      display:flex;
+      justify-content:center;
       overflow-x:hidden;
+    }
 
+    .kpc-app{
+      width:min(430px,100vw);
+      min-height:100vh;
+      position:relative;
+      overflow:hidden;
+      background:#070504;
+      box-shadow:0 0 60px rgba(0,0,0,.72);
+    }
+
+    .kpc-app::before{
+      content:"";
+      position:fixed;
+      top:0;
+      left:50%;
+      transform:translateX(-50%);
+      width:min(430px,100vw);
+      height:100vh;
+      z-index:0;
+      pointer-events:none;
       background:
-      linear-gradient(
-        rgba(255,255,255,0.70),
-        rgba(255,255,255,0.70)
-      ),
-      url("https://images.unsplash.com/photo-1490750967868-88aa4486c946");
-
-      background-size:cover;
-      background-position:center;
-      background-repeat:no-repeat;
-      background-attachment:fixed;
-
+        linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.30) 42%,rgba(0,0,0,.72) 100%),
+        url("images/SenHong.jpg") center top / 100% auto no-repeat;
     }
 
-    /* ================= TITLE ================= */
+    .rain-layer{
+      position:absolute;
+      inset:-90px;
+      z-index:1;
+      pointer-events:none;
+      background-image:repeating-linear-gradient(105deg,rgba(255,255,255,.16) 0 1px,transparent 1px 18px);
+      background-size:130px 130px;
+      opacity:.20;
+      animation:rainFall .95s linear infinite;
+    }
 
-    .title-wrap{
+    @keyframes rainFall{to{background-position:0 130px}}
 
+    .content{
+      position:relative;
+      z-index:2;
+      min-height:100vh;
+      padding:12px 16px 28px;
+    }
+
+    .home-btn{
+      position:fixed;
+      left:calc(50% - min(430px,100vw)/2 + 14px);
+      top:12px;
+      width:46px;
+      height:46px;
+      border-radius:16px;
+      border:1px solid rgba(255,217,138,.36);
+      background:rgba(8,6,5,.68);
+      color:var(--gold-soft);
+      text-decoration:none;
+      display:grid;
+      place-items:center;
+      z-index:99;
+      font-size:22px;
+      box-shadow:0 10px 26px rgba(0,0,0,.36),0 0 18px rgba(255,217,138,.10);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      transition:.22s ease;
+    }
+
+    .home-btn:active{transform:scale(.94)}
+
+    .page-head{
       text-align:center;
-      margin-bottom:20px;
-
+      padding-top:30px;
+      margin-bottom:12px;
     }
 
-    .title{
-
-      display:inline-flex;
-      align-items:center;
-      gap:20px;
-
-      font-size:54px;
-      font-weight:bold;
-
-      color:#c1121f;
-
+    .page-title{
+      margin:0;
+      font-family:"Great Vibes","Brush Script MT",cursive;
+      font-size:clamp(42px,11vw,52px);
+      line-height:1;
+      font-weight:500;
+      color:#ffe8b5;
       text-shadow:
-      0 0 10px rgba(255,255,255,0.9),
-      0 0 20px rgba(255,182,193,0.8);
-
-      animation:titleFloat 3s ease-in-out infinite;
-
+        0 0 10px rgba(255,217,138,.72),
+        0 0 24px rgba(255,217,138,.28),
+        0 4px 12px rgba(0,0,0,.78);
+      white-space:nowrap;
     }
 
-    .pray{
-
-      font-size:42px;
-
-      animation:prayMove 1.8s ease-in-out infinite;
-
-      filter:drop-shadow(0 0 8px rgba(255,255,255,0.8));
-
+    .page-subtitle{
+      margin-top:2px;
+      font-family:"Noto Serif",Georgia,serif;
+      font-size:12px;
+      color:#f4ffb6;
+      text-shadow:0 2px 8px rgba(0,0,0,.8);
     }
-
-    .pray.right{
-
-      animation-delay:0.8s;
-
-    }
-
-    @keyframes prayMove{
-
-      0%{
-        transform:translateY(0px) rotate(0deg);
-      }
-
-      50%{
-        transform:translateY(-8px) rotate(-5deg);
-      }
-
-      100%{
-        transform:translateY(0px) rotate(0deg);
-      }
-
-    }
-
-    @keyframes titleFloat{
-
-      0%{
-        transform:translateY(0px);
-      }
-
-      50%{
-        transform:translateY(-4px);
-      }
-
-      100%{
-        transform:translateY(0px);
-      }
-
-    }
-
-    /* ================= INTRO RUNNING ================= */
 
     .intro-marquee{
-
       width:100%;
-
       overflow:hidden;
-
-      margin-bottom:28px;
-
+      margin:12px auto 12px;
       border-radius:18px;
-
-      background:
-      linear-gradient(
-        90deg,
-        rgba(255,255,255,0.95),
-        rgba(255,240,245,0.95)
-      );
-
-      box-shadow:
-      0 6px 18px rgba(0,0,0,0.08);
-
-      border:
-      2px solid rgba(255,182,193,0.7);
-
-      padding:14px 0;
-
+      border:1px solid rgba(255,217,138,.28);
+      background:rgba(6,12,14,.46);
+      box-shadow:0 12px 28px rgba(0,0,0,.26),inset 0 0 18px rgba(255,255,255,.035),0 0 24px rgba(255,217,138,.08);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+      padding:10px 0;
     }
 
     .intro-text{
-
       display:inline-block;
-
       white-space:nowrap;
-
       padding-left:100%;
-
-      font-size:20px;
-
-      font-weight:bold;
-
-      color:#c1121f;
-
-      text-shadow:
-      0 0 8px rgba(255,255,255,0.9);
-
-      animation:marqueeMove 40s linear infinite;
-
+      font-family:"Noto Serif",Georgia,serif;
+      font-size:13px;
+      font-weight:700;
+      color:#ffe7ae;
+      text-shadow:0 0 10px rgba(255,217,138,.22),0 2px 8px rgba(0,0,0,.72);
+      animation:marqueeMove 38s linear infinite;
     }
 
-    @keyframes marqueeMove{
+    @keyframes marqueeMove{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
 
-      0%{
-        transform:translateX(0%);
-      }
-
-      100%{
-        transform:translateX(-100%);
-      }
-
-    }
-
-    /* ================= SEARCH ================= */
-
-    .search-box{
-
-      max-width:760px;
-
-      margin:auto;
-      margin-bottom:35px;
-
-    }
+    .search-box{margin:0 auto 14px}
 
     .search-box input{
-
       width:100%;
-
-      padding:16px 22px;
-
-      border:none;
+      height:46px;
+      border:1px solid rgba(255,217,138,.30);
       outline:none;
-
-      border-radius:18px;
-
-      font-size:17px;
-
-      background:rgba(255,255,255,0.95);
-
-      box-shadow:
-      0 10px 25px rgba(0,0,0,0.08);
-
+      border-radius:17px;
+      padding:0 15px;
+      font-size:14px;
+      font-family:"Quicksand",Arial,sans-serif;
+      color:#fff6de;
+      background:rgba(8,6,5,.62);
+      box-shadow:inset 0 0 16px rgba(255,255,255,.03),0 10px 24px rgba(0,0,0,.26);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
     }
 
-    /* ================= GRID ================= */
+    .search-box input::placeholder{color:rgba(255,240,200,.62)}
 
     .grid{
-
-      max-width:1200px;
-
-      margin:auto;
-
       display:grid;
-
-      grid-template-columns:
-      repeat(auto-fit,minmax(180px,1fr));
-
-      gap:18px;
-
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      padding-bottom:20px;
     }
-
-    /* ================= CARD ================= */
 
     .card{
-
-      min-height:110px;
-
-      border-radius:24px;
-
-      padding:18px;
-
+      min-height:82px;
+      border:1px solid rgba(255,217,138,.30);
+      border-radius:18px;
+      padding:12px 9px;
       display:flex;
-
       align-items:center;
       justify-content:center;
-
       text-align:center;
-
-      font-size:18px;
-      font-weight:bold;
-
-      color:white;
-
+      font-family:"Noto Serif",Georgia,serif;
+      font-size:13px;
+      font-weight:700;
+      line-height:1.32;
+      color:#fff4d6;
       cursor:pointer;
-
       position:relative;
-
       overflow:hidden;
-
-      transition:0.35s;
-
-      box-shadow:
-      0 10px 24px rgba(0,0,0,0.14);
-
+      background:rgba(14,10,7,.56);
+      box-shadow:0 8px 20px rgba(0,0,0,.22),inset 0 0 18px rgba(255,255,255,.035);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+      transition:.22s ease;
     }
 
-    .card:hover{
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at 30% 20%,rgba(255,217,138,.18),transparent 38%);
+      pointer-events:none;
+    }
 
-      transform:
-      translateY(-5px)
-      scale(1.03);
-
-      box-shadow:
-      0 0 18px rgba(255,255,255,0.9),
-      0 0 35px rgba(255,192,203,0.8),
-      0 20px 35px rgba(0,0,0,0.2);
-
+    .card:active{
+      transform:translateY(-2px) scale(.98);
+      border-color:rgba(255,217,138,.55);
+      background:rgba(33,22,10,.66);
+      box-shadow:0 14px 28px rgba(0,0,0,.32),0 0 20px rgba(255,217,138,.12);
     }
 
     .lotus{
-
       position:absolute;
-
-      font-size:26px;
-
-      opacity:0;
-
-      transition:0.4s;
-
+      font-size:18px;
+      opacity:.18;
       pointer-events:none;
-
+      filter:drop-shadow(0 0 8px rgba(255,217,138,.20));
     }
 
-    .card:hover .lotus{
+    .lotus1{top:6px;left:8px}.lotus2{bottom:6px;right:10px}.lotus3{display:none}
 
-      opacity:1;
-
-    }
-
-    .lotus1{
-
-      top:8px;
-      left:10px;
-
-    }
-
-    .lotus2{
-
-      bottom:8px;
-      right:12px;
-
-    }
-
-    .lotus3{
-
-      top:40px;
-      right:18px;
-
-    }
-
-    /* ================= POPUP ================= */
-
-    .popup-overlay{
-
-      position:fixed;
-
-      inset:0;
-
-      background:rgba(0,0,0,0.55);
-
-      display:none;
-
+    .empty-state{
+      grid-column:1/-1;
+      min-height:120px;
+      display:flex;
       align-items:center;
       justify-content:center;
-
-      z-index:999999;
-
+      text-align:center;
+      border-radius:20px;
+      border:1px solid rgba(255,217,138,.26);
+      background:rgba(8,6,5,.58);
+      color:#ffe7ae;
+      font-size:14px;
       padding:20px;
-
-      backdrop-filter:blur(5px);
-
     }
+
+    .popup-overlay{
+      position:fixed;
+      inset:0;
+      z-index:999999;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:14px;
+      background:rgba(0,0,0,.78);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+    }
+
+    .popup-overlay.show{display:flex;animation:modalFade .22s ease}
+
+    @keyframes modalFade{from{opacity:0}to{opacity:1}}
 
     .popup-box{
-
-      width:100%;
-      max-width:850px;
-
-      max-height:86vh;
-
-      overflow-y:auto;
-
-      border-radius:30px;
-
-      padding:36px;
-
+      width:min(398px,96vw);
+      max-height:88vh;
+      overflow:auto;
+      border-radius:26px;
+      padding:54px 18px 22px;
       position:relative;
-
-      background:
-      linear-gradient(
-        rgba(255,255,255,0.88),
-        rgba(255,255,255,0.88)
-      ),
-      url("https://images.unsplash.com/photo-1506744038136-46273834b3fb");
-
-      background-size:cover;
-      background-position:center;
-
-      box-shadow:
-      0 25px 60px rgba(0,0,0,0.25);
-
+      color:#fff5dc;
+      background:linear-gradient(145deg,rgba(12,10,8,.96),rgba(20,12,7,.92));
+      border:1px solid rgba(255,217,138,.36);
+      box-shadow:0 30px 90px rgba(0,0,0,.60),inset 0 0 28px rgba(255,255,255,.035),0 0 35px rgba(255,217,138,.08);
+      animation:modalPop .25s cubic-bezier(.2,.8,.2,1);
     }
 
+    @keyframes modalPop{from{transform:translateY(16px) scale(.96);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+
     .popup-title{
-
-      font-size:34px;
-      font-weight:bold;
-
-      color:#c1121f;
-
-      margin-bottom:28px;
-
-      padding-right:90px;
-
-      line-height:1.5;
-
+      margin:0 44px 16px 0;
+      font-family:"Noto Serif",Georgia,serif;
+      font-size:22px;
+      line-height:1.35;
+      color:#ffe7ae;
+      text-shadow:0 0 14px rgba(255,217,138,.22);
     }
 
     .popup-content{
-
-      font-size:20px;
-
-      line-height:2;
-
-      color:#333;
-
+      font-family:"Noto Serif",Georgia,serif;
+      font-size:16px;
+      line-height:1.9;
+      color:#fff7e9;
       white-space:pre-line;
-
       word-break:break-word;
-
+      text-shadow:0 2px 8px rgba(0,0,0,.55);
     }
 
-    .popup-close{
-
-      position:absolute;
-
-      top:18px;
-      right:20px;
-
-      width:42px;
-      height:42px;
-
-      border-radius:12px;
-
-      background:#e5e7eb;
-
-      display:flex;
-
-      align-items:center;
-      justify-content:center;
-
-      cursor:pointer;
-
-      font-size:20px;
-
-    }
-
+    .popup-close,
     .popup-copy{
-
       position:absolute;
-
-      top:18px;
-      right:72px;
-
-      width:42px;
-      height:42px;
-
-      border-radius:12px;
-
-      background:#2563eb;
-
-      color:white;
-
-      display:flex;
-
-      align-items:center;
-      justify-content:center;
-
+      top:12px;
+      width:38px;
+      height:38px;
+      border:0;
+      border-radius:50%;
       cursor:pointer;
-
+      display:grid;
+      place-items:center;
+      color:#fff3d0;
+      background:rgba(255,255,255,.12);
+      font-size:21px;
+      box-shadow:0 8px 20px rgba(0,0,0,.25);
+      transition:.2s ease;
     }
 
-    /* ================= TOAST ================= */
+    .popup-close{right:12px}.popup-copy{right:58px;font-size:18px}
+    .popup-close:active,.popup-copy:active{transform:scale(.94)}
 
     .toast{
-
       position:fixed;
-
-      left:50%;
-      bottom:40px;
-
-      transform:translateX(-50%);
-
-      background:rgba(37,99,235,0.95);
-
-      color:white;
-
-      padding:14px 24px;
-
-      border-radius:16px;
-
-      font-size:15px;
-
-      opacity:0;
-
-      pointer-events:none;
-
-      transition:0.3s;
-
       z-index:9999999;
-
+      left:50%;
+      bottom:24px;
+      transform:translateX(-50%) translateY(14px);
+      width:min(340px,calc(100vw - 40px));
+      padding:11px 13px;
+      border-radius:15px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.82);
+      color:#fff1ce;
+      text-align:center;
+      opacity:0;
+      pointer-events:none;
+      transition:.25s ease;
+      font-size:14px;
     }
 
-    .toast.show{
-
-      opacity:1;
-
-      bottom:60px;
-
-    }
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
     mark{
-
-      background:yellow;
-      color:black;
-
+      background:rgba(255,217,138,.85);
+      color:#211200;
       border-radius:4px;
-
-      padding:0 4px;
-
+      padding:0 3px;
     }
 
+    @media(max-width:390px){
+      .content{padding:10px 14px 24px}
+      .page-head{padding-top:32px}
+      .page-title{font-size:44px}
+      .intro-text{font-size:12px}
+      .grid{gap:9px}
+      .card{min-height:76px;font-size:12px;border-radius:16px;padding:10px 7px}
+      .popup-box{width:94vw;padding:52px 16px 20px}
+      .popup-title{font-size:20px}
+      .popup-content{font-size:15px;line-height:1.85}
+    }
   </style>
-
 </head>
 
 <body>
+  <main class="kpc-app">
+    <div class="rain-layer" aria-hidden="true"></div>
+    <a href="index.html" class="home-btn" aria-label="Về trang chủ">⌂</a>
 
-  <!-- THÊM ĐOẠN NÀY NGAY SAU <body> -->
+    <div class="content">
+      <header class="page-head">
+        <h1 class="page-title">Kinh Pháp Cú</h1>
+        <div class="page-subtitle">✪ Đọc chậm một chút, lòng nhẹ một chút ✪</div>
+      </header>
 
-<a href="index.html" class="home-btn">
-  🏠
-</a>
+      <section class="intro-marquee" aria-label="Lời dẫn">
+        <div class="intro-text" id="introText">Đang mở những câu kệ bình an...</div>
+      </section>
 
+      <section class="search-box">
+        <input type="text" id="searchInput" placeholder="Tìm kiếm nội dung..." autocomplete="off">
+      </section>
 
-  <!-- TITLE -->
-
-  <div class="title-wrap">
-
-    <div class="title">
-
-      <span class="pray">🙏</span>
-
-      <span>Kinh Pháp Cú</span>
-
-      <span class="pray right">🙏</span>
-
+      <section class="grid" id="grid" aria-label="Danh sách Kinh Pháp Cú"></section>
     </div>
 
-  </div>
-
-  <!-- INTRO RUNNING -->
-
-  <div class="intro-marquee">
-
-    <div class="intro-text"
-         id="introText">
-
+    <div class="popup-overlay" id="popupOverlay" aria-hidden="true">
+      <article class="popup-box" role="dialog" aria-modal="true">
+        <button class="popup-close" id="closePopupBtn" type="button" aria-label="Đóng">×</button>
+        <button class="popup-copy" id="copyPopupBtn" type="button" aria-label="Sao chép">⧉</button>
+        <h2 class="popup-title" id="popupTitle"></h2>
+        <div class="popup-content" id="popupContent"></div>
+      </article>
     </div>
 
-  </div>
+    <div class="toast" id="toast">Đã sao chép nội dung</div>
 
-  <!-- SEARCH -->
-
-  <div class="search-box">
-
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="Tìm kiếm nội dung..."
-    >
-
-  </div>
-
-  <!-- GRID -->
-
-  <div class="grid"
-       id="grid">
-
-  </div>
-
-  <!-- POPUP -->
-
-  <div class="popup-overlay"
-       id="popupOverlay">
-
-    <div class="popup-box">
-
-      <div class="popup-close"
-           onclick="closePopup()">
-
-        ✕
-
-      </div>
-
-      <div class="popup-copy"
-           onclick="copyPopupContent()">
-
-        <i class="fa-regular fa-copy"></i>
-
-      </div>
-
-      <div class="popup-title"
-           id="popupTitle">
-
-      </div>
-
-      <div class="popup-content"
-           id="popupContent">
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- TOAST -->
-
-  <div class="toast"
-       id="toast">
-
-    Đã sao chép nội dung
-
-  </div>
-
-  <!-- MUSIC -->
-
-  <audio id="bgMusic"
-         autoplay
-         loop>
-
-    <source src="audio/nhacnen/03.mp3"
-            type="audio/mpeg">
-
-  </audio>
+    <audio id="bgMusic" preload="metadata" loop>
+      <source src="audio/nhacnen/03.mp3" type="audio/mpeg">
+    </audio>
+  </main>
 
   <script>
-
     let allData = [];
     let keyword = "";
 
-    const grid =
-    document.getElementById("grid");
-
-    const introText =
-    document.getElementById("introText");
-
-    const popupOverlay =
-    document.getElementById("popupOverlay");
-
-    const popupTitle =
-    document.getElementById("popupTitle");
-
-    const popupContent =
-    document.getElementById("popupContent");
-
-    const toast =
-    document.getElementById("toast");
+    const grid = document.getElementById("grid");
+    const introText = document.getElementById("introText");
+    const searchInput = document.getElementById("searchInput");
+    const popupOverlay = document.getElementById("popupOverlay");
+    const popupTitle = document.getElementById("popupTitle");
+    const popupContent = document.getElementById("popupContent");
+    const closePopupBtn = document.getElementById("closePopupBtn");
+    const copyPopupBtn = document.getElementById("copyPopupBtn");
+    const toast = document.getElementById("toast");
+    const bgMusic = document.getElementById("bgMusic");
 
     const colors = [
-
-    "linear-gradient(135deg,#ff9a9e,#fad0c4)",
-    "linear-gradient(135deg,#a18cd1,#fbc2eb)",
-    "linear-gradient(135deg,#f6d365,#fda085)",
-    "linear-gradient(135deg,#84fab0,#8fd3f4)",
-    "linear-gradient(135deg,#fccb90,#d57eeb)",
-    "linear-gradient(135deg,#30cfd0,#330867)",
-    "linear-gradient(135deg,#f093fb,#f5576c)",
-    "linear-gradient(135deg,#4facfe,#00f2fe)"
-
+      "linear-gradient(135deg,rgba(255,217,138,.16),rgba(255,255,255,.045))",
+      "linear-gradient(135deg,rgba(132,250,176,.14),rgba(143,211,244,.06))",
+      "linear-gradient(135deg,rgba(161,140,209,.18),rgba(251,194,235,.06))",
+      "linear-gradient(135deg,rgba(252,203,144,.14),rgba(213,126,235,.06))",
+      "linear-gradient(135deg,rgba(79,172,254,.14),rgba(0,242,254,.05))",
+      "linear-gradient(135deg,rgba(240,147,251,.12),rgba(245,87,108,.06))"
     ];
 
-    /* ================= LOAD JSON ================= */
-
-    fetch("json/kinhphapcu.json")
-
-    .then(response => response.json())
-
-    .then(data => {
-
-      if(data.intro){
-
-        introText.innerHTML =
-        data.intro.content;
-
-      }
-
-      if(Array.isArray(data.items)){
-
-        allData = data.items;
-
-        renderCards(allData);
-
-      }
-
-    });
-
-    /* ================= RENDER ================= */
-
-    function renderCards(list){
-
-      grid.innerHTML = "";
-
-      list.forEach(item => {
-
-        const card =
-        document.createElement("div");
-
-        card.className = "card";
-
-        card.style.background =
-        colors[
-          Math.floor(
-            Math.random() * colors.length
-          )
-        ];
-
-        card.innerHTML = `
-
-          <div class="lotus lotus1">🪷</div>
-
-          <div class="lotus lotus2">🌸</div>
-
-          <div class="lotus lotus3">🪷</div>
-
-          <div>
-
-            ${highlightText(item.title)}
-
-          </div>
-
-        `;
-
-        card.onclick = () => {
-
-          openPopup(
-            item.title,
-            item.content
-          );
-
-        };
-
-        grid.appendChild(card);
-
-      });
-
+    function escapeHTML(text){
+      return String(text ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
     }
 
-    /* ================= SEARCH ================= */
+    function escapeRegExp(text){
+      return String(text).replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+    }
 
-    document
-    .getElementById("searchInput")
+    function normalizeItem(item,index){
+      if(typeof item === "string") return { title:`Bài ${index + 1}`, content:item };
+      return {
+        title:item?.title || item?.name || item?.ten || `Bài ${index + 1}`,
+        content:item?.content || item?.text || item?.noidung || item?.body || ""
+      };
+    }
 
-    .addEventListener("input", function(e){
+    async function loadData(){
+      const paths = ["json/kinhphapcu.json"];
 
-      keyword =
-      e.target.value
-      .toLowerCase()
-      .trim();
+      for(const path of paths){
+        try{
+          const response = await fetch(path, { cache:"no-store" });
+          if(!response.ok) continue;
 
-      if(keyword === ""){
+          const data = await response.json();
+          const raw = Array.isArray(data) ? data : (data.items || data.data || data.list || []);
+          const items = raw.map(normalizeItem).filter(item => item.title && item.content);
 
-        renderCards(allData);
+          if(data?.intro){
+            introText.innerHTML = formatText(escapeHTML(data.intro.content || data.intro.text || data.intro));
+          }else{
+            introText.textContent = "Những câu kệ ngắn gọn để đọc chậm, nghĩ sâu và giữ lòng bình an.";
+          }
 
-        return;
-
+          if(items.length){
+            allData = items;
+            renderCards(allData);
+            return;
+          }
+        }catch(error){
+          console.warn("Không tải được dữ liệu:", path, error);
+        }
       }
 
-      const filtered =
-      allData.filter(item => {
+      grid.innerHTML = '<div class="empty-state">Chưa tải được dữ liệu. Kiểm tra lại nha.</div>';
+    }
 
-        return (
+    function renderCards(list){
+      grid.innerHTML = "";
 
-          item.title
-          .toLowerCase()
-          .includes(keyword)
+      if(!list.length){
+        grid.innerHTML = '<div class="empty-state">Không tìm thấy nội dung phù hợp.</div>';
+        return;
+      }
 
-          ||
-
-          item.content
-          .toLowerCase()
-          .includes(keyword)
-
-        );
-
+      list.forEach((item,index) => {
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className = "card";
+        card.style.background = colors[index % colors.length];
+        card.innerHTML = `
+          <span class="lotus lotus1">🪷</span>
+          <span class="lotus lotus2">✦</span>
+          <span>${highlightText(item.title)}</span>
+        `;
+        card.addEventListener("click", () => openPopup(item.title, item.content));
+        grid.appendChild(card);
       });
+    }
 
+    searchInput.addEventListener("input", event => {
+      keyword = event.target.value.toLowerCase().trim();
+      if(!keyword){
+        renderCards(allData);
+        return;
+      }
+
+      const filtered = allData.filter(item =>
+        item.title.toLowerCase().includes(keyword) || item.content.toLowerCase().includes(keyword)
+      );
       renderCards(filtered);
-
     });
 
-    /* ================= POPUP ================= */
-
     function openPopup(title, content){
-
-      popupTitle.innerHTML = title;
-
-      popupContent.innerHTML =
-      formatText(
-        highlightText(content)
-      );
-
-      popupOverlay.style.display =
-      "flex";
-
+      popupTitle.innerHTML = highlightText(title);
+      popupContent.innerHTML = formatText(highlightText(content));
+      popupOverlay.classList.add("show");
+      popupOverlay.setAttribute("aria-hidden", "false");
     }
 
     function closePopup(){
-
-      popupOverlay.style.display =
-      "none";
-
+      popupOverlay.classList.remove("show");
+      popupOverlay.setAttribute("aria-hidden", "true");
     }
 
-    popupOverlay.addEventListener("click", e => {
+    closePopupBtn.addEventListener("click", closePopup);
 
-      if(e.target === popupOverlay){
-
-        closePopup();
-
-      }
-
+    popupOverlay.addEventListener("click", event => {
+      if(event.target === popupOverlay) closePopup();
     });
 
-    /* ================= COPY ================= */
+    window.addEventListener("keydown", event => {
+      if(event.key === "Escape") closePopup();
+    });
 
-    function copyPopupContent(){
+    copyPopupBtn.addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText(popupContent.innerText.trim());
+        showToast("Đã sao chép nội dung");
+      }catch(error){
+        showToast("Không sao chép được");
+      }
+    });
 
-      navigator.clipboard.writeText(
-        popupContent.innerText.trim()
-      );
-
+    function showToast(message){
+      toast.textContent = message;
       toast.classList.add("show");
-
-      setTimeout(() => {
-
-        toast.classList.remove("show");
-
-      },2000);
-
+      setTimeout(() => toast.classList.remove("show"), 1800);
     }
-
-    /* ================= FORMAT ================= */
 
     function formatText(text){
-
-      return text
-
-      .replace(/\n/g,"<br>")
-
-      .replace(/<red>(.*?)<\/red>/g,
-      '<span style="color:red;">$1</span>')
-
-      .replace(/<blue>(.*?)<\/blue>/g,
-      '<span style="color:blue;">$1</span>')
-
-      .replace(/<green>(.*?)<\/green>/g,
-      '<span style="color:green;">$1</span>')
-
-      .replace(/<purple>(.*?)<\/purple>/g,
-      '<span style="color:purple;">$1</span>')
-
-      .replace(/<orange>(.*?)<\/orange>/g,
-      '<span style="color:orange;">$1</span>');
-
+      return String(text)
+        .replace(/\n/g,"<br>")
+        .replace(/&lt;red&gt;(.*?)&lt;\/red&gt;/gis,'<span style="color:#ff8d8d">$1</span>')
+        .replace(/&lt;blue&gt;(.*?)&lt;\/blue&gt;/gis,'<span style="color:#8fc7ff">$1</span>')
+        .replace(/&lt;green&gt;(.*?)&lt;\/green&gt;/gis,'<span style="color:#9cffc0">$1</span>')
+        .replace(/&lt;purple&gt;(.*?)&lt;\/purple&gt;/gis,'<span style="color:#d9a8ff">$1</span>')
+        .replace(/&lt;orange&gt;(.*?)&lt;\/orange&gt;/gis,'<span style="color:#ffc06d">$1</span>');
     }
-
-    /* ================= HIGHLIGHT ================= */
 
     function highlightText(text){
-
-      if(!keyword) return text;
-
-      return text.replace(
-
-        new RegExp(`(${keyword})`, "gi"),
-
-        `<mark>$1</mark>`
-
-      );
-
+      let html = escapeHTML(text);
+      if(!keyword) return formatText(html);
+      const pattern = new RegExp(`(${escapeRegExp(keyword)})`, "gi");
+      return formatText(html.replace(pattern,"<mark>$1</mark>"));
     }
 
-    /* ================= MUSIC ================= */
+    bgMusic.volume = .18;
+    window.addEventListener("click", () => bgMusic.play().catch(() => {}), { once:true });
 
-    const bgMusic =
-    document.getElementById("bgMusic");
-
-    bgMusic.volume = 0.2;
-
-    window.addEventListener("click", () => {
-
-      bgMusic.play();
-
-    },{ once:true });
-
+    loadData();
   </script>
-
 </body>
-
 </html>

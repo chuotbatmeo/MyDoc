@@ -35,39 +35,29 @@
       </section>
 
       <nav class="room-menu" aria-label="Menu MyDoc">
-        <a class="menu-card" href="kinhphapcu.html"><span class="m-icon">📖</span><strong>Kinh<br>Pháp Cú</strong></a>
-        <a class="menu-card" href="#" id="openSecretBtn"><span class="m-icon">🔐</span><strong>Kho<br>Bí Mật</strong></a>
-        <a class="menu-card" href="#" id="openJokeBtn"><span class="m-icon">😊</span><strong>Cười<br>xíu</strong></a>
-        <a class="menu-card" href="#" id="openPetHomeBtn"><span class="m-icon">🐾</span><strong>Thú<br>cưng</strong></a>
+        <a class="menu-card" href="kinhphapcu.html"><span class="m-icon">📖</span><strong>Kinh Pháp Cú</strong></a>
+        <a class="menu-card" href="#" id="openSecretBtn"><span class="m-icon">🔐</span><strong>Kho Bí Mật</strong></a>
+        <a class="menu-card" href="#" id="openJokeBtn"><span class="m-icon">😊</span><strong>Cười xíu</strong></a>
+        <a class="menu-card" href="#" id="openPetHomeBtn"><span class="m-icon">🐾</span><strong>Thú cưng</strong></a>
         <a class="menu-card" href="#game" id="gameBtn"><span class="m-icon">🎮</span><strong>Game</strong></a>
-        <a class="menu-card" href="timkiem.html"><span class="m-icon">🔎</span><strong>Tìm<br>kiếm</strong></a>
+        <a class="menu-card" href="timkiem.html"><span class="m-icon">🔎</span><strong>Tìm kiếm</strong></a>
       </nav>
 
-      <section class="player">
-        <div class="track-row">
-          <button class="rain-btn" id="rainBtn" type="button" title="Bật/tắt tiếng mưa">🌧️</button>
+      <button class="theme-float-btn" id="themeFloatBtn" type="button" title="Đổi nền">🎨</button>
+      <button class="chant-float-btn" id="chantFloatBtn" type="button" title="Nhạc Niệm Phật">🙏</button>
+      <audio id="chantAudio" preload="metadata" loop src="audio/lists/000nammo.mp3"></audio>
 
-          <div class="track-name">
-            <strong id="trackTitle">Mưa rơi nhẹ</strong>
-            <span id="trackSub">Âm thanh thiên nhiên</span>
-          </div>
-
-          <button class="list-btn" id="openMusicPage" type="button" title="Mở trang nghe nhạc">☰</button>
+      <section class="player" aria-label="Mini player">
+        <div class="player-info">
+          <div class="mini-title" id="trackTitle">Mưa rơi nhẹ</div>
+          <div class="mini-time" id="trackTime">00:00 / 00:00</div>
         </div>
 
-        <div class="progress">
-          <span id="currentTime">00:00</span>
-          <div class="bar">
-            <span id="progressFill"></span>
-            <input class="seek-bar" id="seekBar" type="range" min="0" max="1000" value="0" aria-label="Tua nhạc">
-          </div>
-          <span id="durationTime">00:00</span>
-        </div>
-
-        <div class="controls">
-          <button class="ctrl" id="prevBtn" type="button">‹</button>
-          <button class="play" id="playBtn" type="button">▶</button>
-          <button class="ctrl" id="nextBtn" type="button">›</button>
+        <div class="mini-controls">
+          <button class="player-btn shuffle-btn" id="shuffleBtn" type="button" title="Phát ngẫu nhiên" aria-label="Phát ngẫu nhiên"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h3.7c2.6 0 3.7 2 4.8 4.5S14.9 16 17.5 16H20"/><path d="M17 13l3 3-3 3"/><path d="M4 17h3.4c1.5 0 2.5-.7 3.3-1.8"/><path d="M14 8.8c.8-1.1 1.8-1.8 3.5-1.8H20"/><path d="M17 4l3 3-3 3"/></svg></button>
+          <button class="player-btn" id="prevBtn" type="button" title="Bài trước" aria-label="Bài trước"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 6L8 12l9 6z"/></svg></button>
+          <button class="player-btn play" id="playBtn" type="button" title="Phát / Tạm dừng" aria-label="Phát / Tạm dừng"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l9 6-9 6z"/></svg></button>
+          <button class="player-btn" id="nextBtn" type="button" title="Bài tiếp theo" aria-label="Bài tiếp theo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 6l9 6-9 6z"/></svg></button>
         </div>
       </section>
 
@@ -262,6 +252,18 @@
       audio.addEventListener("timeupdate", syncSeek);
       audio.addEventListener("loadedmetadata", syncSeek);
       audio.addEventListener("durationchange", syncSeek);
+    })();
+  </script>
+
+  <script>
+    (function(){
+      const shuffleBtn = document.getElementById("shuffleBtn");
+      if (!shuffleBtn) return;
+
+      shuffleBtn.addEventListener("click", function(){
+        shuffleBtn.classList.toggle("active");
+        window.myDocShuffleMode = shuffleBtn.classList.contains("active");
+      });
     })();
   </script>
 

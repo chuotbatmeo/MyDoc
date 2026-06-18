@@ -9,10 +9,12 @@ const $ = (selector) => document.querySelector(selector);
       bgAudio: $("#bgAudio"),
       rainAudio: $("#rainAudio"),
       trackTitle: $("#trackTitle"),
+      trackTime: $("#trackTime"),
       trackSub: $("#trackSub"),
       playBtn: $("#playBtn"),
       prevBtn: $("#prevBtn"),
       nextBtn: $("#nextBtn"),
+      shuffleBtn: $("#shuffleBtn"),
       rainBtn: $("#rainBtn"),
       openMusicPage: $("#openMusicPage"),
       currentTime: $("#currentTime"),
@@ -26,6 +28,7 @@ const $ = (selector) => document.querySelector(selector);
     let playlist = [];
     let currentTrack = 0;
     let isPlaying = false;
+    let isShuffle = false;
     let toastTimer = null;
 
     const fallbackQuotes = [
@@ -38,6 +41,17 @@ const $ = (selector) => document.querySelector(selector);
       { title: "Mưa rơi nhẹ", src: "audio/nhacnen/nhacthien0.mp3" },
       { title: "Nhạc thiền nhẹ", src: "audio/nhacnen/nhacthien.mp3" }
     ];
+
+    const playerIcons = {
+      play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l9 6-9 6z"/></svg>',
+      pause: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h3v12H8z"/><path d="M13 6h3v12h-3z"/></svg>'
+    };
+
+    function setPlayButtonIcon(playing) {
+      if (!els.playBtn) return;
+      els.playBtn.innerHTML = playing ? playerIcons.pause : playerIcons.play;
+    }
+
 
     function pad(num) {
       return String(num).padStart(2, "0");
@@ -180,7 +194,7 @@ const $ = (selector) => document.querySelector(selector);
 
       els.clockText.textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
       els.dateText.textContent = `${days[now.getDay()]}, ${pad(dd)}/${pad(mm)}/${yy}`;
-      els.lunarText.textContent = `${String(lunar.day).padStart(2,'0')}/${String(lunar.month).padStart(2,'0')}${lunar.leap ? " nhuận" : ""} ${canChiYear(lunar.year)}`;;
+      els.lunarText.textContent = `ÂL: ${String(lunar.day).padStart(2,'0')}/${String(lunar.month).padStart(2,'0')}${lunar.leap ? " nhuận" : ""} ${canChiYear(lunar.year)}`;;
     }
 
     function normalizeQuote(item) {
@@ -206,18 +220,27 @@ const $ = (selector) => document.querySelector(selector);
       if (!quotes.length) quotes = fallbackQuotes;
       quoteIndex = Math.floor(Math.random() * quotes.length);
       renderQuote();
-      setInterval(nextQuote, 12000);
+      setInterval(nextQuote, 6000);
     }
 
     function renderQuote() {
-      const quote = quotes[quoteIndex] || fallbackQuotes[0];
-      els.quoteText.style.opacity = "0";
-      setTimeout(() => {
-        els.quoteText.innerHTML = `“${quote.text}”`;
-        els.quoteSource.textContent = quote.source ? `— ${quote.source} —` : "— Mưa Tĩnh Lặng —";
-        els.quoteText.style.opacity = "1";
-      }, 180);
-    }
+  const quote = quotes[quoteIndex] || fallbackQuotes[0];
+
+  els.quoteText.style.opacity = "0";
+  els.quoteText.style.transform = "translateY(15px)";
+  els.quoteText.style.filter = "blur(8px)";
+
+  setTimeout(() => {
+
+    els.quoteText.innerHTML = `${quote.text}`;
+    els.quoteSource.textContent = "";
+
+    els.quoteText.style.opacity = "1";
+    els.quoteText.style.transform = "translateY(0)";
+    els.quoteText.style.filter = "blur(0)";
+
+  }, 400);
+}
 
     function nextQuote() {
       quoteIndex = (quoteIndex + 1) % quotes.length;
@@ -250,7 +273,7 @@ const $ = (selector) => document.querySelector(selector);
     async function loadPlaylist() {
       try {
         const response = await fetch("json/music-list.json", { cache: "no-store" });
-        if (!response.ok) throw new Error("Không tải được music-list.json");
+        if (!response.ok) throw new Error("Không tải được danh sách nhạc!");
         const data = await response.json();
         const raw = Array.isArray(data) ? data : (data.songs || data.music || data.data || data.items || []);
         playlist = raw.map(normalizeTrack).filter(track => track && track.src);
@@ -269,11 +292,12 @@ const $ = (selector) => document.querySelector(selector);
       const track = playlist[currentTrack];
 
       els.bgAudio.src = resolveMusicPath(track.src);
-      els.trackTitle.textContent = track.title || "Nhạc nền";
-      els.trackSub.textContent = "Nhạc nền thư giãn";
-      els.currentTime.textContent = "00:00";
-      els.durationTime.textContent = "00:00";
-      els.progressFill.style.width = "0%";
+      if (els.trackTitle) els.trackTitle.textContent = track.title || "Nhạc nền";
+      if (els.trackSub) els.trackSub.textContent = "Nhạc nền thư giãn";
+      if (els.trackTime) {
+        els.trackTime.textContent = "00:00 / 00:00";
+    }
+      if (els.progressFill) els.progressFill.style.width = "0%";
 
       if (autoplay) playMusic();
     }
@@ -283,28 +307,45 @@ const $ = (selector) => document.querySelector(selector);
         if (!els.bgAudio.src) setTrack(currentTrack, false);
         await els.bgAudio.play();
         isPlaying = true;
-        els.playBtn.textContent = "Ⅱ";
+        setPlayButtonIcon(true);
       } catch (error) {
-        showToast("Không phát được nhạc. Kiểm tra json/music-list.json và audio/nhacnen/");
+        showToast("Không phát được nhạc, vui lòng kiểm tra lại!");
       }
     }
 
     function pauseMusic() {
       els.bgAudio.pause();
       isPlaying = false;
-      els.playBtn.textContent = "▶";
+      if (els.playBtn) setPlayButtonIcon(false);
     }
 
     function toggleMusic() {
       isPlaying ? pauseMusic() : playMusic();
     }
 
+    function getRandomTrackIndex() {
+      if (playlist.length <= 1) return currentTrack;
+
+      let nextIndex = currentTrack;
+      while (nextIndex === currentTrack) {
+        nextIndex = Math.floor(Math.random() * playlist.length);
+      }
+      return nextIndex;
+    }
+
     function nextTrack() {
-      setTrack(currentTrack + 1, true);
+      setTrack(isShuffle ? getRandomTrackIndex() : currentTrack + 1, true);
     }
 
     function prevTrack() {
-      setTrack(currentTrack - 1, true);
+      setTrack(isShuffle ? getRandomTrackIndex() : currentTrack - 1, true);
+    }
+
+    function toggleShuffle() {
+      isShuffle = !isShuffle;
+      window.myDocShuffleMode = isShuffle;
+      els.shuffleBtn?.classList.toggle("active", isShuffle);
+      showToast(isShuffle ? "Đã bật phát ngẫu nhiên" : "Đã tắt phát ngẫu nhiên");
     }
 
     async function toggleRain() {
@@ -314,7 +355,7 @@ const $ = (selector) => document.querySelector(selector);
           await els.rainAudio.play();
           showToast("Đã bật tiếng mưa");
         } catch (error) {
-          showToast("Không phát được tiếng mưa: cần audio/nhacnen/00.mp3");
+          showToast("Không phát được âm thanh!");
         }
       } else {
         els.rainAudio.pause();
@@ -324,23 +365,27 @@ const $ = (selector) => document.querySelector(selector);
 
     function updateProgress() {
       const audio = els.bgAudio;
-      els.currentTime.textContent = formatAudioTime(audio.currentTime || 0);
-      els.durationTime.textContent = formatAudioTime(audio.duration || 0);
+      if (!audio) return;
+      if (els.trackTime) {
+  els.trackTime.textContent =
+    `${formatAudioTime(audio.currentTime || 0)} / ${formatAudioTime(audio.duration || 0)}`;
+  }
       const percent = audio.duration ? Math.min(100, (audio.currentTime / audio.duration) * 100) : 0;
-      els.progressFill.style.width = percent + "%";
+      if (els.progressFill) els.progressFill.style.width = percent + "%";
     }
 
-    els.playBtn.addEventListener("click", toggleMusic);
-    els.prevBtn.addEventListener("click", prevTrack);
-    els.nextBtn.addEventListener("click", nextTrack);
-    els.rainBtn.addEventListener("click", toggleRain);
-    els.openMusicPage.addEventListener("click", () => {
+    els.playBtn?.addEventListener("click", toggleMusic);
+    els.prevBtn?.addEventListener("click", prevTrack);
+    els.nextBtn?.addEventListener("click", nextTrack);
+    els.shuffleBtn?.addEventListener("click", toggleShuffle);
+    els.rainBtn?.addEventListener("click", toggleRain);
+    els.openMusicPage?.addEventListener("click", () => {
       location.href = "nghenhac.html";
     });
 
-    els.bgAudio.addEventListener("timeupdate", updateProgress);
-    els.bgAudio.addEventListener("loadedmetadata", updateProgress);
-    els.bgAudio.addEventListener("ended", nextTrack);
+    els.bgAudio?.addEventListener("timeupdate", updateProgress);
+    els.bgAudio?.addEventListener("loadedmetadata", updateProgress);
+    els.bgAudio?.addEventListener("ended", nextTrack);
 
 
 
@@ -766,7 +811,304 @@ const $ = (selector) => document.querySelector(selector);
       }
     }, true);
 
+
+    // GAME POPUP CLOSE FIX
+    (function(){
+      const gameModal = document.getElementById("gameModal");
+      const gameCloseBtn = document.getElementById("gameCloseBtn");
+
+      function closeGameModal(){
+        if(!gameModal) return;
+        gameModal.classList.remove("show");
+        gameModal.setAttribute("aria-hidden", "true");
+      }
+
+      gameCloseBtn?.addEventListener("click", function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        closeGameModal();
+      });
+
+      gameModal?.addEventListener("click", function(event){
+        if(event.target === gameModal){
+          closeGameModal();
+        }
+      });
+
+      window.addEventListener("keydown", function(event){
+        if(event.key === "Escape" && gameModal?.classList.contains("show")){
+          closeGameModal();
+        }
+      });
+    })();
+
+    setPlayButtonIcon(false);
     updateDateTime();
     setInterval(updateDateTime, 1000);
     loadQuotes();
     loadPlaylist();
+
+
+/* KINH PHÁP CÚ POPUP MOBILE */
+(function(){
+  const openBtn = document.getElementById("openKpcBtn");
+  const modal = document.getElementById("kpcMobileModal");
+  const closeBtn = document.getElementById("kpcCloseBtn");
+  const introEl = document.getElementById("kpcIntroText");
+  const searchInput = document.getElementById("kpcSearchInput");
+  const grid = document.getElementById("kpcGrid");
+  const reader = document.getElementById("kpcReader");
+  const readerTitle = document.getElementById("kpcReaderTitle");
+  const readerContent = document.getElementById("kpcReaderContent");
+  const readerBack = document.getElementById("kpcReaderBack");
+  const readerClose = document.getElementById("kpcReaderClose");
+
+  if(!openBtn || !modal || !grid) return;
+
+  let kpcItems = [];
+  let kpcKeyword = "";
+  let kpcLoaded = false;
+
+  const kpcColors = [
+    "linear-gradient(135deg, rgba(255,154,158,.24), rgba(250,208,196,.10))",
+    "linear-gradient(135deg, rgba(161,140,209,.26), rgba(251,194,235,.10))",
+    "linear-gradient(135deg, rgba(246,211,101,.22), rgba(253,160,133,.10))",
+    "linear-gradient(135deg, rgba(132,250,176,.20), rgba(143,211,244,.10))",
+    "linear-gradient(135deg, rgba(252,203,144,.22), rgba(213,126,235,.10))",
+    "linear-gradient(135deg, rgba(48,207,208,.20), rgba(51,8,103,.16))",
+    "linear-gradient(135deg, rgba(240,147,251,.20), rgba(245,87,108,.12))",
+    "linear-gradient(135deg, rgba(79,172,254,.20), rgba(0,242,254,.10))"
+  ];
+
+  function escapeHTML(text){
+    return String(text ?? "")
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;")
+      .replace(/'/g,"&#039;");
+  }
+
+  function escapeRegExp(text){
+    return String(text).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
+  function normalizeKpcItem(item, index){
+    if(typeof item === "string"){
+      return { title:`Bài ${index + 1}`, content:item };
+    }
+
+    return {
+      title:item?.title || item?.name || item?.ten || `Bài ${index + 1}`,
+      content:item?.content || item?.text || item?.noidung || item?.body || ""
+    };
+  }
+
+  function applyColorTags(html){
+    return html
+      .replace(/&lt;red&gt;(.*?)&lt;\/red&gt;/gis, '<span style="color:#ff8d8d">$1</span>')
+      .replace(/&lt;blue&gt;(.*?)&lt;\/blue&gt;/gis, '<span style="color:#8fc7ff">$1</span>')
+      .replace(/&lt;green&gt;(.*?)&lt;\/green&gt;/gis, '<span style="color:#9cffc0">$1</span>')
+      .replace(/&lt;purple&gt;(.*?)&lt;\/purple&gt;/gis, '<span style="color:#d9a8ff">$1</span>')
+      .replace(/&lt;orange&gt;(.*?)&lt;\/orange&gt;/gis, '<span style="color:#ffc06d">$1</span>');
+  }
+
+  function highlightHTML(text){
+    let html = escapeHTML(text);
+    if(kpcKeyword){
+      const pattern = new RegExp(`(${escapeRegExp(kpcKeyword)})`, "gi");
+      html = html.replace(pattern, "<mark>$1</mark>");
+    }
+    return applyColorTags(html).replace(/\n/g,"<br>");
+  }
+
+  function setKpcLoading(message){
+    grid.innerHTML = `<div class="kpc-loading">${escapeHTML(message)}</div>`;
+  }
+
+  async function fetchKpcData(){
+    const paths = [
+      "json/kinhphapcu.json",
+      "json/jsonkpc2.json",
+      "json/jsonkpc.json"
+    ];
+
+    for(const path of paths){
+      try{
+        const res = await fetch(path, { cache:"no-store" });
+        if(!res.ok) continue;
+        const data = await res.json();
+        const raw = Array.isArray(data) ? data : (data.items || data.data || data.list || []);
+        const items = raw.map(normalizeKpcItem).filter(item => item.title && item.content);
+
+        if(data?.intro){
+          introEl.innerHTML = data.intro.content || data.intro.text || data.intro || "Kinh Pháp Cú";
+        }else{
+          introEl.textContent = "Những câu kệ ngắn gọn để đọc chậm, nghĩ sâu và giữ lòng bình an.";
+        }
+
+        if(items.length){
+          kpcItems = items;
+          kpcLoaded = true;
+          renderKpcCards(kpcItems);
+          return;
+        }
+      }catch(error){
+        console.warn("Không tải được Kinh Pháp Cú:", path, error);
+      }
+    }
+
+    kpcLoaded = true;
+    kpcItems = [];
+    introEl.textContent = "Không tải được dữ liệu Kinh Pháp Cú.";
+    setKpcLoading("Chưa tải được dữ liệu. Kiểm tra file json/kinhphapcu.json hoặc json/jsonkpc2.json nha.");
+  }
+
+  function renderKpcCards(list){
+    grid.innerHTML = "";
+
+    if(!list.length){
+      grid.innerHTML = '<div class="kpc-empty">Không tìm thấy bài phù hợp.</div>';
+      return;
+    }
+
+    list.forEach((item, index) => {
+      const card = document.createElement("button");
+      card.type = "button";
+      card.className = "kpc-card";
+      card.style.background = kpcColors[index % kpcColors.length];
+      card.innerHTML = highlightHTML(item.title);
+      card.addEventListener("click", () => openKpcReader(item));
+      grid.appendChild(card);
+    });
+  }
+
+  function filterKpc(){
+    const key = kpcKeyword.toLowerCase();
+    if(!key){
+      renderKpcCards(kpcItems);
+      return;
+    }
+
+    const filtered = kpcItems.filter(item => {
+      return item.title.toLowerCase().includes(key) || item.content.toLowerCase().includes(key);
+    });
+
+    renderKpcCards(filtered);
+  }
+
+  function openKpcReader(item){
+    if(!reader) return;
+    readerTitle.innerHTML = highlightHTML(item.title);
+    readerContent.innerHTML = highlightHTML(item.content);
+    reader.classList.add("show");
+    reader.setAttribute("aria-hidden", "false");
+  }
+
+  function closeKpcReader(){
+    if(!reader) return;
+    reader.classList.remove("show");
+    reader.setAttribute("aria-hidden", "true");
+  }
+
+  function openKpcModal(event){
+    event?.preventDefault();
+    modal.classList.add("show");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("kpc-open");
+
+    if(!kpcLoaded){
+      setKpcLoading("Đang mở Kinh Pháp Cú...");
+      fetchKpcData();
+    }
+
+    setTimeout(() => searchInput?.focus(), 120);
+  }
+
+  function closeKpcModal(){
+    closeKpcReader();
+    modal.classList.remove("show");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("kpc-open");
+  }
+
+  openBtn.addEventListener("click", openKpcModal);
+  closeBtn?.addEventListener("click", closeKpcModal);
+  readerBack?.addEventListener("click", closeKpcReader);
+  readerClose?.addEventListener("click", closeKpcModal);
+
+  modal.addEventListener("click", event => {
+    if(event.target === modal) closeKpcModal();
+  });
+
+  searchInput?.addEventListener("input", event => {
+    kpcKeyword = event.target.value.trim();
+    filterKpc();
+  });
+
+  window.addEventListener("keydown", event => {
+    if(event.key !== "Escape" || !modal.classList.contains("show")) return;
+    if(reader?.classList.contains("show")){
+      closeKpcReader();
+    }else{
+      closeKpcModal();
+    }
+  });
+})();
+const themeFloatBtn = document.getElementById("themeFloatBtn");
+const roomApp = document.querySelector(".room-app");
+
+const myDocThemes = [
+  { name: "rain", icon: "🌙" },
+  { name: "blue", icon: "💧" },
+  { name: "purple", icon: "🌑" }
+];
+
+let myDocThemeIndex = Number(localStorage.getItem("myDocThemeIndex") || 0);
+
+function applyMyDocTheme(){
+  if(!roomApp) return;
+
+  const theme = myDocThemes[myDocThemeIndex] || myDocThemes[0];
+
+  roomApp.dataset.theme = theme.name;
+
+  if(themeFloatBtn){
+    themeFloatBtn.textContent = theme.icon;
+    themeFloatBtn.title = `Đổi giao diện: ${theme.name}`;
+  }
+
+  localStorage.setItem("myDocThemeIndex", String(myDocThemeIndex));
+}
+
+themeFloatBtn?.addEventListener("click", () => {
+  myDocThemeIndex = (myDocThemeIndex + 1) % myDocThemes.length;
+  applyMyDocTheme();
+});
+
+applyMyDocTheme();
+
+const chantFloatBtn = document.getElementById("chantFloatBtn");
+const chantAudio = document.getElementById("chantAudio");
+
+let isChantPlaying = false;
+
+chantFloatBtn?.addEventListener("click", async () => {
+  if (!chantAudio) return;
+
+  if (isChantPlaying) {
+    chantAudio.pause();
+    isChantPlaying = false;
+    chantFloatBtn.classList.remove("active");
+    return;
+  }
+
+  try {
+    chantAudio.volume = 0.8;
+    await chantAudio.play();
+    isChantPlaying = true;
+    chantFloatBtn.classList.add("active");
+  } catch (error) {
+    showToast?.("Không phát được Nhạc Niệm Phật.");
+  }
+});
