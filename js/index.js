@@ -928,155 +928,12 @@ const $ = (selector) => document.querySelector(selector);
     })();
 
 
-      /* THẦN CHÚ - đọc từ json/kinhchu.json */
-const thanchuBtn = document.querySelector("#thanchuBtn");
 
-let thanchuList = [];
-
-function normalizeThanChu(item) {
-  if (!item || typeof item !== "object") return null;
-
-  const title = String(item.title || item.tieude || "").trim();
-  const content = String(item.content || item.noidung || "").trim();
-
-  if (!title || !content) return null;
-
-  return { title, content };
-}
-
-function createThanChuModal() {
-  const modal = document.createElement("div");
-  modal.className = "home-modal";
-  modal.id = "thanchuModal";
-  modal.setAttribute("aria-hidden", "true");
-
-  modal.innerHTML = `
-    <div class="modal-card thanchu-card">
-      <button class="modal-close" id="thanchuCloseBtn" type="button">×</button>
-      <div class="modal-icon">🪄</div>
-      <h2>Thần chú Phật giáo</h2>
-      <div class="thanchu-grid" id="thanchuGrid"></div>
-    </div>
-  `;
-
-  document.body.appendChild(modal);
-  return modal;
-}
-
-function createThanChuReader() {
-  const reader = document.createElement("div");
-  reader.className = "home-modal";
-  reader.id = "thanchuReader";
-  reader.setAttribute("aria-hidden", "true");
-
-  reader.innerHTML = `
-    <div class="modal-card thanchu-reader-card">
-      <button class="modal-close" id="thanchuReaderCloseBtn" type="button">×</button>
-      <h2 id="thanchuReaderTitle">Tiêu đề</h2>
-      <p id="thanchuReaderContent">Nội dung</p>
-    </div>
-  `;
-
-  document.body.appendChild(reader);
-  return reader;
-}
-
-const thanchuModal = createThanChuModal();
-const thanchuReader = createThanChuReader();
-const thanchuGrid = document.querySelector("#thanchuGrid");
-const thanchuCloseBtn = document.querySelector("#thanchuCloseBtn");
-const thanchuReaderCloseBtn = document.querySelector("#thanchuReaderCloseBtn");
-const thanchuReaderTitle = document.querySelector("#thanchuReaderTitle");
-const thanchuReaderContent = document.querySelector("#thanchuReaderContent");
-
-function openThanChuModal() {
-  thanchuModal.classList.add("show");
-  thanchuModal.setAttribute("aria-hidden", "false");
-}
-
-function closeThanChuModal() {
-  thanchuModal.classList.remove("show");
-  thanchuModal.setAttribute("aria-hidden", "true");
-}
-
-function openThanChuReader(item) {
-  thanchuReaderTitle.textContent = item.title;
-  thanchuReaderContent.innerHTML = item.content;
-  thanchuReader.classList.add("show");
-  thanchuReader.setAttribute("aria-hidden", "false");
-}
-
-function closeThanChuReader() {
-  thanchuReader.classList.remove("show");
-  thanchuReader.setAttribute("aria-hidden", "true");
-}
-
-async function loadThanChu() {
-  try {
-    const response = await fetch("json/kinhchu.json", { cache: "no-store" });
-    if (!response.ok) throw new Error("Không tải được kinhchu.json");
-
-    const data = await response.json();
-    const raw = Array.isArray(data)
-      ? data
-      : (data.items || data.data || data.list || []);
-
-    thanchuList = raw.map(normalizeThanChu).filter(Boolean);
-  } catch (error) {
-    thanchuList = [];
-  }
-
-  renderThanChuCards();
-}
-
-function renderThanChuCards() {
-  if (!thanchuGrid) return;
-
-  if (!thanchuList.length) {
-    thanchuGrid.innerHTML = `
-      <div class="thanchu-empty">
-        Chưa có dữ liệu hợp lệ trong json/kinhchu.json.<br>
-        Mỗi mục cần đủ <b>title</b> và <b>content</b>.
-      </div>
-    `;
-    return;
-  }
-
-  thanchuGrid.innerHTML = "";
-
-  thanchuList.forEach(item => {
-    const card = document.createElement("button");
-    card.type = "button";
-    card.className = "thanchu-item";
-    card.innerHTML = `<strong>${item.title}</strong>`;
-
-    card.addEventListener("click", () => {
-      openThanChuReader(item);
+    document.getElementById("open2048HomeBtn")?.addEventListener("click", function(event){
+      event.preventDefault();
+      document.getElementById("gameModal")?.classList.remove("show");
+      document.getElementById("game2048Modal")?.classList.add("show");
     });
-
-    thanchuGrid.appendChild(card);
-  });
-}
-
-thanchuBtn?.addEventListener("click", event => {
-  event.preventDefault();
-  event.stopPropagation();
-  openThanChuModal();
-});
-
-thanchuCloseBtn?.addEventListener("click", closeThanChuModal);
-thanchuReaderCloseBtn?.addEventListener("click", closeThanChuReader);
-
-thanchuModal?.addEventListener("click", event => {
-  if (event.target === thanchuModal) closeThanChuModal();
-});
-
-thanchuReader?.addEventListener("click", event => {
-  if (event.target === thanchuReader) closeThanChuReader();
-});
-
-loadThanChu();
-
 
     document.getElementById("zenBtn")?.addEventListener("click", async function(event){
       event.preventDefault();
@@ -1316,8 +1173,8 @@ function applyMyDocTheme(){
   document.body.dataset.theme = theme.name;
 
   if(themeFloatBtn){
-    themeFloatBtn.innerHTML = `<span class="top-action-icon">${theme.icon}</span><span class="top-action-label">Chủ đề</span>`;
-    themeFloatBtn.title = `Chủ đề: ${theme.name}`;
+    themeFloatBtn.innerHTML = `<span class="top-action-icon">${theme.icon}</span><span class="top-action-label">Đổi giao diện</span>`;
+    themeFloatBtn.title = `Đổi giao diện: ${theme.name}`;
   }
 
   localStorage.setItem("myDocThemeIndex", String(myDocThemeIndex));
@@ -1354,3 +1211,338 @@ chantFloatBtn?.addEventListener("click", async () => {
     showToast?.("Không phát được Nhạc Niệm Phật.");
   }
 });
+
+
+/* =========================================================
+   MYDOC: CÁC BÀI CHÚ + ĐỐ VUI
+   - Dựa theo HTML hiện tại:
+     #thanchuBtn  -> json/kinhchu.json
+     #quizBtn     -> json/caudovui.json
+   - Không đụng Time / Quote / Player
+========================================================= */
+(function(){
+  const thanchuBtn = document.getElementById("thanchuBtn");
+  const quizBtn = document.getElementById("quizBtn");
+
+  function safeText(value){
+    return String(value ?? "").trim();
+  }
+
+  function shuffleArray(list){
+    const arr = [...list];
+    for(let i = arr.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function showMyDocModal(modal){
+    if(!modal) return;
+    modal.classList.add("show");
+    modal.setAttribute("aria-hidden", "false");
+  }
+
+  function hideMyDocModal(modal){
+    if(!modal) return;
+    modal.classList.remove("show");
+    modal.setAttribute("aria-hidden", "true");
+  }
+
+  /* ===================== CÁC BÀI CHÚ ===================== */
+  let thanchuList = [];
+  let thanchuLoaded = false;
+
+  function normalizeThanChu(item){
+    if(!item || typeof item !== "object") return null;
+
+    const title = safeText(item.title || item.tieude || item.name || item.ten);
+    const content = safeText(item.content || item.noidung || item.text || item.body);
+
+    if(!title || !content) return null;
+    return { title, content };
+  }
+
+  function createThanChuUI(){
+    if(document.getElementById("thanchuModal") && document.getElementById("thanchuReader")) return;
+
+    const modal = document.createElement("div");
+    modal.className = "home-modal";
+    modal.id = "thanchuModal";
+    modal.setAttribute("aria-hidden", "true");
+    modal.innerHTML = `
+      <div class="modal-card" style="width:min(390px,94vw);max-height:86vh;">
+        <button class="modal-close" id="thanchuCloseBtn" type="button">×</button>
+        <div class="modal-icon">🪄</div>
+        <h2>Các Bài Chú</h2>
+        <div id="thanchuGrid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px;"></div>
+      </div>
+    `;
+
+    const reader = document.createElement("div");
+    reader.className = "home-modal";
+    reader.id = "thanchuReader";
+    reader.setAttribute("aria-hidden", "true");
+    reader.innerHTML = `
+      <div class="modal-card" style="width:min(390px,94vw);max-height:86vh;">
+        <button class="modal-close" id="thanchuReaderCloseBtn" type="button">×</button>
+        <div class="modal-icon">🪄</div>
+        <h2 id="thanchuReaderTitle">Tiêu đề</h2>
+        <p id="thanchuReaderContent" style="max-height:58vh;overflow:auto;white-space:pre-line;"></p>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+    document.body.appendChild(reader);
+
+    document.getElementById("thanchuCloseBtn")?.addEventListener("click", () => hideMyDocModal(modal));
+    document.getElementById("thanchuReaderCloseBtn")?.addEventListener("click", () => hideMyDocModal(reader));
+
+    modal.addEventListener("click", event => {
+      if(event.target === modal) hideMyDocModal(modal);
+    });
+
+    reader.addEventListener("click", event => {
+      if(event.target === reader) hideMyDocModal(reader);
+    });
+  }
+
+  async function loadThanChu(){
+    if(thanchuLoaded) return;
+
+    try{
+      const response = await fetch("json/kinhchu.json", { cache:"no-store" });
+      if(!response.ok) throw new Error("Không tải được kinhchu.json");
+
+      const data = await response.json();
+      const raw = Array.isArray(data) ? data : (data.items || data.data || data.list || []);
+      thanchuList = raw.map(normalizeThanChu).filter(Boolean);
+    }catch(error){
+      console.warn("Không tải được Các Bài Chú:", error);
+      thanchuList = [];
+    }
+
+    thanchuLoaded = true;
+  }
+
+  function renderThanChu(){
+    const grid = document.getElementById("thanchuGrid");
+    if(!grid) return;
+
+    grid.innerHTML = "";
+
+    if(!thanchuList.length){
+      grid.innerHTML = `
+        <div style="grid-column:1/-1;padding:16px;line-height:1.55;color:var(--gold-soft);">
+          Chưa có dữ liệu hợp lệ trong <b>json/kinhchu.json</b>.<br>
+          Mỗi mục cần đủ <b>title</b> và <b>content</b>.
+        </div>
+      `;
+      return;
+    }
+
+    thanchuList.forEach(item => {
+      const card = document.createElement("button");
+      card.type = "button";
+      card.style.cssText = `
+        min-height:82px;
+        border-radius:18px;
+        border:1px solid var(--line);
+        background:color-mix(in srgb, var(--glass-panel) 72%, transparent);
+        color:var(--gold-soft);
+        box-shadow:0 14px 30px rgba(0,0,0,.26), inset 0 0 18px rgba(255,255,255,.035), 0 0 18px var(--theme-shadow-soft);
+        font-family:"Noto Serif", Georgia, serif;
+        cursor:pointer;
+        padding:12px 10px;
+        font-size:15px;
+        line-height:1.35;
+      `;
+      card.innerHTML = `<strong>${item.title}</strong>`;
+
+      card.addEventListener("click", () => {
+        document.getElementById("thanchuReaderTitle").textContent = item.title;
+        document.getElementById("thanchuReaderContent").innerHTML = item.content;
+        showMyDocModal(document.getElementById("thanchuReader"));
+      });
+
+      grid.appendChild(card);
+    });
+  }
+
+  thanchuBtn?.addEventListener("click", async event => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    createThanChuUI();
+    await loadThanChu();
+    renderThanChu();
+    showMyDocModal(document.getElementById("thanchuModal"));
+  });
+
+  /* ========================= ĐỐ VUI ========================= */
+  let quizList = [];
+  let quizBag = [];
+  let quizLoaded = false;
+  let currentQuiz = null;
+
+  function normalizeQuiz(item){
+    if(!item || typeof item !== "object") return null;
+
+    const question = safeText(
+      item.question ||
+      item.cauhoi ||
+      item.cau_hoi ||
+      item.title ||
+      item.tieude ||
+      item.do ||
+      item.content ||
+      item.text
+    );
+
+    const answer = safeText(
+      item.answer ||
+      item.dapan ||
+      item.dap_an ||
+      item.reply ||
+      item.result ||
+      item.traloi ||
+      item.tra_loi
+    );
+
+    if(!question || !answer) return null;
+    return { question, answer };
+  }
+
+  function createQuizUI(){
+    if(document.getElementById("quizModal")) return;
+
+    const modal = document.createElement("div");
+    modal.className = "home-modal";
+    modal.id = "quizModal";
+    modal.setAttribute("aria-hidden", "true");
+    modal.innerHTML = `
+      <div class="modal-card" style="width:min(370px,94vw);">
+        <button class="modal-close" id="quizCloseBtn" type="button">×</button>
+        <div class="modal-icon">😼</div>
+        <h2>Hi, Đố Vui</h2>
+
+        <div id="quizQuestion" style="
+          margin:14px auto 16px;
+          padding:16px;
+          border-radius:20px;
+          border:1px solid var(--line);
+          background:color-mix(in srgb, var(--glass-panel) 68%, transparent);
+          color:var(--gold-soft);
+          font-family:'Noto Serif', Georgia, serif;
+          font-size:17px;
+          line-height:1.55;
+          text-align:left;
+          box-shadow:inset 0 0 18px rgba(255,255,255,.035), 0 0 18px var(--theme-shadow-soft);
+        ">Đang tải câu đố...</div>
+
+        <div id="quizAnswer" hidden style="
+          margin:0 auto 16px;
+          padding:13px 15px;
+          border-radius:18px;
+          border:1px dashed var(--line);
+          color:var(--gold);
+          background:var(--theme-glass);
+          font-family:'Noto Serif', Georgia, serif;
+          font-size:16px;
+          line-height:1.5;
+          text-align:left;
+          white-space:pre-line;
+        "></div>
+
+        <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;">
+          <button class="modal-next" id="showQuizAnswerBtn" type="button">Hiện đáp án</button>
+          <button class="modal-next" id="nextQuizBtn" type="button">Câu đố khác</button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    document.getElementById("quizCloseBtn")?.addEventListener("click", () => hideMyDocModal(modal));
+
+    modal.addEventListener("click", event => {
+      if(event.target === modal) hideMyDocModal(modal);
+    });
+
+    document.getElementById("showQuizAnswerBtn")?.addEventListener("click", () => {
+      const answer = document.getElementById("quizAnswer");
+      const btn = document.getElementById("showQuizAnswerBtn");
+      if(!answer || !btn || !currentQuiz) return;
+
+      answer.hidden = !answer.hidden;
+      btn.textContent = answer.hidden ? "Hiện đáp án" : "Ẩn đáp án";
+    });
+
+    document.getElementById("nextQuizBtn")?.addEventListener("click", renderRandomQuiz);
+  }
+
+  async function loadQuiz(){
+    if(quizLoaded) return;
+
+    try{
+      const response = await fetch("json/caudovui.json", { cache:"no-store" });
+      if(!response.ok) throw new Error("Không tải được caudovui.json");
+
+      const data = await response.json();
+      const raw = Array.isArray(data) ? data : (data.items || data.data || data.questions || data.list || []);
+      quizList = raw.map(normalizeQuiz).filter(Boolean);
+      quizBag = shuffleArray(quizList);
+    }catch(error){
+      console.warn("Không tải được Đố vui:", error);
+      quizList = [];
+      quizBag = [];
+    }
+
+    quizLoaded = true;
+  }
+
+  function renderRandomQuiz(){
+    const question = document.getElementById("quizQuestion");
+    const answer = document.getElementById("quizAnswer");
+    const answerBtn = document.getElementById("showQuizAnswerBtn");
+
+    if(!question || !answer || !answerBtn) return;
+
+    if(!quizList.length){
+      question.innerHTML = `
+        Chưa có dữ liệu hợp lệ trong <b>json/caudovui.json</b>.<br>
+        Mỗi câu cần có câu hỏi và đáp án.
+      `;
+      answer.hidden = true;
+      answer.textContent = "";
+      answerBtn.textContent = "Hiện đáp án";
+      return;
+    }
+
+    if(!quizBag.length) quizBag = shuffleArray(quizList);
+
+    currentQuiz = quizBag.shift();
+    question.textContent = currentQuiz.question;
+    answer.textContent = currentQuiz.answer;
+    answer.hidden = true;
+    answerBtn.textContent = "Hiện đáp án";
+  }
+
+  quizBtn?.addEventListener("click", async event => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    createQuizUI();
+    await loadQuiz();
+    renderRandomQuiz();
+    showMyDocModal(document.getElementById("quizModal"));
+  });
+
+  window.addEventListener("keydown", event => {
+    if(event.key !== "Escape") return;
+    hideMyDocModal(document.getElementById("thanchuModal"));
+    hideMyDocModal(document.getElementById("thanchuReader"));
+    hideMyDocModal(document.getElementById("quizModal"));
+  });
+})();
+
