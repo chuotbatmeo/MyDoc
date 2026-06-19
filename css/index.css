@@ -1384,3 +1384,51 @@ body{
     font-size:11px;
   }
 }
+
+.thanchu-card{
+  width:min(390px,94vw);
+  max-height:86vh;
+}
+
+.thanchu-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:18px;
+}
+
+.thanchu-item{
+  min-height:82px;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:color-mix(in srgb, var(--glass-panel) 72%, transparent);
+  color:var(--gold-soft);
+  box-shadow:0 14px 30px rgba(0,0,0,.26), inset 0 0 18px rgba(255,255,255,.035), 0 0 18px var(--theme-shadow-soft);
+  font-family:"Noto Serif", Georgia, serif;
+  cursor:pointer;
+  padding:12px 10px;
+}
+
+.thanchu-item strong{
+  font-size:15px;
+  line-height:1.35;
+}
+
+.thanchu-item:hover,
+.thanchu-item:active{
+  transform:translateY(-2px);
+  border-color:var(--gold);
+  background:var(--theme-glass-strong);
+}
+
+.thanchu-empty{
+  grid-column:1/-1;
+  padding:18px;
+  line-height:1.5;
+  color:var(--gold-soft);
+}
+
+.thanchu-reader-card p{
+  max-height:58vh;
+  overflow:auto;
+}

@@ -25,9 +25,11 @@ const $ = (selector) => document.querySelector(selector);
     };
 
     let quotes = [];
-    let quoteIndex = 0;
+    let quoteIndex = -1;
+    let quoteBag = [];
     let playlist = [];
-    let currentTrack = 0;
+    let currentTrack = -1;
+    let trackBag = [];
     let isPlaying = false;
     let isShuffle = false;
     let toastTimer = null;
@@ -64,6 +66,34 @@ const $ = (selector) => document.querySelector(selector);
       els.toast.classList.add("show");
       clearTimeout(toastTimer);
       toastTimer = setTimeout(() => els.toast.classList.remove("show"), 2200);
+    }
+
+    function buildIndexBag(length, excludeIndex = -1) {
+      const bag = [];
+
+      for (let i = 0; i < length; i++) {
+        if (length > 1 && i === excludeIndex) continue;
+        bag.push(i);
+      }
+
+      for (let i = bag.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [bag[i], bag[j]] = [bag[j], bag[i]];
+      }
+
+      return bag;
+    }
+
+    function getNextQuoteIndex() {
+      if (!quotes.length) return 0;
+
+      if (!quoteBag.length) {
+        quoteBag = buildIndexBag(quotes.length, quoteIndex);
+      }
+
+      const nextIndex = quoteBag.shift();
+      quoteIndex = Number.isInteger(nextIndex) ? nextIndex : 0;
+      return quoteIndex;
     }
 
     function formatAudioTime(seconds) {
@@ -235,7 +265,9 @@ const $ = (selector) => document.querySelector(selector);
       }
 
       if (!quotes.length) quotes = fallbackQuotes;
-      quoteIndex = Math.floor(Math.random() * quotes.length);
+      quoteIndex = -1;
+      quoteBag = buildIndexBag(quotes.length);
+      getNextQuoteIndex();
       renderQuote();
       setInterval(nextQuote, 6000);
     }
@@ -261,7 +293,7 @@ const $ = (selector) => document.querySelector(selector);
 }
 
     function nextQuote() {
-      quoteIndex = (quoteIndex + 1) % quotes.length;
+      getNextQuoteIndex();
       renderQuote();
     }
 
@@ -300,13 +332,15 @@ const $ = (selector) => document.querySelector(selector);
       }
 
       if (!playlist.length) playlist = fallbackPlaylist;
-      currentTrack = Math.floor(Math.random() * playlist.length);
-      setTrack(currentTrack, false);
+      currentTrack = -1;
+      trackBag = buildIndexBag(playlist.length);
+      setTrack(getRandomTrackIndex(), false);
     }
 
     function setTrack(index, autoplay = isPlaying) {
       if (!playlist.length) return;
-      currentTrack = (index + playlist.length) % playlist.length;
+      const safeIndex = Number.isInteger(index) ? index : 0;
+      currentTrack = (safeIndex + playlist.length) % playlist.length;
       const track = playlist[currentTrack];
 
       els.bgAudio.src = resolveMusicPath(track.src);
@@ -345,13 +379,15 @@ const $ = (selector) => document.querySelector(selector);
     }
 
     function getRandomTrackIndex() {
-      if (playlist.length <= 1) return currentTrack;
+      if (!playlist.length) return 0;
+      if (playlist.length <= 1) return currentTrack >= 0 ? currentTrack : 0;
 
-      let nextIndex = currentTrack;
-      while (nextIndex === currentTrack) {
-        nextIndex = Math.floor(Math.random() * playlist.length);
+      if (!trackBag.length) {
+        trackBag = buildIndexBag(playlist.length, currentTrack);
       }
-      return nextIndex;
+
+      const nextIndex = trackBag.shift();
+      return Number.isInteger(nextIndex) ? nextIndex : 0;
     }
 
     function nextTrack() {
@@ -364,6 +400,7 @@ const $ = (selector) => document.querySelector(selector);
 
     function toggleShuffle() {
       isShuffle = !isShuffle;
+      if (isShuffle) trackBag = buildIndexBag(playlist.length, currentTrack);
       window.myDocShuffleMode = isShuffle;
       els.shuffleBtn?.classList.toggle("active", isShuffle);
       showToast(isShuffle ? "Đã bật phát ngẫu nhiên" : "Đã tắt phát ngẫu nhiên");
@@ -891,12 +928,155 @@ const $ = (selector) => document.querySelector(selector);
     })();
 
 
+      /* THẦN CHÚ - đọc từ json/kinhchu.json */
+const thanchuBtn = document.querySelector("#thanchuBtn");
 
-    document.getElementById("open2048HomeBtn")?.addEventListener("click", function(event){
-      event.preventDefault();
-      document.getElementById("gameModal")?.classList.remove("show");
-      document.getElementById("game2048Modal")?.classList.add("show");
+let thanchuList = [];
+
+function normalizeThanChu(item) {
+  if (!item || typeof item !== "object") return null;
+
+  const title = String(item.title || item.tieude || "").trim();
+  const content = String(item.content || item.noidung || "").trim();
+
+  if (!title || !content) return null;
+
+  return { title, content };
+}
+
+function createThanChuModal() {
+  const modal = document.createElement("div");
+  modal.className = "home-modal";
+  modal.id = "thanchuModal";
+  modal.setAttribute("aria-hidden", "true");
+
+  modal.innerHTML = `
+    <div class="modal-card thanchu-card">
+      <button class="modal-close" id="thanchuCloseBtn" type="button">×</button>
+      <div class="modal-icon">🪄</div>
+      <h2>Thần chú Phật giáo</h2>
+      <div class="thanchu-grid" id="thanchuGrid"></div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+  return modal;
+}
+
+function createThanChuReader() {
+  const reader = document.createElement("div");
+  reader.className = "home-modal";
+  reader.id = "thanchuReader";
+  reader.setAttribute("aria-hidden", "true");
+
+  reader.innerHTML = `
+    <div class="modal-card thanchu-reader-card">
+      <button class="modal-close" id="thanchuReaderCloseBtn" type="button">×</button>
+      <h2 id="thanchuReaderTitle">Tiêu đề</h2>
+      <p id="thanchuReaderContent">Nội dung</p>
+    </div>
+  `;
+
+  document.body.appendChild(reader);
+  return reader;
+}
+
+const thanchuModal = createThanChuModal();
+const thanchuReader = createThanChuReader();
+const thanchuGrid = document.querySelector("#thanchuGrid");
+const thanchuCloseBtn = document.querySelector("#thanchuCloseBtn");
+const thanchuReaderCloseBtn = document.querySelector("#thanchuReaderCloseBtn");
+const thanchuReaderTitle = document.querySelector("#thanchuReaderTitle");
+const thanchuReaderContent = document.querySelector("#thanchuReaderContent");
+
+function openThanChuModal() {
+  thanchuModal.classList.add("show");
+  thanchuModal.setAttribute("aria-hidden", "false");
+}
+
+function closeThanChuModal() {
+  thanchuModal.classList.remove("show");
+  thanchuModal.setAttribute("aria-hidden", "true");
+}
+
+function openThanChuReader(item) {
+  thanchuReaderTitle.textContent = item.title;
+  thanchuReaderContent.innerHTML = item.content;
+  thanchuReader.classList.add("show");
+  thanchuReader.setAttribute("aria-hidden", "false");
+}
+
+function closeThanChuReader() {
+  thanchuReader.classList.remove("show");
+  thanchuReader.setAttribute("aria-hidden", "true");
+}
+
+async function loadThanChu() {
+  try {
+    const response = await fetch("json/kinhchu.json", { cache: "no-store" });
+    if (!response.ok) throw new Error("Không tải được kinhchu.json");
+
+    const data = await response.json();
+    const raw = Array.isArray(data)
+      ? data
+      : (data.items || data.data || data.list || []);
+
+    thanchuList = raw.map(normalizeThanChu).filter(Boolean);
+  } catch (error) {
+    thanchuList = [];
+  }
+
+  renderThanChuCards();
+}
+
+function renderThanChuCards() {
+  if (!thanchuGrid) return;
+
+  if (!thanchuList.length) {
+    thanchuGrid.innerHTML = `
+      <div class="thanchu-empty">
+        Chưa có dữ liệu hợp lệ trong json/kinhchu.json.<br>
+        Mỗi mục cần đủ <b>title</b> và <b>content</b>.
+      </div>
+    `;
+    return;
+  }
+
+  thanchuGrid.innerHTML = "";
+
+  thanchuList.forEach(item => {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "thanchu-item";
+    card.innerHTML = `<strong>${item.title}</strong>`;
+
+    card.addEventListener("click", () => {
+      openThanChuReader(item);
     });
+
+    thanchuGrid.appendChild(card);
+  });
+}
+
+thanchuBtn?.addEventListener("click", event => {
+  event.preventDefault();
+  event.stopPropagation();
+  openThanChuModal();
+});
+
+thanchuCloseBtn?.addEventListener("click", closeThanChuModal);
+thanchuReaderCloseBtn?.addEventListener("click", closeThanChuReader);
+
+thanchuModal?.addEventListener("click", event => {
+  if (event.target === thanchuModal) closeThanChuModal();
+});
+
+thanchuReader?.addEventListener("click", event => {
+  if (event.target === thanchuReader) closeThanChuReader();
+});
+
+loadThanChu();
+
 
     document.getElementById("zenBtn")?.addEventListener("click", async function(event){
       event.preventDefault();
@@ -1136,8 +1316,8 @@ function applyMyDocTheme(){
   document.body.dataset.theme = theme.name;
 
   if(themeFloatBtn){
-    themeFloatBtn.innerHTML = `<span class="top-action-icon">${theme.icon}</span><span class="top-action-label">Đổi giao diện</span>`;
-    themeFloatBtn.title = `Đổi giao diện: ${theme.name}`;
+    themeFloatBtn.innerHTML = `<span class="top-action-icon">${theme.icon}</span><span class="top-action-label">Chủ đề</span>`;
+    themeFloatBtn.title = `Chủ đề: ${theme.name}`;
   }
 
   localStorage.setItem("myDocThemeIndex", String(myDocThemeIndex));
