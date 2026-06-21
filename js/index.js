@@ -15,8 +15,6 @@ const $ = (selector) => document.querySelector(selector);
       prevBtn: $("#prevBtn"),
       nextBtn: $("#nextBtn"),
       shuffleBtn: $("#shuffleBtn"),
-      rainBtn: $("#rainBtn"),
-      openMusicPage: $("#openMusicPage"),
       currentTime: $("#currentTime"),
       durationTime: $("#durationTime"),
       progressFill: $("#progressFill"),
@@ -35,9 +33,9 @@ const $ = (selector) => document.querySelector(selector);
     let toastTimer = null;
 
     const fallbackQuotes = [
-      { text: "Hôm nay mình đi thật chậm thôi.", source: "Mưa Tĩnh Lặng" },
-      { text: "Có những ngày chỉ cần bình yên là đủ.", source: "Mưa Tĩnh Lặng" },
-      { text: "Mưa ngoài kia cứ để mưa, lòng mình cứ nhẹ lại.", source: "Mưa Tĩnh Lặng" }
+      { text: "Hôm nay mình đi thật chậm thôi.", author: "Mưa Tĩnh Lặng" },
+      { text: "Có những ngày chỉ cần bình yên là đủ.", author: "Mưa Tĩnh Lặng" },
+      { text: "Mưa ngoài kia cứ để mưa, lòng mình cứ nhẹ lại.", author: "Mưa Tĩnh Lặng" }
     ];
 
     const fallbackPlaylist = [
@@ -54,7 +52,6 @@ const $ = (selector) => document.querySelector(selector);
       if (!els.playBtn) return;
       els.playBtn.innerHTML = playing ? playerIcons.pause : playerIcons.play;
     }
-
 
     function pad(num) {
       return String(num).padStart(2, "0");
@@ -406,21 +403,6 @@ const $ = (selector) => document.querySelector(selector);
       showToast(isShuffle ? "Đã bật phát ngẫu nhiên" : "Đã tắt phát ngẫu nhiên");
     }
 
-    async function toggleRain() {
-      if (els.rainAudio.paused) {
-        try {
-          els.rainAudio.volume = .45;
-          await els.rainAudio.play();
-          showToast("Đã bật tiếng mưa");
-        } catch (error) {
-          showToast("Không phát được âm thanh!");
-        }
-      } else {
-        els.rainAudio.pause();
-        showToast("Đã tắt tiếng mưa");
-      }
-    }
-
     let isSeekingTrack = false;
 
     function updateProgress() {
@@ -463,16 +445,9 @@ const $ = (selector) => document.querySelector(selector);
     els.prevBtn?.addEventListener("click", prevTrack);
     els.nextBtn?.addEventListener("click", nextTrack);
     els.shuffleBtn?.addEventListener("click", toggleShuffle);
-    els.rainBtn?.addEventListener("click", toggleRain);
-    els.openMusicPage?.addEventListener("click", () => {
-      location.href = "nghenhac.html";
-    });
-
     els.bgAudio?.addEventListener("timeupdate", updateProgress);
     els.bgAudio?.addEventListener("loadedmetadata", updateProgress);
     els.bgAudio?.addEventListener("ended", nextTrack);
-
-
 
     /* HOME POPUPS: KHO BÍ MẬT / CƯỜI XÍU / THÚ CƯNG */
     const openSecretBtn = $("#openSecretBtn");
@@ -888,14 +863,12 @@ const $ = (selector) => document.querySelector(selector);
       }
     });
 
-
     document.addEventListener("click", function(event) {
       if (event.target.closest && (event.target.closest("#openCaroBtn") || event.target.closest("#open2048Btn"))) {
         const choose = document.getElementById("gameModal");
         if (choose) choose.classList.remove("show");
       }
     }, true);
-
 
     // GAME POPUP CLOSE FIX
     (function(){
@@ -927,8 +900,6 @@ const $ = (selector) => document.querySelector(selector);
       });
     })();
 
-
-
     document.getElementById("open2048HomeBtn")?.addEventListener("click", function(event){
       event.preventDefault();
       document.getElementById("gameModal")?.classList.remove("show");
@@ -945,7 +916,6 @@ const $ = (selector) => document.querySelector(selector);
     setInterval(updateDateTime, 1000);
     loadQuotes();
     loadPlaylist();
-
 
 /* KINH PHÁP CÚ POPUP MOBILE */
 (function(){
@@ -1211,7 +1181,6 @@ chantFloatBtn?.addEventListener("click", async () => {
     showToast?.("Không phát được Nhạc Niệm Phật.");
   }
 });
-
 
 /* =========================================================
    MYDOC: CÁC BÀI CHÚ + ĐỐ VUI
@@ -1545,4 +1514,3 @@ chantFloatBtn?.addEventListener("click", async () => {
     hideMyDocModal(document.getElementById("quizModal"));
   });
 })();
-

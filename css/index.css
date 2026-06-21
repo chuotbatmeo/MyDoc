@@ -23,28 +23,6 @@
   --modal-glow-2:rgba(96,165,250,.14);
 }
 
-.room-app[data-theme="rain"],
-body[data-theme="rain"]{
-  --gold:#ffd98a;
-  --gold-soft:#fff0c8;
-  --text:#fff6de;
-  --line:rgba(255,217,138,.42);
-  --title:#f9f906;
-  --clock:#ffe7ae;
-  --date:#ffe1a1;
-  --tagline:#f4ffb6;
-  --quote:#fff7e8;
-  --theme-shadow:rgba(255,217,138,.24);
-  --theme-shadow-soft:rgba(255,217,138,.11);
-  --glass-panel:rgba(8,6,5,.84);
-  --theme-glass:rgba(255,217,138,.08);
-  --theme-glass-strong:rgba(255,217,138,.15);
-  --theme-card-bg:linear-gradient(145deg, rgba(15,20,28,.94), rgba(7,10,15,.92));
-  --theme-game-bg:linear-gradient(145deg, rgba(12,10,8,.96), rgba(20,12,7,.92));
-  --modal-glow-1:rgba(255,217,138,.22);
-  --modal-glow-2:rgba(96,165,250,.14);
-}
-
 .room-app[data-theme="blue"],
 body[data-theme="blue"]{
   --gold:#9fd8ff;
@@ -671,15 +649,6 @@ body{
   box-shadow:0 0 14px var(--theme-shadow), inset 0 0 12px var(--theme-shadow-soft);
 }
 
-.track-row,
-.progress,
-.rain-btn,
-.list-btn,
-.track-name,
-.controls{
-  display:none;
-}
-
 .footer-note{
   display:none;
 }
@@ -710,7 +679,6 @@ body{
 /* POPUP CHUNG */
 .home-modal,
 .game-modal,
-.game-play-modal,
 .caro-modal,
 .game2048-modal,
 .kpc-mobile-modal,
@@ -728,8 +696,7 @@ body{
 }
 
 .home-modal.show,
-.game-modal.show,
-.game-play-modal.show,
+.game-modal.show.show,
 .caro-modal.show,
 .game2048-modal.show{
   display:flex;
@@ -744,7 +711,6 @@ body{
 .modal-card,
 .pet-home-box,
 .game-choice-card,
-.game-play-card,
 .caro-card,
 .game2048-card,
 .caro-result-box,
@@ -971,7 +937,6 @@ body{
 
 /* GAME */
 .game-choice-card,
-.game-play-card,
 .caro-card,
 .game2048-card,
 .caro-result-box,
