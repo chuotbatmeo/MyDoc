@@ -12,5 +12,4 @@ function loadDictionary() {
     return [];
   }
 }
-
 const DICTIONARY = loadDictionary();
