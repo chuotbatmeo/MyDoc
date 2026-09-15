@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Đoán Chữ - Bàn Phím Tiếng Việt</title>
+    <style>
+        :root { --box-bg: rgba(0,0,0,0.6); --correct: #28A745; --present: #FFC107; --accent: #3182CE; --absent: #222; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; user-select: none; }
+        
+        body { 
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), 
+                        radial-gradient(circle, #cc3333, #cc7733, #cccc33, #33cc33, #3333cc, #6633cc); 
+            color: #fff; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: space-between; 
+            min-height: 100vh; 
+            padding: 6px 4px; 
+            overflow-x: hidden; 
+        }
+
+        #game-container { display: flex; flex-direction: column; gap: 4px; margin: auto 0; max-width: 100vw; overflow-x: auto; padding: 2px; }
+        .row { display: flex; gap: 3px; justify-content: center; padding: 2px; border-radius: 6px; }
+        .row.active-row { border: 2px solid #FFD700; background-color: rgba(0,0,0,0.4); box-shadow: 0 0 8px rgba(255,215,0,0.8); }
+        .space-gap { width: 8px; }
+        .tile { width: 32px; height: 32px; border-radius: 4px; background: var(--box-bg); border: 1.5px solid rgba(255,255,255,0.4); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: bold; text-transform: lowercase; }
+        .tile.correct { background: var(--correct); border-color: #1e7e34; }
+        .tile.present { background: var(--present); border-color: #d39e00; }
+        .tile.vowel-match { background: var(--accent); border-color: #1e56a0; }
+        .tile.absent { background: var(--absent); border-color: #111; }
+        
+        .main-controls { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 450px; gap: 4px; }
+
+        /* Bảng Hướng dẫn luật chơi viết chi tiết hơn */
+        .legend { background-color: rgba(0, 0, 0, 0.75); backdrop-filter: blur(4px); padding: 6px 8px; border-radius: 6px; width: 100%; font-size: 0.68rem; display: flex; flex-direction: column; gap: 3px; border: 1px solid rgba(255,255,255,0.2); }
+        .legend-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+        .legend-item { display: flex; align-items: center; gap: 5px; font-weight: 500; }
+        .legend-box { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+        .bg-green { background-color: var(--correct); }
+        .bg-yellow { background-color: var(--present); }
+        .bg-blue { background-color: var(--accent); }
+        .bg-dark { background-color: var(--absent); }
+
+        /* Bàn phím gọn gàng */
+        #keyboard { width: 100%; display: flex; flex-direction: column; gap: 3px; padding: 4px; background: rgba(0,0,0,0.75); border-radius: 8px; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.2); }
+        .kb-row { display: flex; justify-content: center; gap: 2px; }
+        .key { background: #333; color: #fff; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; height: 34px; font-weight: bold; font-size: 0.8rem; flex: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .key:active { transform: scale(0.93); background: #555; }
+        /* Phím dấu bằng 1/2 chiều cao các ô khác */
+        .key.tone { background: #4a5568; color: #FFD700; height: 17px; font-size: 0.8rem; }
+        .key.wide { flex: 1.4; background: #c53030; font-size: 0.75rem; }
+        .key.enter { flex: 1.6; background: #28A745; font-size: 0.75rem; }
+
+        .btn-restart { background: #FFD700; color: #000; border: none; padding: 4px 14px; font-weight: bold; font-size: 0.8rem; border-radius: 14px; cursor: pointer; box-shadow: 0 2px 0 #b39700; }
+        .btn-restart:active { transform: translateY(1px); box-shadow: 0 1px 0 #b39700; }
+
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 1000; }
+        .modal-card { background: #222; border: 2px solid #FFD700; border-radius: 12px; padding: 16px; text-align: center; width: 85%; max-width: 280px; }
+        .word-highlight { color: #FFD700; font-weight: bold; font-size: 1.1rem; text-transform: uppercase; }
+        #toast { position: fixed; top: 5%; background: rgba(0,0,0,0.9); color: #FFD700; padding: 4px 12px; border-radius: 8px; font-weight: bold; font-size: 0.8rem; display: none; z-index: 500; border: 1px solid #FFD700; }
+    </style>
+</head>
+<body>
+    <div id="toast"></div>
+    <button class="btn-restart" onclick="startNewGame()">Ván mới 🔄</button>
+    <div id="game-container"></div>
+
+    <div class="main-controls">
+        <div class="legend">
+            <div class="legend-grid">
+                <div class="legend-item"><div class="legend-box bg-green"></div><span>Đúng chữ, đúng dấu & vị trí</span></div>
+                <div class="legend-item"><div class="legend-box bg-yellow"></div><span>Đúng chữ & dấu, sai vị trí</span></div>
+                <div class="legend-item"><div class="legend-box bg-blue"></div><span>Đúng chữ, sai dấu</span></div>
+                <div class="legend-item"><div class="legend-box bg-dark"></div><span>Chữ không có trong từ</span></div>
+            </div>
+        </div>
+        <div id="keyboard"></div>
+    </div>
+
+    <div id="modal" class="modal-overlay">
+        <div class="modal-card">
+            <h3 id="modal-title">THÔNG BÁO</h3>
+            <div id="modal-stickers" style="font-size: 1.8rem; margin: 4px 0;">🎉</div>
+            <p id="modal-body" style="font-size: 0.85rem;"></p>
+            <button style="background:#28A745;color:#fff;border:none;padding:6px 16px;border-radius:12px;margin-top:8px;font-weight:bold;font-size:0.8rem" onclick="closeModal()">Tiếp tục ➔</button>
+        </div>
+    </div>
+
+    <script src="/py/words.js"></script>
+
+    <script>
+        // Đảm bảo toàn bộ trang đã nạp xong mới bắt đầu lấy từ
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof DICTIONARY !== 'undefined' && DICTIONARY.length > 0) {
+                console.log("Đã nạp thành công:", DICTIONARY.length, "từ!");
+                startGame();
+            } else {
+                console.error("Không tìm thấy dữ liệu từ điển!");
+            }
+        });
+
+        function startGame() {
+            // Lấy 1 từ ngẫu nhiên từ mảng DICTIONARY
+            const randomIndex = Math.floor(Math.random() * DICTIONARY.length);
+            const secretWord = DICTIONARY[randomIndex];
+            
+            // Hiển thị ra màn hình game
+            document.getElementById('word-display').innerText = secretWord;
+        }
+
+        function nextWord() {
+            startGame();
+        }
+    </script>
+
+    <script>
+        const MAX_ATTEMPTS = 6;
+        let targetWord = "", currentAttempt = 0, wordLen = 0, currentGuess = [];
+        const gameContainer = document.getElementById("game-container");
+        const keyboard = document.getElementById("keyboard");
+
+        const KB_LAYOUT = [
+            ["ă","â","ê","ô","ơ","ư","đ"],
+            ["´","`","̉","˜","̣"],
+            ["q","w","e","r","t","y","u","i","o","p"],
+            ["a","s","d","f","g","h","j","k","l"],
+            ["DEL","z","x","c","v","b","n","m","ENTER"]
+        ];
+
+        const TONE_MAP = {
+            '´': { 'a':'á', 'ă':'ắ', 'â':'ấ', 'e':'é', 'ê':'ế', 'i':'í', 'o':'ó', 'ô':'ố', 'ơ':'ớ', 'u':'ú', 'ư':'ứ', 'y':'ý' },
+            '`': { 'a':'à', 'ă':'ằ', 'â':'ầ', 'e':'è', 'ê':'ề', 'i':'ì', 'o':'ò', 'ô':'ồ', 'ơ':'ờ', 'u':'ù', 'ư':'ừ', 'y':'ỳ' },
+            '̉': { 'a':'ả', 'ă':'ẳ', 'â':'ẩ', 'e':'ẻ', 'ê':'ể', 'i':'ỉ', 'o':'ỏ', 'ô':'ổ', 'ơ':'ở', 'u':'ủ', 'ư':'ử', 'y':'ỷ' },
+            '˜': { 'a':'ã', 'ă':'ẵ', 'â':'ẫ', 'e':'ẽ', 'ê':'ễ', 'i':'ĩ', 'o':'õ', 'ô':'ỗ', 'ơ':'ỡ', 'u':'ũ', 'ư':'ữ', 'y':'ỹ' },
+            '̣': { 'a':'ạ', 'ă':'ặ', 'â':'ậ', 'e':'ẹ', 'ê':'ệ', 'i':'ị', 'o':'ọ', 'ô':'ộ', 'ơ':'ợ', 'u':'ụ', 'ư':'ự', 'y':'ỵ' }
+        };
+
+        function startNewGame() {
+            if (typeof DICTIONARY === "undefined") return;
+            const valid = DICTIONARY.filter(w => { let s = (w.match(/ /g)||[]).length; return s >= 1 && s <= 2; });
+            targetWord = valid[Math.floor(Math.random() * valid.length)].toLowerCase();
+            wordLen = targetWord.length;
+            currentAttempt = 0;
+            currentGuess = [];
+            initBoard();
+            initKeyboard();
+        }
+
+        function initBoard() {
+            gameContainer.innerHTML = "";
+            for (let i = 0; i < MAX_ATTEMPTS; i++) {
+                const row = document.createElement("div");
+                row.className = "row" + (i === 0 ? " active-row" : "");
+                row.id = `row-${i}`;
+                for (let j = 0; j < wordLen; j++) {
+                    if (targetWord[j] === " ") {
+                        const space = document.createElement("div");
+                        space.className = "space-gap";
+                        row.appendChild(space);
+                    } else {
+                        const tile = document.createElement("div");
+                        tile.className = "tile";
+                        tile.id = `row-${i}-tile-${j}`;
+                        row.appendChild(tile);
+                    }
+                }
+                gameContainer.appendChild(row);
+            }
+        }
+
+        function initKeyboard() {
+            keyboard.innerHTML = "";
+            KB_LAYOUT.forEach((rowKeys, rIdx) => {
+                const row = document.createElement("div");
+                row.className = "kb-row";
+                rowKeys.forEach(key => {
+                    const btn = document.createElement("button");
+                    let cls = "key";
+                    if (rIdx === 1) cls += " tone";
+                    if (key === "DEL") cls += " wide";
+                    if (key === "ENTER") cls += " enter";
+                    
+                    btn.className = cls;
+                    btn.textContent = key;
+                    btn.id = `key-${key}`;
+                    btn.onclick = () => handleKeyPress(key);
+                    row.appendChild(btn);
+                });
+                keyboard.appendChild(row);
+            });
+        }
+
+        function handleKeyPress(key) {
+            if (currentAttempt >= MAX_ATTEMPTS) return;
+            const validCount = targetWord.split('').filter(c => c !== " ").length;
+
+            if (key === "DEL") {
+                if (currentGuess.length > 0) {
+                    currentGuess.pop();
+                    updateRowDisplay();
+                }
+            } else if (key === "ENTER") {
+                if (currentGuess.length === validCount) {
+                    submitGuess();
+                } else {
+                    showToast("Chưa điền đủ ô!");
+                }
+            } else if (TONE_MAP[key]) {
+                if (currentGuess.length > 0) {
+                    let lastIdx = currentGuess.length - 1;
+                    let lastChar = currentGuess[lastIdx];
+                    if (TONE_MAP[key][lastChar]) {
+                        currentGuess[lastIdx] = TONE_MAP[key][lastChar];
+                        updateRowDisplay();
+                    }
+                }
+            } else {
+                if (currentGuess.length < validCount) {
+                    currentGuess.push(key.toLowerCase());
+                    updateRowDisplay();
+                }
+            }
+        }
+
+        function updateRowDisplay() {
+            let idx = 0;
+            for (let j = 0; j < wordLen; j++) {
+                if (targetWord[j] !== " ") {
+                    const tile = document.getElementById(`row-${currentAttempt}-tile-${j}`);
+                    tile.textContent = currentGuess[idx] || "";
+                    idx++;
+                }
+            }
+        }
+
+        function getBaseVowels(char) {
+            if (!char) return "";
+            const toneMap = {
+                'a':'a','á':'a','à':'a','ả':'a','ã':'a','ạ':'a',
+                'ă':'ă','ắ':'ă','ằ':'ă','ẳ':'ă','ẵ':'ă','ặ':'ă',
+                'â':'â','ấ':'â','ầ':'â','ẩ':'â','ẫ':'â','ậ':'â',
+                'e':'e','é':'e','è':'e','ẻ':'e','ẽ':'e','ẹ':'e',
+                'ê':'ê','ế':'ê','ề':'ê','ể':'ê','ễ':'ê','ệ':'ê',
+                'o':'o','ó':'o','ò':'o','ỏ':'o','õ':'o','ọ':'o',
+                'ô':'ô','ố':'ô','ồ':'ô','ổ':'ô','ỗ':'ô','ộ':'ô',
+                'ơ':'ơ','ớ':'ơ','ờ':'ơ','ở':'ơ','ỡ':'ơ','ợ':'ơ',
+                'u':'u','ú':'u','ù':'u','ủ':'u','ũ':'u','ụ':'u',
+                'ư':'ư','ứ':'ư','ừ':'ư','ử':'ư','ữ':'ư','ự':'ư',
+                'i':'i','í':'i','ì':'i','ỉ':'i','ĩ':'i','ị':'i',
+                'y':'y','ý':'y','ỳ':'y','ỷ':'y','ỹ':'y','ỵ':'y'
+            };
+            return toneMap[char.toLowerCase()] || char.toLowerCase();
+        }
+
+        function submitGuess() {
+            let targetArr = targetWord.split('').filter(c => c !== " ");
+            let result = new Array(currentGuess.length).fill("absent");
+            let targetUsed = new Array(targetArr.length).fill(false);
+
+            for (let i = 0; i < currentGuess.length; i++) {
+                if (currentGuess[i] === targetArr[i]) {
+                    result[i] = "correct";
+                    targetUsed[i] = true;
+                }
+            }
+            for (let i = 0; i < currentGuess.length; i++) {
+                if (result[i] !== "correct") {
+                    for (let j = 0; j < targetArr.length; j++) {
+                        if (!targetUsed[j] && currentGuess[i] === targetArr[j]) {
+                            result[i] = "present";
+                            targetUsed[j] = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            const listVowels = ['a','ă','â','e','ê','i','o','ô','ơ','u','ư','y'];
+            for (let i = 0; i < currentGuess.length; i++) {
+                if (result[i] === "absent") {
+                    let guessBase = getBaseVowels(currentGuess[i]);
+                    if (listVowels.includes(guessBase)) {
+                        for (let j = 0; j < targetArr.length; j++) {
+                            if (!targetUsed[j] && guessBase === getBaseVowels(targetArr[j])) {
+                                result[i] = "vowel-match";
+                                targetUsed[j] = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            let idx = 0;
+            for (let j = 0; j < wordLen; j++) {
+                if (targetWord[j] !== " ") {
+                    const tile = document.getElementById(`row-${currentAttempt}-tile-${j}`);
+                    tile.className = `tile ${result[idx]}`;
+                    idx++;
+                }
+            }
+
+            if (currentGuess.join('') === targetArr.join('')) {
+                showModal("XIN CHÚC MỪNG!", "🎉🥳🏆", `Đã đoán chính xác cụm từ:<br><span class="word-highlight">${targetWord}</span>`);
+                currentAttempt = MAX_ATTEMPTS;
+                return;
+            }
+
+            document.getElementById(`row-${currentAttempt}`).classList.remove("active-row");
+            currentAttempt++;
+            currentGuess = [];
+
+            if (currentAttempt < MAX_ATTEMPTS) {
+                document.getElementById(`row-${currentAttempt}`).classList.add("active-row");
+            } else {
+                showModal("RẤT TIẾC!", "😢🥀", `Đã hết lượt chơi!<br>Đáp án đúng là:<br><span class="word-highlight">${targetWord}</span>`);
+            }
+        }
+
+        function showModal(title, stickers, body) {
+            document.getElementById("modal-title").innerHTML = title;
+            document.getElementById("modal-stickers").innerHTML = stickers;
+            document.getElementById("modal-body").innerHTML = body;
+            document.getElementById("modal").style.display = "flex";
+        }
+        function closeModal() { document.getElementById("modal").style.display = "none"; startNewGame(); }
+        function showToast(msg) {
+            const t = document.getElementById("toast"); t.textContent = msg; t.style.display = "block";
+            setTimeout(() => t.style.display = "none", 1500);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') handleKeyPress('ENTER');
+            else if (e.key === 'Backspace') handleKeyPress('DEL');
+            else if (/^[a-zA-ZăâêôơưđĂÂÊÔƠƯĐ]$/.test(e.key)) handleKeyPress(e.key.toLowerCase());
+        });
+
+        startNewGame();
+    </script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+import json
+
+# 1. Danh sách chính xác 999 cụm từ tiếng Việt (mỗi cụm từ gồm đúng 2 tiếng)
+raw_words = [
+    "an bình", "an ninh", "an toàn", "an tâm", "an hưởng", "an dưỡng", "an táng", "an vị", "an giấc", "an nhiên",
+    "ảo giác", "ảo ảnh", "ảo tưởng", "ảo thuật", "ảo mộng", "ảo diệu", "áp lực", "áp dụng", "áp tải", "áp giải",
+    "áp đảo", "áp chế", "áp bức", "ám ảnh", "ám hại", "ám chỉ", "ám hiệu", "ấm áp", "ấm cúng", "ấm êm",
+    "ấm no", "ẩm thực", "ẩm ướt", "ẩm thấp", "ẩn số", "ẩn danh", "ẩn dụ", "ẩn hiện", "ẩn cư", "ẩn chứa",
+    "ba hoa", "ba ba", "bá chủ", "bá đạo", "bá vương", "bác sĩ", "bác bỏ", "bác học", "bác ái", "bạch cầu",
+    "bạch kim", "bạch mã", "bạch tuyết", "bạch ốc", "bạch hải", "bạch tuộc", "bạch ngọc", "bảng hiệu", "bảng điểm", "bảng vàng",
+    "bản đồ", "bản năng", "bản sắc", "bản lĩnh", "bản sao", "bản thảo", "bản tin", "bản xứ", "bản ngã", "bán hàng",
+    "bán lẻ", "bán buôn", "bán đảo", "bán kết", "bán nguyệt", "bán độ", "bán chạy", "bạn bè", "bạn đời", "bạn đọc",
+    "bạn học", "bạn thân", "bạn hàng", "bạn hữu", "bao la", "bao gồm", "bao phủ", "bao che", "bao bọc", "bao quát",
+    "bao dung", "bao cấp", "bao bì", "bao vây", "bao tải", "bao tử", "bảo vệ", "bảo hiểm", "bảo tồn", "bảo mật",
+    "bảo quản", "bảo trì", "bảo hành", "bảo tàng", "bảo trợ", "bảo đảm", "bảo quốc", "bảo vật", "bão lũ", "bão tố",
+    "bão giá", "bắt đầu", "bắt giữ", "bắt bớ", "bắt tay", "bắt chuyện", "bắt chước", "bằng chứng", "bằng lòng", "bằng cấp",
+    "bằng phẳng", "bằng hữu", "bằng an", "bắc cầu", "bắc thuộc", "băn khoăn", "bắn súng", "bắn phá", "bắn tia", "bấm máy",
+    "bấm nút", "bấm chuông", "bàn phím", "bất an", "bất chấp", "bất công", "bất đồng", "bất hòa", "bất lợi", "bất lực",
+    "bất kỳ", "bất thường", "bất thành", "bất tử", "bất tận", "bầu trời", "bầu cử", "bầu không", "bay đà", "bay nhảy",
+    "bến xe", "bến cảng", "bến đò", "bến sông", "bên cạnh", "bên trong", "bên ngoài", "bên phải", "bên trái", "bên trên",
+    "bên dưới", "bếp ăn", "bếp nước", "bếp lửa", "bết bát", "bệnh viện", "bệnh nhân", "bệnh lý", "bệnh tật", "bi quan",
+    "bi kịch", "bi thảm", "bi ai", "bí mật", "bí thư", "bí ẩn", "bí danh", "bí cực", "bí đao", "bìa sách",
+    "biết ơn", "biết bao", "biển cả", "biển rộng", "biển đảo", "biển hiệu", "biến đổi", "biến động", "biến cố", "biến mất",
+    "biến dạng", "biến chất", "biến chủng", "biến pháp", "biểu tượng", "biểu diễn", "biểu lộ", "biểu đạt", "biểu thị", "biểu quyết",
+    "biểu hiện", "biểu cảm", "bình an", "bình tĩnh", "bình thường", "bình luận", "bình đẳng", "bình minh", "bình phục", "bình yên",
+    "bình ổn", "bổ sung", "bổ nhiệm", "bổ ích", "bộ phận", "bộ đội", "bộ trưởng", "bộ não", "bộ luật", "bộ dạng",
+    "bố trí", "bố cục", "bố cáo", "bố mẹ", "bối rối", "bồi thường", "bồi dưỡng", "bồi đắp", "bột mì", "bột canh",
+    "bột năng", "bộc phát", "bộc lộ", "bột giặt", "bọt biển", "bơi lội", "bởi vì", "bọ cạp", "bờ biển", "bờ sông",
+    "bờ rào", "bụi bẩn", "bụi đường", "bụi rậm", "bụi đời", "bù nhìn", "bù trừ", "bủn rủn", "bùn lầy", "bùn đất",
+    "bút ký", "bút danh", "bút toán", "bút mực", "bút chì", "bút lông", "búp bệ", "búp non", "búp sen", "bức thư",
+    "bức tranh", "bức tường", "bức tử", "bức hại", "bức rút", "bức bối", "buộc dây", "buôn bán", "buôn chuyện", "buổi sáng",
+    "buổi trưa", "buổi chiều", "buổi tối", "bưu điện", "bưu thiếp", "bưu kiện", "bưu phẩm", "bưu tá", "ca hát", "ca sĩ",
+    "ca nhạc", "ca khúc", "ca ngợi", "ca kịch", "ca từ", "cà phê", "cà vạt", "cá tính", "cá nhân", "cá cược",
+    "cá chép", "cá ngựa", "cá voi", "cá mập", "cá biệt", "cá thể", "cán bộ", "cán dao", "cán cờ", "cân bằng",
+    "cân nhắc", "cân nặng", "cân đối", "cần thiết", "cần cù", "cần kiệm", "cần mẫn", "cần thận", "cẩn thận", "cẩn trọng",
+    "cầu nguyện", "cầu xin", "cầu cứu", "cầu thủ", "cầu hôn", "cầu thang", "cầu đường", "cầu tre", "cầu vồng", "cây cảnh",
+    "cây cối", "cây xanh", "cây lúa", "cất cánh", "cất giữ", "cất giấu", "cam đoan", "cam kết", "cam chịu", "cam đành",
+    "cam thảo", "cầm đồ", "cầm quyền", "cầm hơi", "cầm tù", "cấm đoán", "cấm vận", "cầm chừng", "cắt ngắn", "cắt nghĩa",
+    "cắt tóc", "căn bản", "căn hộ", "căn cứ", "căn dặn", "căn bệnh", "căn phòng", "căn nhà", "cẩm nang", "cẩm thạch",
+    "cầm tay", "cầm chân", "cảm cúm", "cảm tạ", "cố gắng", "cố chấp", "cố định", "cố hương", "cố nhân", "cố vấn",
+    "cổ điển", "cổ truyền", "cổ vật", "cổ phần", "cổ đông", "cổ tích", "cơ bản", "cơ sở", "cơ quan", "cơ hội",
+    "cơ cấu", "cơ chế", "cơ mật", "cơ cực", "cơ bắp", "cơ khí", "cổ thụ", "cơ đồ", "công an", "công nhân",
+    "công ty", "công việc", "công nghệ", "công nghiệp", "công cộng", "công bằng", "công khai", "công tác", "công dân", "công trình",
+    "công viên", "công dụng", "công cụ", "công ích", "công văn", "công bố", "công sức", "công hòa", "công hiến", "công lập",
+    "công trường", "công chúa", "dạ hội", "dạ tiệc", "dạ khúc", "dạ hành", "danh vọng", "danh dự", "danh tiếng", "danh xưng",
+    "danh phận", "danh mục", "danh từ", "danh hiệu", "danh nhân", "danh tính", "dân chủ", "dân trí", "dân quân", "dân số",
+    "dân tộc", "dân thường", "dân sinh", "dân ca", "dân gian", "dân vận", "dập tắt", "dập dìu", "dầu khí", "dầu mỏ",
+    "dầu ăn", "dầu hỏa", "dầu dừa", "dấu hiệu", "dấu vết", "dấu ấn", "dấu chân", "dấu chấm", "dấu phẩy", "dây chuyền",
+    "dây rốn", "dây thừng", "dây dưa", "dễ chịu", "dễ thương", "dễ dàng", "dễ hiểu", "dễ tính", "dịch bệnh", "dịch vụ",
+    "dịch thuật", "dịu dàng", "dịu êm", "dịu mát", "dịu ngọt", "diện tích", "diện mạo", "diễn viên", "diễn xuất", "diễn kịch",
+    "diễn thuyết", "diễn giả", "diễn biến", "diễn đàn", "diễn tập", "diệu kỳ", "dư luận", "dư vị", "dự đoán", "dự báo",
+    "dự kiến", "dự án", "dự thảo", "dự tiệc", "dự bị", "dự định", "dự phòng", "dự trữ", "dự thi", "dự toán",
+    "đại học", "đại biểu", "đại hội", "đại diện", "đại sứ", "đại dịch", "đại dương", "đại tá", "đại gia", "đại lộ",
+    "đại từ", "đại chiến", "đám cưới", "đám hỏi", "đám mây", "đám đông", "đất mẹ", "đàn ông", "đàn bà", "đàn em",
+    "đàn anh", "đàn tranh", "đảm nhận", "đảm bảo", "đáng yêu", "đáng sợ", "đáng tiếc", "đáng giá", "đảng viên", "đăng ký",
+    "đăng tải", "đăng nhập", "đăng xuất", "đăng quang", "đặc biệt", "đặc sản", "đặc khu", "đặc tính", "đặc quyền", "đặc vụ",
+    "đặc công", "đặc sắc", "đất nước", "đất đai", "đất đỏ", "đất thánh", "đất sét", "đấu giá", "đấu thầu", "đầu tiên",
+    "đầu tư", "đầu não", "đầu bếp", "đầu hàng", "đầu độc", "đầu mối", "đầy đủ", "đầm lầy", "đầm ấm", "đậm đà",
+    "đập phá", "đập tan", "đập hộp", "đậu hũ", "đèn lồng", "đèn ngủ", "đèn đường", "đẹp đẽ", "đẹp lòng", "đẹp mắt",
+    "đêm tối", "đêm khuya", "đề xuất", "đề nghị", "đề án", "đề tài", "đề mục", "đề thi", "đề cao", "được mùa",
+    "đế chế", "đền thờ", "đền bù", "đền ơn", "đề phòng", "định hướng", "định kiến", "định nghĩa", "định cư", "định hình",
+    "định lượng", "định giá", "định mệnh", "định luật", "địa lý", "địa điểm", "địa chỉ", "địa phương", "địa hình", "địa cầu",
+    "địa ngục", "địa chủ", "đoàn kết", "đoàn viên", "đoàn thể", "đoàn tàu", "độc lập", "độc thân", "độc quyền", "độc hại",
+    "độc giả", "độc đoán", "độc ác", "đối thủ", "đối phương", "đối thoại", "đối lập", "đối phó", "đối tượng", "đối xử",
+    "đối chiếu", "đội ngũ", "đội trưởng", "đổi mới", "đổi thay", "đổi trả", "đồng chí", "đồng nghiệp", "đồng hương", "đồng tâm",
+    "đồng bào", "đồng hành", "đồng phục", "đồng hồ", "đồng lúa", "đố vui", "độ dài", "độ lượng", "độ ẩm", "độ cao",
+    "độ sâu", "động thái", "đô thị", "đô la", "đồ dùng", "đồ chơi", "đồ ăn", "đồi núi", "đội hình", "đơn giản",
+    "đơn độc", "đơn côi", "đơn hàng", "đơn từ", "đơn thuốc", "đơn vị", "đơn sắc", "đơn điệu", "đơn phương", "đưa đò",
+    "đưa đón", "đưa tiễn", "đưa tin", "đường phố", "đường đi", "đường sắt", "đường bộ", "đường thủy", "đường sông", "đường hầm",
+    "đường mòn", "đường kính", "đứng dậy", "đứng nhìn", "đứng lại", "êm đềm", "êm ả", "êm dịu", "êm đẹp", "ép buộc",
+    "ép giá", "éo le", "ế ẩm", "ế khách", "gánh vác", "gánh nặng", "gánh xiếc", "gạo cội", "gạo nếp", "gạo tẻ",
+    "gắt gao", "gắn kết", "gắn bó", "gần gũi", "gần đây", "gội đầu", "góc nhìn", "góc phố", "gõ phím", "gọn gàng",
+    "gọi tên", "gọi điện", "gốc rễ", "gốc cây", "gốm sứ", "gỗ tốt", "gốc gác", "gợi ý", "gợi nhớ", "gợi cảm",
+    "gợi mở", "gửi gắm", "gửi thư", "gửi tiền", "gương mẫu", "gương mặt", "gương soi", "gạch đá", "gạch men", "gạch ngói",
+    "gái đẹp", "gái ngoan", "gái quê", "gà trống", "gà mái", "gà con", "gà chọi", "giao thông", "giao tiếp", "giao dịch",
+    "giao hàng", "giao lưu", "giao thừa", "giao ước", "giao hưởng", "giao thoa", "giá cả", "giá trị", "giá sách", "giá vẽ",
+    "giá rét", "gia đình", "giải trí", "giải quyết", "giải phóng", "giải thưởng", "giải tán", "giải cứu", "giải tỏa", "giảm giá",
+    "giảm nhẹ", "giảm sút", "giảm thuế", "giám đốc", "giám định", "giám khảo", "giản dị", "giản đơn", "gián điệp", "gián đoạn",
+    "gián tiếp", "giang hồ", "giang sơn", "giáo dục", "giáo viên", "giáo án", "giáo trình", "giáo dưỡng", "giáo phái", "giáo hoàng",
+    "giáo sư", "giặt giũ", "giặt đồ", "giặc ngoại", "giặc cướp", "giận dữ", "giấy khen", "giấy phép", "giấy mời", "giấy in",
+    "giấu kín", "giấu mặt", "giọt nước", "giọt lệ", "giọt sương", "giọt máu", "gió mùa", "gió lốc", "giống hệt", "giống như",
+    "giống loài", "giống cây", "giờ học", "giờ làm", "giờ giấc", "giờ đây", "giờ nghỉ", "giới tính", "giới thiệu", "giới hạn",
+    "giới nghiêm", "giúp đỡ", "giúp sức", "giúp việc", "giữ kín", "giữ gìn", "giữ lời", "giữa trưa", "giữa đêm", "giữa tuần",
+    "giữa kỳ", "giữa dòng", "giường ngủ", "giường đơn", "giường đôi", "giường bệnh", "giấc mơ", "giấc ngủ", "giấc mộng", "giằng co",
+    "hạ tầng", "hạ nhiệt", "hạ giá", "hạ cấp", "hạ màn", "hạ sốt", "hải sản", "hải quan", "hải quân", "hải đảo",
+    "hải trình", "hải đăng", "hải tặc", "hài lòng", "hài hòa", "hài kịch", "hàm răng", "hạn chế", "hạn hán", "hàng hóa",
+    "hàng xóm", "hàng không", "hàng hải", "hàng rào", "hàng quán", "hàng loạt", "hàng tháng", "hàng tuần", "hàng ngày", "hàng năm",
+    "hành vi", "hành động", "hành trình", "hành chính", "hành lễ", "hành hạ", "hành quân", "hành trang", "hành khách", "hành nghề",
+    "hao hụt", "hao phí", "hảo tâm", "hảo hạng", "hậu quả", "hậu trường", "hậu phương", "hậu sinh", "hậu duệ", "hậu đãi",
+    "hệ thống", "hệ sinh", "hệ điều", "hệ lụy", "hết giờ", "hết hạn", "hết lòng", "hết sức", "hết lời", "hi vọng",
+    "hi sinh", "hi hữu", "hiền lành", "hiền hòa", "hiền dịu", "hiện thực", "hiện tại", "hiện thị", "hiện đại", "hiện diện",
+    "hiệu quả", "hiệu ứng", "hiệu suất", "hiệu lực", "hiệu lệnh", "hiệu trưởng", "hiệu sách", "hiếu học", "hiếu kỳ", "hiếu khách",
+    "hiểu biết", "hiểu lầm", "hiểm họa", "hiểm trở", "hiểm ác", "hiếm có", "hiếm thấy", "hiếm hoi", "hình ảnh", "hình thức",
+    "hình dáng", "hình dung", "hình phạt", "hình xăm", "hình nón", "hình hộp", "hình như", "hoàn thành", "hoàn hảo", "hoàn toàn",
+    "hoàn cảnh", "hoàn lương", "hoàn trả", "hoàn lại", "hoạn nạn", "hoạt động", "hoạt hình", "hoạt náo", "hoạt chất", "học sinh",
+    "học tập", "học hành", "học phí", "học bổng", "học vấn", "học hàm", "học vị", "học thuyết", "học hỏi", "hỏi thăm",
+    "hỏi đáp", "hội thảo", "hội đồng", "hội nghị", "hội nhập", "hội chợ", "hội tụ", "hội họa", "hội chứng", "hội thoại",
+    "hôn nhân", "hôn lễ", "hôn ước", "hôn mê", "hỗ trợ", "hỗn loạn", "hỗn hợp", "hồn nhiên", "hồng ngoại", "hồng trà",
+    "hợp tác", "hợp đồng", "hợp pháp", "hợp lý", "hợp kim", "hợp xướng", "hợp nhất", "hối hận", "hối thúc", "hối lộ",
+    "hối hả", "hồi phục", "hồi tưởng", "hồi sinh", "hồi đáp", "hồi ức", "hồi âm", "hồ bơi", "hồ nước", "hồ sơ",
+    "hội viên", "hợp thành", "hợp thời", "hớt hải", "hớt tóc", "hợp sức", "huấn luyện", "hùng mạnh", "hùng dũng", "hùng vĩ",
+    "hùng biện", "huyết áp", "huyết thanh", "hủy bỏ", "hủy hoại", "hủy diệt", "hứa hẹn", "hư hỏng", "hư cấu", "hư vô",
+    "hứng thú", "hứng khởi", "hướng dẫn", "hướng ngoại", "hướng nội", "hướng tâm", "hướng nghiệp", "hương vị", "ích kỷ", "ích lợi",
+    "in ấn", "in nghiêng", "in đậm", "ít khi", "ít nhất", "ít nhiều", "im lặng", "yêu cầu", "u buồn", "u mê",
+    "ủng hộ", "uy tín", "uy lực", "uy thế", "uy hiếp", "uy quyền", "ủy ban", "uyển chuyển", "uốn nắn", "uốn dẻo",
+    "uống nước", "uống thuốc", "ứng dụng", "ước mơ", "ước nguyện", "ước tính", "ước chừng", "ứng xử", "ứng cử", "ứng tuyển",
+    "ưa thích", "ưa chuộng", "kế hoạch", "kế toán", "kế thừa", "kế tiếp", "kế vị", "kế sách", "kể chuyện", "kể lại",
+    "kết quả", "kết thúc", "kết nối", "kết hôn", "kết giao", "kết hợp", "kết cấu", "kết luận", "kết nạp", "kết tinh",
+    "kéo co", "kéo dài", "kéo lại", "kêu gọi", "kêu cứu", "kêu ca", "kẻ thù", "kẻ trộm", "kẻ cướp", "kẻ gian",
+    "kịch bản", "kịch nói", "kịch tính", "kỳ diệu", "kỳ lạ", "kỳ quan", "kỳ vọng", "kỳ hạn", "kỳ nghỉ", "kỳ thi",
+    "kỳ ảo", "kỳ tích", "kỹ năng", "kỹ thuật", "kỹ sư", "kỹ xảo", "ký gửi", "ký túc", "ký ức", "ký sự",
+    "ký họa", "ký sinh", "ký hiệu", "kỷ niệm", "kỷ nguyên", "kỷ cương", "kiên trì", "kiên định", "kiên cường", "kiên nhẫn",
+    "kiên quyết", "kiến thức", "kiến trúc", "kiến nghị", "kiến tạo", "kiến thiết", "kiểm tra", "kiểm soát", "kiểm toán", "kiểm duyệt",
+    "kiểm kê", "kiềm chế", "kiếm tiền", "kiếm sống", "kiếm hiệp", "khiêm tốn", "khiếu nại", "khiêu vũ", "khiêu khích", "lá cây",
+    "lá thư", "lá cờ", "lá gan", "lá chắn", "lạ kỳ", "lạ lẫm", "lạc hướng", "lạc quan", "lạc lối", "lạc đề",
+    "lạc hậu", "lạc đà", "lại đây", "lãi suất", "làm ăn", "làm việc", "làm giàu", "làm chủ", "làm quen", "làm đẹp",
+    "làm lại", "lãng phí", "lãng mạn", "lãng quên", "lặng lẽ", "lặng im", "lắng nghe", "lắng đọng", "làm chứng", "lập trình",
+    "lập luận", "lập trường", "lập công", "lần đầu", "lần lượt", "lần theo", "lật đổ", "lật mặt", "lấy lại", "lấy vợ",
+    "lấy chồng", "lâu đài", "lâu đời", "lâu nay", "lầm lỗi", "lầm lẫn", "lầm lì", "lầm tưởng", "lễ hội", "lễ phép",
+    "lễ nghĩa", "lễ độ", "lễ phục", "lễ tang", "lễ cưới", "lịch sử", "lịch trình", "lịch thi", "lịch sự", "liên kết",
+    "liên hệ", "liên quan", "liên minh", "liên hoan", "liên tiếp", "liên lụy", "liên tưởng", "liên đoàn", "liên bang", "liêm chính",
+    "liêm khiết", "liều mạng", "liều thuốc", "liều lượng", "liệu trình", "lo lắng", "lo ngại", "lo sợ", "lo liệu", "lộ trình",
+    "lộ diện", "lộ thiên", "lối đi", "lối sống", "lối nhỏ", "lối về", "lỗi thời", "ô tô", "lời nói", "lời hứa",
+    "lời khen", "lời chê", "lời khuyên", "lợi ích", "lợi nhuận", "lời thề", "lớp học", "luật pháp", "luật sư", "luật lệ",
+    "luật chơi", "luân chuyển", "luân hồi", "luận lý", "luân phiên", "luyện tập", "luyện thi", "luyện võ", "lựa chọn", "lực lượng",
+    "lực sĩ", "lực hút", "lực đẩy", "lịch lãm", "lược bỏ", "lược dịch", "lược sử", "lướt sóng", "lướt ván", "lướt web",
+    "lưu trữ", "lưu thông", "lưu niệm", "lưu ý", "lưu manh", "lưu lạc", "lưu lượng", "mã lực", "mã số", "mã hóa",
+    "mạ vàng", "mạch máu", "mạch điện", "mạch ngầm", "mạch lạc", "mái nhà", "mái tóc", "mái trường", "mái hiên", "mạng lưới",
+    "mạng sống", "mạng nhện", "mặc dù", "mặc kệ", "mặc định", "mặc cả", "mặt trời", "mặt trăng", "mặt đất", "mặt tiền",
+    "mặt phẳng", "mặt cầu", "mặt cắt", "mặt kính", "mắc kẹt", "mắc lỗi", "mắc nợ", "mắm tôm", "mầm non", "mật khẩu",
+    "mật độ", "mật vụ", "mật thư", "mật mã", "mẫu thân", "mẫu giáo", "mẫu hệ", "mẫu số", "mất ngủ", "mất trí",
+    "mất mạng", "mây mù", "mây trôi", "mây trắng", "mấy ai", "mấy khi", "mấy giờ", "mẹo nhỏ", "mẹo hay", "mẹo vặt",
+    "mê muội", "mê hoặc", "mê mẩn", "mê tín", "mệnh lệnh", "mệnh giá", "mệnh đề", "mệt mỏi", "mì tôm", "mì xào",
+    "mì chính", "mỉm cười", "minh họa", "minh bạch", "minh chứng", "minh định", "minh mẫn", "minh triết", "minh tinh", "minh quân",
+    "mía đường", "mắt xích", "mùi hương", "mùi vị", "mùi thơm", "mù mịt", "mù quáng", "mù màu", "mục đích", "mục tiêu",
+    "mục lục", "mục sư", "mục đồng", "mục rữa", "mục nát", "mũi nhọn", "mũi tên", "mũi khoan", "mũi tàu", "mùa xuân",
+    "mùa hạ", "mùa thu", "mùa đông", "mùa mưa", "mùa khô", "mùa gặt", "mùa cưới", "mức giá", "mức phạt", "mừng rỡ",
+    "mừng thọ", "mừng tuổi", "mơ mộng", "mơ ước", "mỏ than", "mở rộng", "mở đầu", "mở lối", "mời cơm", "mời cưới",
+    "mời gọi", "mời vào", "mới mẻ", "mới lạ", "mới đây", "mối tình", "nam nữ", "nam giới", "nam sinh", "nam cực",
+    "nắm tay", "nắm bắt", "nắm giữ", "nắn thẳng", "năng lượng", "năng lực", "năng suất", "năng động", "năng khiếu", "nặng nhọc",
+    "nặng lòng", "nắng ấm", "nắng gắt", "nếu như", "nếu không", "nếp sống", "nếp nhà", "nền tảng", "nền kinh", "nền văn",
+    "nếm thử", "nếm trải", "nói chuyện", "nói dối", "nói thật", "nói nhỏ", "nói to", "nói đùa", "nói tiếng", "nỗ lực",
+    "nổ tung", "nổ súng", "nở rộ", "nữ giới", "nữ sinh", "nữ hoàng", "nữ quyền", "nữ công", "nữ ca", "nữ thần",
+    "nữ tính", "nụ cười", "nụ hôn", "nụ hoa", "núi rừng", "núi cao", "núi lửa", "núp bóng", "nước mắt", "nước ngọt",
+    "nước mắm", "nước dùng", "nước suối", "nước ép", "nước đá", "nước lẩu", "nước lọc", "nước sơn", "nướng thịt", "nướng cá",
+    "ô vuông", "ổ khóa", "ổ cắm", "ốc nhồi", "ốc bươu", "ốc hương", "ốm đau", "ốm yếu", "ôn tập", "ôn hòa",
+    "ổn định", "ông bà", "ông chủ", "ông trời", "ông trùm", "ông ngoại", "ông nội", "oán thù", "ớt hiểm", "ớt chuông",
+    "pha chế", "phát triển", "phá hủy", "phá hoại", "phá án", "phá giá", "phá sản", "phá rối", "phái đoàn", "phân tích",
+    "phân loại", "phân phối", "phân chia", "phân biệt", "phân bổ", "phần mềm", "phần trăm", "phần thưởng", "pháp luật", "pháp lý",
+    "phát thanh", "phát minh", "phát sinh", "phát hiện", "phát huy", "phép thuật", "phép tính", "phi trường", "phòng thủ", "phòng học",
+    "phức tạp", "phương án", "phương tiện", "phương hướng", "phương trời"
+]
+
+# 2. Chuyển đổi danh sách 999 từ thành chuỗi JSON và mã hóa Hex
+json_str = json.dumps(raw_words, ensure_ascii=False)
+hex_bytes = json_str.encode('utf-8').hex()
+
+# 3. Tạo nội dung JS hoàn chỉnh
+js_content = f"""// File: words.js (Chứa đầy đủ 999 cụm từ tiếng Việt mã hóa Hex)
+
+const HEX_DATA = "{hex_bytes}";
+
+function loadDictionary() {{
+  try {{
+    let bytes = new Uint8Array(HEX_DATA.match(/.{{1,2}}/g).map(byte => parseInt(byte, 16)));
+    let text = new TextDecoder('utf-8').decode(bytes);
+    return JSON.parse(text);
+  }} catch (e) {{
+    console.error("Lỗi giải mã từ điển:", e);
+    return [];
+  }}
+}}
+
+const DICTIONARY = loadDictionary();
+"""
+
+# Xuất ra file words.js
+with open("words.js", "w", encoding="utf-8") as f:
+    f.write(js_content)
+
+print(f"Đã xuất thành công file words.js với {len(raw_words)} cụm từ!")
