@@ -2,7 +2,7 @@
   "name": "Chill game tí thôi",
   "short_name": "MiniGame",
   "description": "Đoán Chữ nào...",
-  "start_url": "/",
+  "start_url": "https://chuotbatmeo.github.io/MyDoc/html/doanchu.html",
   "display": "standalone",
   "background_color": "#020617",
   "theme_color": "#0f172a",
