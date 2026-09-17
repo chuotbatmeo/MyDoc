@@ -3,6 +3,7 @@
 <head>
     <link rel="manifest" href="manifest.json">
     <meta charset="UTF-8">
+    <meta name="theme-color" content="#0f172a">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Cổng Game Mini - Đoán Chữ & Caro</title>
     <style>
@@ -911,5 +912,16 @@
             else if (/^[a-zA-ZăâêôơưđĂÂÊÔƠƯĐ]$/.test(e.key)) handleKeyPress(e.key.toLowerCase());
         });
     </script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('./sw.js').then(function(registration) {
+        console.log('ServiceWorker đăng ký thành công: ', registration.scope);
+      }, function(err) {
+        console.log('ServiceWorker đăng ký thất bại: ', err);
+      });
+    });
+  }
+</script>
 </body>
 </html>
