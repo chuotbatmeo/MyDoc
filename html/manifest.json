@@ -1,0 +1,16 @@
+{
+  "name": "Cổng Game Mini - Đoán Chữ & Caro",
+  "short_name": "MiniGame",
+  "description": "Đoán Chữ nào...",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

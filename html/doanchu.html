@@ -168,7 +168,7 @@
         .sound-toggle:hover { border-color: #a855f7; }
 
         .stats-hud {
-            display: none;
+            display: flex;
             justify-content: flex-end;
             width: 100%;
             padding: 2px 8px;
@@ -378,7 +378,7 @@
             </div>
 
             <div class="stats-hud" id="stats-hud">
-                <span id="hud-timer">⏰ 05:00</span>
+                <span id="hud-timer">⏰ 10:00</span>
             </div>
 
             <div id="game-container"></div>
@@ -423,18 +423,16 @@
     <script src="words.js"></script>
     <script src="words2.js"></script>
     <script>
-        // Hàm giải mã Base64 hỗ trợ tiếng Việt có dấu
         function decodeBase64Utf8(base64Str) {
             try {
                 const binString = atob(base64Str);
                 const bytes = Uint8Array.from(binString, (m) => m.codePointAt(0));
                 return new TextDecoder().decode(bytes);
             } catch (e) {
-                return base64Str; // Trả về nguyên bản nếu chuỗi chưa mã hóa
+                return base64Str;
             }
         }
 
-        // Tự động chuyển mảng mã hóa thành mảng từ gốc cho game sử dụng
         let DICTIONARY_3WORDS = [];
         if (typeof ENCRYPTED_DICTIONARY_3WORDS !== 'undefined' && ENCRYPTED_DICTIONARY_3WORDS.length > 0) {
             DICTIONARY_3WORDS = ENCRYPTED_DICTIONARY_3WORDS.map(item => decodeBase64Utf8(item));
@@ -457,7 +455,7 @@
         let gameMode = "classic";
         let targetWord = "", currentAttempt = 0, wordLen = 0, currentGuess = [];
         let soundEnabled = true;
-        let hardcoreTimer = null, timeLeft = 300;
+        let gameTimer = null, timeLeft = 600; // Mặc định 10 phút cho chế độ Thư giãn
 
         const gameContainer = document.getElementById("game-container");
         const keyboard = document.getElementById("keyboard");
@@ -479,13 +477,16 @@
             '̣': { 'a':'ạ', 'ă':'ặ', 'â':'ậ', 'e':'ẹ', 'ê':'ệ', 'i':'ị', 'o':'ọ', 'ô':'ộ', 'ơ':'ợ', 'u':'ụ', 'ư':'ự', 'y':'ỵ' }
         };
 
-        const CUTE_STICKERS = ["⭐", "💖", "🌸", "☁️", "✨", "🍀", "💫", "🦄"];
+        const CUTE_STICKERS = ["⭐", "💖", "🌸", "☁️", "✨", "🍀", "💫❤️❤️❤️", "🦄"];
 
-        function getMaxAttempts() { return gameMode === 'hardcore' ? 5 : 6; }
+        function getMaxAttempts() { return gameMode === 'hardcore' ? 7 : 6; }
         function getValidCount() { return targetWord.split('').filter(c => c !== " ").length; }
 
-        const winAudio = new Audio('/audio/winlose/votay.mp3');
-        const loseAudio = new Audio('/audio/winlose/lose.mp3');
+        const winAudio = new Audio('votay.mp3');
+        const loseAudio = new Audio('lose.mp3');
+        const bgMusic = new Audio('nhacnen.mp3');
+        bgMusic.loop = true;
+        bgMusic.volume = 0.3;
 
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playSound(type) {
@@ -537,7 +538,13 @@
         function toggleSound() {
             soundEnabled = !soundEnabled;
             document.getElementById("sound-btn").textContent = soundEnabled ? "🔊" : "🔇";
-            showToast(soundEnabled ? "Đã bật âm thanh" : "Đã tắt âm thanh");
+            if (soundEnabled) {
+                bgMusic.play().catch(e => console.log("Không thể tự phát nhạc nền:", e));
+                showToast("Đã bật âm thanh & nhạc nền");
+            } else {
+                bgMusic.pause();
+                showToast("Đã tắt âm thanh");
+            }
         }
 
         function spawnFallingSticker() {
@@ -554,27 +561,32 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             if (typeof DICTIONARY !== 'undefined' && DICTIONARY.length > 0) {
-                startNewGame();
+                setGameMode('classic');
                 initCaro();
             } else {
                 showToast("Lỗi: Không tải được từ điển!");
             }
+            
+            // Tự động phát nhạc nền khi người dùng tương tác lần đầu
+            document.body.addEventListener('click', () => {
+                if (soundEnabled && bgMusic.paused) {
+                    bgMusic.play().catch(e => console.log(e));
+                }
+            }, { once: true });
         });
 
         function setGameMode(mode) {
             gameMode = mode;
             document.getElementById("btn-classic").className = "mode-btn " + (mode === 'classic' ? 'active' : '');
             document.getElementById("btn-hardcore").className = "mode-btn " + (mode === 'hardcore' ? 'active' : '');
-            const statsHud = document.getElementById("stats-hud");
-
+            
+            // Cả hai chế độ đều có đếm ngược thời gian
             if (mode === 'hardcore') {
-                statsHud.style.display = "flex";
-                timeLeft = 300;
-                startTimer();
+                timeLeft = 900; // 15 phút
             } else {
-                statsHud.style.display = "none";
-                clearInterval(hardcoreTimer);
+                timeLeft = 600; // 10 phút
             }
+            startTimer();
             startNewGame();
         }
 
@@ -585,14 +597,14 @@
         }
 
         function startTimer() {
-            clearInterval(hardcoreTimer);
+            clearInterval(gameTimer);
             document.getElementById("hud-timer").textContent = `⏰ ${formatTime(timeLeft)}`;
-            hardcoreTimer = setInterval(() => {
+            gameTimer = setInterval(() => {
                 timeLeft--;
                 document.getElementById("hud-timer").textContent = `⏰ ${formatTime(timeLeft)}`;
                 if (timeLeft <= 0) {
-                    clearInterval(hardcoreTimer);
-                    showModal("HẾT GIỜ RỒI! ⏰", "⌛💔", `Đã hết 5 phút thử thách!<br>Đáp án: <span class="word-highlight">${targetWord}</span>`, 'lose');
+                    clearInterval(gameTimer);
+                    showModal("HẾT GIỜ RỒI! ⏰", "⌛💔", `Đã hết thời gian thử thách!<br>Đáp án: <span class="word-highlight">${targetWord}</span>`, 'lose');
                 }
             }, 1000);
         }
@@ -754,7 +766,7 @@
 
             let maxAtt = getMaxAttempts();
             if (currentGuess.join('') === targetArr.join('')) {
-                if (gameMode === 'hardcore') clearInterval(hardcoreTimer);
+                clearInterval(gameTimer);
                 showModal("CHIẾN THẮNG XUẤT SẮC! 🎉", "🏆✨🥳", `Đoán đúng cụm từ:<br><span class="word-highlight">${targetWord}</span>`, 'win');
                 currentAttempt = maxAtt;
                 return;
@@ -767,7 +779,7 @@
             if (currentAttempt < maxAtt) {
                 document.getElementById(`row-${currentAttempt}`).classList.add("active-row");
             } else {
-                if (gameMode === 'hardcore') clearInterval(hardcoreTimer);
+                clearInterval(gameTimer);
                 showModal("RẤT TIẾC, HẾT LƯỢT! 💔", "😢🥀", `Đáp án đúng là:<br><span class="word-highlight">${targetWord}</span>`, 'lose');
             }
         }
@@ -879,8 +891,7 @@
         function closeModal() { 
             document.getElementById("modal").style.display = "none"; 
             if (document.getElementById('tab-doanchu').classList.contains('active')) {
-                if (gameMode === 'hardcore') setGameMode('hardcore');
-                else startNewGame();
+                setGameMode(gameMode);
             } else {
                 initCaro();
             }
