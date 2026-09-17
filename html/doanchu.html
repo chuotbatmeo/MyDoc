@@ -30,15 +30,15 @@
         .phone-frame {
             background: radial-gradient(circle at 50% 20%, #1e1b4b 0%, #0f172a 60%, #030712 100%);
             width: 100%;
-            max-width: 410px;
+            max-width: 380px;
             height: 100%;
-            max-height: 780px;
-            border-radius: 36px;
+            max-height: 720px;
+            border-radius: 28px;
             border: 2px solid rgba(192, 132, 252, 0.8);
             box-shadow: 0 0 35px rgba(147, 51, 234, 0.35), 0 20px 25px -5px rgba(0, 0, 0, 0.7), inset 0 0 25px rgba(192, 132, 252, 0.2);
             display: flex;
             flex-direction: column;
-            padding: 10px 10px;
+            padding: 8px 10px;
             position: relative;
             overflow: hidden;
         }
@@ -72,11 +72,11 @@
             width: 100%;
             background: rgba(30, 41, 59, 0.95);
             border: 1px solid rgba(56, 189, 248, 0.4);
-            border-radius: 20px;
-            padding: 3px;
+            border-radius: 16px;
+            padding: 2px;
             gap: 4px;
             z-index: 10;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             backdrop-filter: blur(10px);
         }
         .tab-btn {
@@ -84,10 +84,10 @@
             background: transparent;
             border: none;
             color: #cbd5e1;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 700;
-            padding: 6px;
-            border-radius: 16px;
+            padding: 5px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s;
         }
@@ -103,8 +103,8 @@
         .falling-sticker {
             position: absolute;
             top: -50px;
-            font-size: 2.4rem;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 20px rgba(56, 189, 248, 0.6));
+            font-size: 2rem;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
             user-select: none;
             pointer-events: none;
             z-index: 1;
@@ -115,7 +115,7 @@
             0% { transform: translateY(0) rotate(0deg); opacity: 0; }
             15% { opacity: 0.8; }
             85% { opacity: 0.8; }
-            100% { transform: translateY(800px) rotate(360deg); opacity: 0; }
+            100% { transform: translateY(700px) rotate(360deg); opacity: 0; }
         }
 
         .top-bar {
@@ -123,15 +123,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 4px;
-            margin-bottom: 2px;
+            padding: 0 2px;
+            margin-bottom: 3px;
         }
 
         .mode-switcher {
             display: flex;
             background: rgba(30, 41, 59, 0.9);
             border: 1px solid rgba(56, 189, 248, 0.4);
-            border-radius: 20px;
+            border-radius: 16px;
             padding: 2px;
             gap: 2px;
         }
@@ -143,7 +143,7 @@
             font-size: 0.6rem;
             font-weight: 700;
             padding: 4px 8px;
-            border-radius: 16px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -158,17 +158,15 @@
             background: rgba(30, 41, 59, 0.9);
             border: 1px solid rgba(56, 189, 248, 0.4);
             color: #f8fafc;
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 0.8rem;
-            transition: all 0.2s;
+            font-size: 0.75rem;
         }
-        .sound-toggle:hover { border-color: #38bdf8; }
 
         .helper-container {
             display: flex;
@@ -177,25 +175,20 @@
             gap: 6px;
             font-size: 0.68rem;
             color: #38bdf8;
-            padding: 4px 6px;
+            padding: 3px 6px;
             margin-bottom: 4px;
             font-weight: 600;
             background: rgba(30, 41, 59, 0.6);
-            border-radius: 8px;
+            border-radius: 6px;
             border: 1px dashed rgba(56, 189, 248, 0.3);
         }
-        .helper-container input {
-            cursor: pointer;
-            accent-color: #0284c7;
-            width: 13px;
-            height: 13px;
-        }
+        .helper-container input { cursor: pointer; accent-color: #0284c7; width: 12px; height: 12px; }
 
         .stats-hud {
             display: flex;
             justify-content: flex-end;
             width: 100%;
-            padding: 0 8px;
+            padding: 0 4px;
             font-size: 0.7rem;
             font-weight: 700;
             color: #fde047;
@@ -210,60 +203,72 @@
             align-items: center;
             flex-grow: 1;
             overflow-y: auto;
-            max-height: 290px;
+            max-height: 260px;
             padding: 2px 0;
+        }
+
+        .row-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            position: relative;
+        }
+
+        .row-indicator {
+            width: 12px;
+            font-size: 0.65rem;
+            color: #ef4444;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.2s;
+            text-align: center;
+        }
+        .row-wrapper.active-wrapper .row-indicator {
+            opacity: 1;
+            animation: pulseArrow 1s infinite alternate;
+        }
+        @keyframes pulseArrow {
+            from { transform: translateX(0); opacity: 0.7; }
+            to { transform: translateX(3px); opacity: 1; }
         }
 
         .row { 
             display: flex; 
             gap: 3px; 
             justify-content: center; 
-            padding: 4px 8px; 
-            border-radius: 12px; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 2px 6px; 
+            border-radius: 8px; 
+            transition: all 0.3s;
             background: transparent;
-            border: none;
         }
 
         .row.active-row { 
-            background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(37, 99, 235, 0.12) 70%, transparent 100%);
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.35), inset 0 0 12px rgba(56, 189, 248, 0.25);
-            animation: rowPulse 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes rowPulse {
-            0% {
-                box-shadow: 0 0 12px rgba(56, 189, 248, 0.2), inset 0 0 8px rgba(56, 189, 248, 0.15);
-                filter: brightness(1);
-            }
-            100% {
-                box-shadow: 0 0 24px rgba(56, 189, 248, 0.45), inset 0 0 16px rgba(56, 189, 248, 0.35);
-                filter: brightness(1.15);
-            }
+            background: radial-gradient(circle, rgba(239, 68, 68, 0.35) 0%, rgba(185, 28, 28, 0.18) 70%, transparent 100%);
+            box-shadow: 0 0 18px rgba(239, 68, 68, 0.5);
+            border: none;
         }
 
         .space-gap { width: 6px; }
         
         .tile { 
-            width: 21px; 
-            height: 25px; 
+            width: var(--tile-w, 22px); 
+            height: var(--tile-h, 28px); 
             border-radius: 4px; 
             background: var(--box-bg); 
             border: 1px solid rgba(56, 189, 248, 0.4); 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            font-size: 0.7rem; 
+            font-size: var(--tile-font, 0.75rem); 
             font-weight: 800; 
             color: #f8fafc;
             text-transform: lowercase; 
-            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(8px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
-        .tile.correct { background: var(--correct); border-color: #34d399; color: #fff; box-shadow: 0 0 10px rgba(52, 211, 153, 0.6); }
-        .tile.present { background: var(--present); border-color: #fbbf24; color: #fff; box-shadow: 0 0 10px rgba(251, 191, 36, 0.6); }
-        .tile.vowel-match { background: var(--accent); border-color: #60a5fa; color: #fff; box-shadow: 0 0 10px rgba(96, 165, 250, 0.6); }
-        .tile.absent { background: var(--absent); border-color: rgba(255, 255, 255, 0.1); color: #94a3b8; opacity: 0.9; }
+        .tile.correct { background: var(--correct); border-color: #34d399; color: #fff; }
+        .tile.present { background: var(--present); border-color: #fbbf24; color: #fff; }
+        .tile.vowel-match { background: var(--accent); border-color: #60a5fa; color: #fff; }
+        .tile.absent { background: var(--absent); border-color: rgba(255, 255, 255, 0.1); color: #94a3b8; }
         
         .main-controls { 
             display: flex; 
@@ -275,18 +280,17 @@
 
         .legend { 
             background: rgba(30, 41, 59, 0.9); 
-            backdrop-filter: blur(10px); 
             padding: 4px 8px; 
-            border-radius: 10px; 
+            border-radius: 8px; 
             width: 100%; 
-            font-size: 0.52rem; 
+            font-size: 0.54rem; 
             display: flex; 
             flex-direction: column; 
             border: 1px solid rgba(56, 189, 248, 0.3); 
         }
-        .legend-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
-        .legend-item { display: flex; align-items: center; gap: 4px; font-weight: 600; color: #f1f5f9; }
-        .legend-box { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.3); }
+        .legend-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+        .legend-item { display: flex; align-items: center; gap: 3px; font-weight: 600; color: #f1f5f9; }
+        .legend-box { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
         .bg-green { background-color: var(--correct); }
         .bg-yellow { background-color: var(--present); }
         .bg-blue { background-color: var(--accent); }
@@ -297,54 +301,65 @@
             display: flex; 
             flex-direction: column; 
             gap: 3px; 
-            padding: 5px; 
+            padding: 4px; 
             background: rgba(30, 41, 59, 0.95); 
-            border-radius: 14px; 
-            backdrop-filter: blur(12px); 
+            border-radius: 12px; 
             border: 1px solid rgba(56, 189, 248, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
         }
-        .kb-row { display: flex; justify-content: center; gap: 3px; }
+        .kb-row { display: flex; justify-content: center; gap: 2px; }
         
         .key { 
             background: linear-gradient(145deg, rgba(51, 65, 85, 0.95), rgba(30, 41, 59, 0.98)); 
             color: #ffffff; 
             border: 1px solid rgba(255, 255, 255, 0.2); 
             border-radius: 5px; 
-            height: 28px; 
+            height: 30px; 
             font-weight: 700; 
-            font-size: 0.68rem; 
+            font-size: 0.72rem; 
             flex: 1; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             cursor: pointer; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            transition: opacity 0.2s, background 0.2s;
         }
-        .key.disabled-key {
-            opacity: 0.25;
-            background: #0f172a !important;
-            border-color: rgba(255, 255, 255, 0.05) !important;
-            color: #475569 !important;
-            pointer-events: none !important;
-            cursor: not-allowed;
+        .key.disabled-key, .key.disabled, .key.absent {
+            opacity: 0.35; background: #0f172a !important; color: #94a3b8 !important; pointer-events: none !important;
         }
         .key.tone { 
             background: linear-gradient(145deg, rgba(2, 132, 199, 0.85), rgba(30, 58, 138, 0.95)); 
-            color: #fde047; 
-            font-size: 0.72rem; 
-            border-color: rgba(56, 189, 248, 0.4);
+            color: #fde047; font-size: 0.75rem; height: 26px;
         }
-        .key.wide { flex: 1.3; font-size: 0.52rem; background: linear-gradient(145deg, #dc2626, #b91c1c); border-color: rgba(255,255,255,0.25); }
-        .key.enter { flex: 1.5; font-size: 0.52rem; background: linear-gradient(145deg, #059669, #047857); border-color: rgba(255,255,255,0.25); }
+        .key.wide { flex: 1.2; font-size: 0.58rem; background: linear-gradient(145deg, #dc2626, #b91c1c); }
+        .key.enter { flex: 1.4; font-size: 0.58rem; background: linear-gradient(145deg, #059669, #047857); }
 
-        /* --- Caro 10x10 Styles --- */
+        .inline-action-container {
+            width: 100%;
+            display: none;
+            justify-content: center;
+            margin: 4px 0;
+        }
+        .btn-inline-newword {
+            background: linear-gradient(135deg, #facc15, #ca8a04);
+            color: #1e1b4b;
+            border: 1px solid rgba(255,255,255,0.6);
+            padding: 8px 18px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.78rem;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(250, 204, 21, 0.5);
+            animation: pulseBtn 1.5s infinite alternate;
+        }
+        @keyframes pulseBtn {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+
         .caro-header { text-align: center; margin-bottom: 4px; }
-        .caro-turn { font-size: 0.9rem; font-weight: 800; color: #fde047; margin-bottom: 2px; display: flex; justify-content: space-between; padding: 0 10px; align-items: center;}
+        .caro-turn { font-size: 0.85rem; font-weight: 800; color: #fde047; margin-bottom: 2px; display: flex; justify-content: space-between; padding: 0 6px; align-items: center;}
         .caro-turn span.x { color: #f87171; }
         .caro-turn span.o { color: #60a5fa; }
-        .caro-timer { background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; color: #fca5a5; }
+        .caro-timer { background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); padding: 2px 6px; border-radius: 8px; font-size: 0.7rem; color: #fca5a5; }
         
         .caro-board-wrapper {
             position: relative;
@@ -360,125 +375,65 @@
             grid-template-columns: repeat(10, 1fr);
             gap: 2px;
             width: 100%;
-            max-width: 390px;
+            max-width: 340px;
             margin: 0 auto;
         }
-        
-        #caro-board.blurred {
-            filter: blur(5px);
-            pointer-events: none;
-        }
+        #caro-board.blurred { filter: blur(5px); pointer-events: none; }
 
         .caro-cell {
             aspect-ratio: 1;
             background: rgba(30, 41, 59, 0.9);
             border: 1px solid rgba(56, 189, 248, 0.4);
-            border-radius: 4px;
+            border-radius: 3px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             font-weight: 900;
             position: relative;
             cursor: pointer;
-            transition: 0.15s;
         }
-        .caro-cell:hover { background: rgba(51, 65, 85, 1); border-color: #38bdf8; box-shadow: 0 0 6px rgba(56, 189, 248, 0.3); }
-        .caro-cell.x { color: #f87171; text-shadow: 0 0 8px rgba(248, 113, 113, 0.8); }
-        .caro-cell.o { color: #60a5fa; text-shadow: 0 0 8px rgba(96, 165, 250, 0.8); }
-        
-        .caro-cell.winning-cell {
-            background: rgba(250, 204, 21, 0.35) !important;
-            border-color: #fde047 !important;
-            box-shadow: 0 0 12px #fde047 !important;
-            animation: winPulse 1s ease-in-out infinite alternate;
-        }
-        @keyframes winPulse {
-            from { transform: scale(1); }
-            to { transform: scale(1.08); }
-        }
-        
-        .caro-coord {
-            position: absolute;
-            top: 1px; left: 2px;
-            font-size: 0.5rem;
-            color: rgba(255, 255, 255, 0.5);
-            font-weight: 700;
-        }
+        .caro-cell.x { color: #f87171; }
+        .caro-cell.o { color: #60a5fa; }
+        .caro-cell.winning-cell { background: rgba(250, 204, 21, 0.35) !important; border-color: #fde047 !important; }
+        .caro-coord { position: absolute; top: 1px; left: 2px; font-size: 0.45rem; color: rgba(255, 255, 255, 0.5); }
 
         .caro-start-overlay {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 20;
-            background: rgba(2, 6, 23, 0.6);
-            backdrop-filter: blur(3px);
-            border-radius: 12px;
+            position: absolute; inset: 0; display: flex; justify-content: center; align-items: center;
+            z-index: 20; background: rgba(2, 6, 23, 0.6); backdrop-filter: blur(3px); border-radius: 12px;
         }
-
         .btn-caro-action {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.4);
-            padding: 12px 28px;
-            border-radius: 16px;
-            font-weight: 800;
-            font-size: 1rem;
-            cursor: pointer;
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
-            transition: all 0.2s;
+            background: linear-gradient(135deg, #10b981, #059669); color: white; border: 1px solid rgba(255,255,255,0.4);
+            padding: 10px 24px; border-radius: 14px; font-weight: 800; font-size: 0.9rem; cursor: pointer;
         }
-        .btn-caro-action:hover { transform: scale(1.05); }
-
-        .caro-bottom-controls {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            margin: 8px auto;
+        .caro-bottom-controls { display: flex; gap: 6px; justify-content: center; margin: 6px auto; }
+        .btn-reset-caro, .btn-pause-caro {
+            color: white; border: 1px solid rgba(255,255,255,0.3); padding: 6px 12px; border-radius: 10px;
+            font-weight: bold; font-size: 0.7rem; cursor: pointer;
         }
-
-        .btn-reset-caro {
-            background: linear-gradient(135deg, #ef4444, #b91c1c);
-            color: white; border: 1px solid rgba(255,255,255,0.3); padding: 7px 14px; border-radius: 12px;
-            font-weight: bold; font-size: 0.75rem; cursor: pointer;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
-        }
-
-        .btn-pause-caro {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white; border: 1px solid rgba(255,255,255,0.3); padding: 7px 14px; border-radius: 12px;
-            font-weight: bold; font-size: 0.75rem; cursor: pointer;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
-        }
+        .btn-reset-caro { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+        .btn-pause-caro { background: linear-gradient(135deg, #f59e0b, #d97706); }
 
         .modal-overlay { 
             position: absolute; inset: 0; background: rgba(2, 6, 23, 0.9); 
-            backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 100; border-radius: 36px;
+            backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 100; border-radius: 28px;
         }
         .modal-card { 
-            background: linear-gradient(145deg, #1e1b4b, #0f172a); border-radius: 20px; padding: 18px 14px; text-align: center; width: 90%; max-width: 310px; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8); border: 2px solid rgba(56, 189, 248, 0.6);
+            background: linear-gradient(145deg, #1e1b4b, #0f172a); border-radius: 16px; padding: 14px 10px; text-align: center; width: 85%; max-width: 280px; 
+            border: 2px solid rgba(56, 189, 248, 0.6);
         }
-        .modal-title { font-size: 1.05rem; font-weight: 800; margin-bottom: 2px; color: #f8fafc; }
-        .word-highlight { color: #fde047; font-weight: 800; font-size: 1.05rem; text-transform: uppercase; }
+        .modal-title { font-size: 0.95rem; font-weight: 800; margin-bottom: 2px; color: #f8fafc; }
+        .word-highlight { color: #fde047; font-weight: 800; font-size: 0.95rem; text-transform: uppercase; }
         
-        .modal-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            margin-top: 10px;
+        .modal-buttons { display: flex; flex-direction: column; gap: 5px; margin-top: 8px; }
+        .btn-modal-close, .btn-modal-review {
+            color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 6px 12px; border-radius: 10px; font-weight: 700; font-size: 0.72rem; cursor: pointer; 
         }
-        .btn-modal-close { 
-            background: linear-gradient(135deg, #0284c7, #2563eb); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 7px 16px; border-radius: 12px; font-weight: 700; font-size: 0.75rem; cursor: pointer; 
-        }
-        .btn-modal-review {
-            background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 7px 16px; border-radius: 12px; font-weight: 700; font-size: 0.75rem; cursor: pointer;
-        }
+        .btn-modal-close { background: linear-gradient(135deg, #0284c7, #2563eb); }
+        .btn-modal-review { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
 
         #toast { 
-            position: absolute; top: 6%; background: rgba(30, 41, 59, 0.98); color: #fde047; padding: 6px 14px; border-radius: 10px; font-weight: 700; font-size: 0.8rem; display: none; z-index: 50; border: 1px solid rgba(56, 189, 248, 0.5); box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            position: absolute; top: 5%; background: rgba(30, 41, 59, 0.98); color: #fde047; padding: 5px 12px; border-radius: 8px; font-weight: 700; font-size: 0.75rem; display: none; z-index: 50; border: 1px solid rgba(56, 189, 248, 0.5);
         }
     </style>
 </head>
@@ -498,17 +453,19 @@
                     <button class="mode-btn active" id="btn-classic" onclick="setGameMode('classic')">Thư giãn (2 từ)</button>
                     <button class="mode-btn" id="btn-hardcore" onclick="setGameMode('hardcore')">Thử thách (3 từ)</button>
                 </div>
-                <button class="sound-toggle" id="sound-btn" onclick="toggleSound()" title="Bật/Tắt Âm Thanh">🔊</button>
+                <button class="sound-toggle" id="sound-btn" onclick="toggleSound()">🔊</button>
             </div>
 
             <div class="stats-hud" id="stats-hud">
                 <span id="hud-timer">⏰ 10:00</span>
             </div>
 
-            <!-- Khung chứa các hàng ô chữ cần đoán -->
             <div id="game-container"></div>
 
-            <!-- Tickbox trợ giúp thông minh -->
+            <div class="inline-action-container" id="inline-action-box">
+                <button class="btn-inline-newword" onclick="startNewGame()">Đoán từ mới ➔</button>
+            </div>
+
             <div class="helper-container" id="helper-box-container">
                 <input type="checkbox" id="helper-toggle" onchange="updateKeyboardHelpState()">
                 <label for="helper-toggle">Trợ giúp thông minh</label>
@@ -553,17 +510,16 @@
         <div id="modal" class="modal-overlay">
             <div id="modal-card" class="modal-card">
                 <h3 id="modal-title" class="modal-title">THÔNG BÁO</h3>
-                <div id="modal-stickers" style="font-size: 1.6rem; margin: 2px 0;">🎉</div>
-                <p id="modal-body" style="font-size: 0.75rem; color: #cbd5e1; line-height: 1.3;"></p>
+                <div id="modal-stickers" style="font-size: 1.4rem; margin: 2px 0;">🎉</div>
+                <p id="modal-body" style="font-size: 0.72rem; color: #cbd5e1; line-height: 1.3;"></p>
                 <div class="modal-buttons" id="modal-buttons-container">
-                    <button id="modal-btn-review" class="btn-modal-review" onclick="reviewCurrentGame()" style="display: none;">👁️ Xem lại ván đấu</button>
+                    <button id="modal-btn-review" class="btn-modal-review" onclick="reviewCurrentGame()">👁️ Xem lại ván đấu</button>
                     <button id="modal-btn-action" class="btn-modal-close" onclick="closeModal()">CHƠI VÁN MỚI ➔</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Khai báo nguồn từ điển & tự động giải mã Base64 từ words2.js -->
     <script src="words.js"></script>
     <script src="words2.js"></script>
     <script>
@@ -585,22 +541,21 @@
 
     <script>
         function switchMainTab(tabId, btn) {
-            if (document.getElementById('tab-caro').classList.contains('active') && tabId !== 'caro') {
-                initCaro();
-            }
-
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             
             document.getElementById('tab-' + tabId).classList.add('active');
             btn.classList.add('active');
             
-            if (tabId === 'caro' && caroBoard.every(cell => cell === null)) {
-                renderEmptyCaroBoard();
+            if (tabId === 'doanchu') {
+                startNewGame();
+            } else if (tabId === 'caro') {
+                clearInterval(gameTimer);
+                gameTimer = null;
+                initCaro();
             }
         }
 
-        // --- ĐOÁN CHỮ LOGIC ---
         let gameMode = "classic";
         let targetWord = "", currentAttempt = 0, wordLen = 0, currentGuess = [];
         let soundEnabled = true;
@@ -608,6 +563,7 @@
         let guessedWrongLetters = new Set(); 
         let confirmedCorrectChars = []; 
         let wordleHistory = []; 
+        let keyboardState = {};
 
         const gameContainer = document.getElementById("game-container");
         const keyboard = document.getElementById("keyboard");
@@ -629,7 +585,7 @@
             '̣': { 'a':'ạ', 'ă':'ặ', 'â':'ậ', 'e':'ẹ', 'ê':'ệ', 'i':'ị', 'o':'ọ', 'ô':'ộ', 'ơ':'ợ', 'u':'ụ', 'ư':'ự', 'y':'ỵ' }
         };
 
-        const CUTE_STICKERS = ["💧","🎶","🍂","🐶","🦊","🐯","🦁","🐺","🙊","🙉","🙈","🐵","🦒","🐯","🐷","🐗","🐭","🐹","🦝","🐮","🐺","🐰","🐻","🐻‍❄️","🐨","🐼","🐸","🦓","🐴","🫎","🫏","🦄","🐔","🐾","🦮","🐕‍🦺","🐩","🐕","🐈","🐈‍⬛","🦏","🦬","🦌","🐎","🐆","🐅","🦛","🐂","🐃","🐄","🐖","🐏","🦘","🦙","🐫","🐪","🐐","🐑","🦥","🦨","🦡","🐘","🦣","🐁","🦎","🦫","🐿️","🐇","🦔","🐀","🐊","🐢","🐍","🐉","🦕","🦖","🦦","🦈","🐬","🦭","🐳","🐋","🐙","🦑","🦐","🐡","🐠","🐟","🦞","🦀","🐚","🪸","🪼","🦆","🦜","🦢","🕊️","🦅","🦃","🐓","🪽","🐦‍⬛","🪿","🐦‍🔥","🦩","🦚","🐥","🐧","🐦","🪶","🦤","🦉","🐤","🐣","🦇","🦋","🐌","🐛","🪳","🐜","🦗","🪱","🪰","🦟","🐝","🪲","🐞","🦂","🕷️","🕸️","🧟‍♂️","👉👈","⭐", "💖", "🌸", "☁️", "✨", "🍀", "💫", "🦄", "❤️"];
+        const CUTE_STICKERS = ["💧","🎶","🍂","🐶","🦊","🐯","🦁","🐺","🐵","🦒","🐷","🐰","🐻","🐨","🐼","🐸","🦄","🐔","🐾","🐕","🐈","🦥","🦨","🐘","🦫","🐿️","🐢","🐍","🦕","🦖","🐬","🐳","🐋","🦀","🐠","🐟","🦉","🦋","🐝","⭐","💖","🌸","🍀","🦄","❤️"];
 
         function getMaxAttempts() { return gameMode === 'hardcore' ? 7 : 6; }
         function getValidCount() { return targetWord.split('').filter(c => c !== " ").length; }
@@ -637,13 +593,11 @@
         const winAudio = new Audio('votay.mp3');
         const loseAudio = new Audio('lose.mp3');
         const bgMusic = new Audio('nhacnen.mp3');
-        bgMusic.loop = true;
-        bgMusic.volume = 0.3;
+        bgMusic.loop = true; bgMusic.volume = 0.3;
 
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playSound(type) {
             if (!soundEnabled) return;
-
             if (type === 'key') {
                 if (audioCtx.state === 'suspended') audioCtx.resume();
                 const osc = audioCtx.createOscillator();
@@ -654,11 +608,9 @@
                 gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
                 osc.start(audioCtx.currentTime); osc.stop(audioCtx.currentTime + 0.08);
             } else if (type === 'win') {
-                winAudio.currentTime = 0;
-                winAudio.play().catch(e => console.log("Lỗi phát âm thanh win:", e));
+                winAudio.currentTime = 0; winAudio.play().catch(e => {});
             } else if (type === 'lose') {
-                loseAudio.currentTime = 0;
-                loseAudio.play().catch(e => console.log("Lỗi phát âm thanh lose:", e));
+                loseAudio.currentTime = 0; loseAudio.play().catch(e => {});
             }
         }
 
@@ -667,62 +619,44 @@
             if (audioCtx.state === 'suspended') audioCtx.resume();
             const osc = audioCtx.createOscillator();
             const gainNode = audioCtx.createGain();
-            osc.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
+            osc.connect(gainNode); gainNode.connect(audioCtx.destination);
             let now = audioCtx.currentTime;
-
             if (player === 'X') {
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(550, now);
-                osc.frequency.exponentialRampToValueAtTime(700, now + 0.1);
+                osc.type = 'triangle'; osc.frequency.setValueAtTime(550, now); osc.frequency.exponentialRampToValueAtTime(700, now + 0.1);
             } else {
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(350, now);
-                osc.frequency.exponentialRampToValueAtTime(250, now + 0.1);
+                osc.type = 'sine'; osc.frequency.setValueAtTime(350, now); osc.frequency.exponentialRampToValueAtTime(250, now + 0.1);
             }
-
             gainNode.gain.setValueAtTime(0.12, now);
             gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
-            osc.start(now);
-            osc.stop(now + 0.15);
+            osc.start(now); osc.stop(now + 0.15);
         }
 
         function toggleSound() {
             soundEnabled = !soundEnabled;
             document.getElementById("sound-btn").textContent = soundEnabled ? "🔊" : "🔇";
-            if (soundEnabled) {
-                bgMusic.play().catch(e => console.log("Không thể tự phát nhạc nền:", e));
-                showToast("Đã bật âm thanh & nhạc nền");
-            } else {
-                bgMusic.pause();
-                showToast("Đã tắt âm thanh");
-            }
+            if (soundEnabled) bgMusic.play().catch(e => {});
+            else bgMusic.pause();
         }
 
         function spawnFallingSticker() {
             const sticker = document.createElement("div");
             sticker.className = "falling-sticker";
             sticker.textContent = CUTE_STICKERS[Math.floor(Math.random() * CUTE_STICKERS.length)];
-            sticker.style.left = (Math.random() * 370 + 10) + "px";
+            sticker.style.left = (Math.random() * 340 + 10) + "px";
             const randomDuration = Math.random() * 4 + 4;
             sticker.style.animationDuration = randomDuration + "s";
             phoneFrame.appendChild(sticker);
             setTimeout(() => sticker.remove(), randomDuration * 1000);
         }
-        setInterval(spawnFallingSticker, 1500);
+        setInterval(spawnFallingSticker, 1800);
 
         window.addEventListener('DOMContentLoaded', () => {
             if (typeof DICTIONARY !== 'undefined' && DICTIONARY.length > 0) {
                 setGameMode('classic');
                 renderEmptyCaroBoard();
-            } else {
-                showToast("Lỗi: Không tải được từ điển!");
             }
-            
             document.body.addEventListener('click', () => {
-                if (soundEnabled && bgMusic.paused) {
-                    bgMusic.play().catch(e => console.log(e));
-                }
+                if (soundEnabled && bgMusic.paused) bgMusic.play().catch(e => {});
             }, { once: true });
         });
 
@@ -733,15 +667,11 @@
             
             const helperBox = document.getElementById("helper-box-container");
             if (mode === 'classic') {
-                helperBox.style.display = "flex";
-                timeLeft = 600;
+                helperBox.style.display = "flex"; timeLeft = 600;
             } else {
                 helperBox.style.display = "none";
-                document.getElementById("helper-toggle").checked = false;
-                timeLeft = 900;
+                document.getElementById("helper-toggle").checked = false; timeLeft = 900;
             }
-
-            startTimer();
             startNewGame();
         }
 
@@ -755,26 +685,36 @@
             clearInterval(gameTimer);
             document.getElementById("hud-timer").textContent = `⏰ ${formatTime(timeLeft)}`;
             gameTimer = setInterval(() => {
+                if (!document.getElementById('tab-doanchu').classList.contains('active')) {
+                    clearInterval(gameTimer);
+                    return;
+                }
                 timeLeft--;
                 document.getElementById("hud-timer").textContent = `⏰ ${formatTime(timeLeft)}`;
                 if (timeLeft <= 0) {
                     clearInterval(gameTimer);
-                    showModal("HẾT GIỜ RỒI! ⏰", "⌛💔", `Đã hết thời gian thử thách!<br>Đáp án: <span class="word-highlight">${targetWord}</span>`, 'lose', true, 'wordle');
+                    showModal("HẾT GIỜ RỒI! ⏰", "⌛💔", `Đã hết thời gian!<br>Đáp án: <span class="word-highlight">${targetWord}</span>`, 'lose', true, 'wordle');
                 }
             }, 1000);
         }
 
         function startNewGame() {
+            clearInterval(gameTimer);
+            document.getElementById("inline-action-box").style.display = "none";
             guessedWrongLetters.clear(); 
             confirmedCorrectChars = [];
             wordleHistory = [];
+            keyboardState = {};
+
             if (gameMode === 'hardcore') {
+                timeLeft = 900;
                 if (DICTIONARY_3WORDS && DICTIONARY_3WORDS.length > 0) {
                     targetWord = DICTIONARY_3WORDS[Math.floor(Math.random() * DICTIONARY_3WORDS.length)].toLowerCase();
                 } else {
                     targetWord = "chúc bạn chơi vui"; 
                 }
             } else {
+                timeLeft = 600;
                 if (typeof DICTIONARY === "undefined") return;
                 const valid = DICTIONARY.filter(w => { let s = (w.match(/ /g)||[]).length; return s === 1; });
                 targetWord = valid[Math.floor(Math.random() * valid.length)].toLowerCase();
@@ -787,12 +727,31 @@
             confirmedCorrectChars = new Array(validCount).fill("");
             initBoard();
             initKeyboard();
+            startTimer();
         }
 
         function initBoard() {
             gameContainer.innerHTML = "";
             let maxAtt = getMaxAttempts();
+            let totalChars = getValidCount();
+            let tileW = gameMode === 'classic' ? Math.min(30, Math.floor(320 / (totalChars + 1))) : 18;
+            let tileH = gameMode === 'classic' ? Math.min(36, Math.floor(250 / getMaxAttempts())) : 22;
+            let tileFont = gameMode === 'classic' ? Math.min(0.95, tileW * 0.035) + 'rem' : '0.6rem';
+
+            document.documentElement.style.setProperty('--tile-w', tileW + 'px');
+            document.documentElement.style.setProperty('--tile-h', tileH + 'px');
+            document.documentElement.style.setProperty('--tile-font', tileFont);
+
             for (let i = 0; i < maxAtt; i++) {
+                const wrapper = document.createElement("div");
+                wrapper.className = "row-wrapper" + (i === 0 ? " active-wrapper" : "");
+                wrapper.id = `wrapper-${i}`;
+
+                const indicator = document.createElement("div");
+                indicator.className = "row-indicator";
+                indicator.textContent = "▶";
+                wrapper.appendChild(indicator);
+
                 const row = document.createElement("div");
                 row.className = "row" + (i === 0 ? " active-row" : "");
                 row.id = `row-${i}`;
@@ -813,12 +772,14 @@
                         row.appendChild(space);
                     }
                 });
-                gameContainer.appendChild(row);
+                wrapper.appendChild(row);
+                gameContainer.appendChild(wrapper);
             }
         }
 
         function initKeyboard() {
             keyboard.innerHTML = "";
+            keyboardState = {};
             KB_LAYOUT.forEach((rowKeys, rIdx) => {
                 const row = document.createElement("div");
                 row.className = "kb-row";
@@ -839,20 +800,54 @@
             updateKeyboardHelpState();
         }
 
+        function removeVietnameseTones(str) {
+            if (!str) return '';
+            return str
+                .normalize('NFD')
+                .replace(/[\u0300\u0301\u0303\u0309\u0323]/g, '')
+                .normalize('NFC');
+        }
+
+        function updateVirtualKeyboard(guessRow, keyboardStateObj) {
+            // Lấy danh sách các ký tự gốc (không dấu) có trong từ khóa đích
+            const targetBaseChars = targetWord.split('').map(c => removeVietnameseTones(c));
+
+            guessRow.forEach((tile) => {
+                const rawChar = tile.letter;
+                const baseChar = removeVietnameseTones(rawChar);
+
+                // Chỉ vô hiệu hóa phím nếu hoàn toàn không có chữ cái gốc này trong từ khóa
+                if (!targetBaseChars.includes(baseChar)) {
+                    keyboardStateObj[baseChar] = 'disabled';
+                    disableKeyOnUI(baseChar);
+                }
+            });
+        }
+
+        function disableKeyOnUI(char) {
+            const keyElement = document.querySelector(`[data-key="${char}"]`);
+            if (keyElement) {
+                keyElement.classList.add('disabled', 'absent');
+                keyElement.setAttribute('disabled', 'true');
+            }
+        }
+
+        function updateKeyUI(char, status) {
+            // Không thực hiện đổi màu phím ảo
+        }
+
         function updateKeyboardHelpState() {
             const isHelperActive = document.getElementById("helper-toggle").checked && gameMode === 'classic';
             const allKeys = keyboard.querySelectorAll('.key');
-
             allKeys.forEach(btn => {
                 const k = btn.getAttribute('data-key');
-                if (k === "DEL" || k === "ENTER" || TONE_MAP[k]) {
-                    return;
-                }
-
+                if (k === "DEL" || k === "ENTER" || TONE_MAP[k]) return;
                 if (isHelperActive && guessedWrongLetters.has(k)) {
                     btn.classList.add('disabled-key');
                 } else {
-                    btn.classList.remove('disabled-key');
+                    if (!keyboardState[k]) {
+                        btn.classList.remove('disabled-key');
+                    }
                 }
             });
         }
@@ -869,8 +864,7 @@
                 let targetIdxToDel = -1;
                 for (let i = currentGuess.length - 1; i >= 0; i--) {
                     if (currentGuess[i] !== "" && !(helperActive && confirmedCorrectChars[i])) {
-                        targetIdxToDel = i;
-                        break;
+                        targetIdxToDel = i; break;
                     }
                 }
                 if (targetIdxToDel !== -1) {
@@ -887,8 +881,7 @@
                 let targetIdx = -1;
                 for (let i = currentGuess.length - 1; i >= 0; i--) {
                     if (currentGuess[i] !== "" && !(helperActive && confirmedCorrectChars[i])) {
-                        targetIdx = i;
-                        break;
+                        targetIdx = i; break;
                     }
                 }
                 if (targetIdx !== -1) {
@@ -903,11 +896,9 @@
                 for (let i = 0; i < validCount; i++) {
                     if (helperActive && confirmedCorrectChars[i]) continue;
                     if (!currentGuess[i] || currentGuess[i] === "") {
-                        targetIdxToAdd = i;
-                        break;
+                        targetIdxToAdd = i; break;
                     }
                 }
-
                 if (targetIdxToAdd !== -1) {
                     currentGuess[targetIdxToAdd] = key.toLowerCase();
                     updateRowDisplay();
@@ -961,11 +952,8 @@
 
             for (let i = 0; i < currentGuess.length; i++) {
                 if (currentGuess[i] === targetArr[i]) { 
-                    result[i] = "correct"; 
-                    targetUsed[i] = true; 
-                    if (helperActive) {
-                        confirmedCorrectChars[i] = currentGuess[i];
-                    }
+                    result[i] = "correct"; targetUsed[i] = true; 
+                    if (helperActive) confirmedCorrectChars[i] = currentGuess[i];
                 }
             }
             for (let i = 0; i < currentGuess.length; i++) {
@@ -988,7 +976,12 @@
                 }
             }
 
-            // Lưu lại kết quả hàng này vào lịch sử ván đấu
+            let guessRowForKB = [];
+            for (let i = 0; i < currentGuess.length; i++) {
+                guessRowForKB.push({ letter: currentGuess[i], status: result[i] });
+            }
+            updateVirtualKeyboard(guessRowForKB, keyboardState);
+
             wordleHistory.push({
                 attemptRow: currentAttempt,
                 guesses: [...currentGuess],
@@ -1000,10 +993,7 @@
                 let isAnyMatch = targetWord.includes(char);
                 let baseChar = getBaseVowels(char);
                 let hasBaseMatch = targetWord.split('').some(c => getBaseVowels(c) === baseChar);
-
-                if (!isAnyMatch && !hasBaseMatch) {
-                    guessedWrongLetters.add(char);
-                }
+                if (!isAnyMatch && !hasBaseMatch) guessedWrongLetters.add(char);
             }
 
             let wordsArray = targetWord.split(" ");
@@ -1019,185 +1009,132 @@
             });
 
             updateKeyboardHelpState();
-
             let maxAtt = getMaxAttempts();
+
             if (currentGuess.join('') === targetArr.join('')) {
                 clearInterval(gameTimer);
-                showModal("CHIẾN THẮNG XUẤT SẮC! 🎉", "🏆✨🥳", `Đoán đúng cụm từ:<br><span class="word-highlight">${targetWord}</span>`, 'win', true, 'wordle');
+                showModal("CHIẾN THẮNG! 🎉", "🏆✨", `Đoán đúng cụm từ:<br><span class="word-highlight">${targetWord}</span>`, 'win', true, 'wordle');
                 currentAttempt = maxAtt;
                 return;
             }
 
             document.getElementById(`row-${currentAttempt}`).classList.remove("active-row");
+            document.getElementById(`wrapper-${currentAttempt}`).classList.remove("active-wrapper");
             currentAttempt++;
 
             if (currentAttempt < maxAtt) {
                 document.getElementById(`row-${currentAttempt}`).classList.add("active-row");
-                
+                document.getElementById(`wrapper-${currentAttempt}`).classList.add("active-wrapper");
                 let validCount = getValidCount();
                 currentGuess = new Array(validCount).fill("");
                 if (helperActive) {
                     for (let i = 0; i < confirmedCorrectChars.length; i++) {
-                        if (confirmedCorrectChars[i]) {
-                            currentGuess[i] = confirmedCorrectChars[i];
-                        }
+                        if (confirmedCorrectChars[i]) currentGuess[i] = confirmedCorrectChars[i];
                     }
                 }
                 updateRowDisplay();
             } else {
                 clearInterval(gameTimer);
-                showModal("RẤT TIẾC, HẾT LƯỢT! 💔", "😢🥀", `Đáp án đúng là:<br><span class="word-highlight">${targetWord}</span>`, 'lose', true, 'wordle');
+                showModal("HẾT LƯỢT! 💔", "😢🥀", `Đáp án đúng là:<br><span class="word-highlight">${targetWord}</span>`, 'lose', true, 'wordle');
             }
         }
 
-        // --- CỜ CARO 10x10 LOGIC ---
+        // --- CARO LOGIC ---
         const boardSize = 10;
         const winCondition = 5;
-        let caroBoard = [];
-        let moveHistory = [];
-        let winningCellsList = [];
-        let currentPlayer = 'X'; 
-        let gameActive = false;
-        let isPaused = false;
-        let caroTurnTimer = null;
-        let caroTimeLeft = 30;
+        let caroBoard = [], moveHistory = [], winningCellsList = [];
+        let currentPlayer = 'X', gameActive = false, isPaused = false;
+        let caroTurnTimer = null, caroTimeLeft = 30;
 
         function renderEmptyCaroBoard() {
             const boardEl = document.getElementById('caro-board');
             boardEl.innerHTML = '';
             caroBoard = Array(boardSize * boardSize).fill(null);
-            moveHistory = [];
-            winningCellsList = [];
-            gameActive = false;
-            isPaused = false;
+            moveHistory = []; winningCellsList = [];
+            gameActive = false; isPaused = false;
             clearInterval(caroTurnTimer);
 
             for (let i = 0; i < boardSize * boardSize; i++) {
                 const cell = document.createElement('div');
                 cell.className = 'caro-cell';
-                const number = document.createElement('span');
-                number.className = 'caro-coord';
-                number.innerText = (i + 1);
-                const symbol = document.createElement('span');
-                symbol.className = 'caro-symbol';
-                
-                cell.appendChild(number);
-                cell.appendChild(symbol);
+                const number = document.createElement('span'); number.className = 'caro-coord'; number.innerText = (i + 1);
+                const symbol = document.createElement('span'); symbol.className = 'caro-symbol';
+                cell.appendChild(number); cell.appendChild(symbol);
                 boardEl.appendChild(cell);
             }
-
             let overlay = document.getElementById('caro-start-overlay');
-            if (!overlay) {
-                overlay = document.createElement('div');
-                overlay.id = 'caro-start-overlay';
-                overlay.className = 'caro-start-overlay';
-                overlay.innerHTML = `<button class="btn-caro-action" onclick="startCaroGame()">▶ Bắt Đầu</button>`;
-                document.querySelector('.caro-board-wrapper').appendChild(overlay);
-            } else {
-                overlay.style.display = 'flex';
-            }
-
+            if (overlay) overlay.style.display = 'flex';
             document.getElementById('turn-text').innerHTML = 'Lượt: <span class="x">X</span>';
             document.getElementById('caro-time-box').textContent = `⏳ 30s`;
             document.getElementById('btn-pause').style.display = 'none';
             boardEl.classList.remove('blurred');
         }
 
-        function initCaro() {
-            renderEmptyCaroBoard();
-        }
+        function initCaro() { renderEmptyCaroBoard(); }
 
         function startCaroGame() {
-            const overlay = document.getElementById('caro-start-overlay');
-            if (overlay) overlay.style.display = 'none';
-
+            document.getElementById('caro-start-overlay').style.display = 'none';
             caroBoard = Array(boardSize * boardSize).fill(null);
-            moveHistory = [];
-            winningCellsList = [];
-            currentPlayer = 'X';
-            gameActive = true;
-            isPaused = false;
+            moveHistory = []; winningCellsList = [];
+            currentPlayer = 'X'; gameActive = true; isPaused = false;
             
             const pauseBtn = document.getElementById('btn-pause');
-            pauseBtn.style.display = 'inline-block';
-            pauseBtn.textContent = "⏸ Tạm Dừng";
+            pauseBtn.style.display = 'inline-block'; pauseBtn.textContent = "⏸ Tạm Dừng";
 
             const boardEl = document.getElementById('caro-board');
-            boardEl.classList.remove('blurred');
-            boardEl.innerHTML = '';
+            boardEl.classList.remove('blurred'); boardEl.innerHTML = '';
 
             for (let i = 0; i < boardSize * boardSize; i++) {
                 const cell = document.createElement('div');
                 cell.className = 'caro-cell';
                 cell.onclick = () => handleCaroClick(i);
-
-                const number = document.createElement('span');
-                number.className = 'caro-coord';
-                number.innerText = (i + 1);
-
-                const symbol = document.createElement('span');
-                symbol.className = 'caro-symbol';
-                
-                cell.appendChild(number);
-                cell.appendChild(symbol);
+                const number = document.createElement('span'); number.className = 'caro-coord'; number.innerText = (i + 1);
+                const symbol = document.createElement('span'); symbol.className = 'caro-symbol';
+                cell.appendChild(number); cell.appendChild(symbol);
                 boardEl.appendChild(cell);
             }
-
             updateTurnIndicator();
             startCaroTurnTimer();
         }
 
         function pauseCaroGame() {
             if (!gameActive) return;
-            isPaused = true;
-            clearInterval(caroTurnTimer);
+            isPaused = true; clearInterval(caroTurnTimer);
             document.getElementById('caro-board').classList.add('blurred');
-            
-            showModal("ĐANG TẠM DỪNG ⏸", "☕🛋️", "Trận đấu đang tạm dừng.<br>Nhấn tiếp tục để chơi tiếp!", 'pause', false, 'caro');
+            showModal("ĐANG TẠM DỪNG ⏸", "☕🛋️", "Trận đấu đang tạm dừng.", 'pause', false, 'caro');
             document.getElementById('modal-btn-review').style.display = 'none';
-            
-            const modalBtn = document.getElementById('modal-btn-action');
-            modalBtn.textContent = "TIẾP TỤC ➔";
-            modalBtn.onclick = resumeCaroGame;
+            let modalBtn = document.getElementById('modal-btn-action');
+            modalBtn.textContent = "TIẾP TỤC ➔"; modalBtn.onclick = resumeCaroGame;
         }
 
         function resumeCaroGame() {
             document.getElementById("modal").style.display = "none";
-            isPaused = false;
-            document.getElementById('caro-board').classList.remove('blurred');
+            isPaused = false; document.getElementById('caro-board').classList.remove('blurred');
             startCaroTurnTimer();
-            
-            const modalBtn = document.getElementById('modal-btn-action');
-            modalBtn.textContent = "CHƠI VÁN MỚI ➔";
-            modalBtn.onclick = closeModal;
+            let modalBtn = document.getElementById('modal-btn-action');
+            modalBtn.textContent = "CHƠI VÁN MỚI ➔"; modalBtn.onclick = closeModal;
         }
 
         function startCaroTurnTimer() {
             clearInterval(caroTurnTimer);
             caroTimeLeft = 30;
             document.getElementById('caro-time-box').textContent = `⏳ ${caroTimeLeft}s`;
-
             caroTurnTimer = setInterval(() => {
-                if (isPaused || !gameActive) return;
+                if (isPaused || !gameActive || !document.getElementById('tab-caro').classList.contains('active')) return;
                 caroTimeLeft--;
                 document.getElementById('caro-time-box').textContent = `⏳ ${caroTimeLeft}s`;
-
                 if (caroTimeLeft <= 0) {
                     clearInterval(caroTurnTimer);
                     gameActive = false;
                     document.getElementById('btn-pause').style.display = 'none';
-                    let loser = currentPlayer;
-                    let winner = currentPlayer === 'X' ? 'O' : 'X';
-
-                    document.getElementById('turn-text').innerHTML = `Hết giờ! <span class="${loser.toLowerCase()}">${loser}</span> thua.`;
-                    showModal("QUÁ THỜI GIAN SUY NGHĨ! ⏰", "⌛💥", `Bên <span class="word-highlight">${loser}</span> đã hết 30 giây suy nghĩ nên bị xử thua!<br>Phe <span class="word-highlight">${winner}</span> chiến thắng!`, 'lose', true, 'caro');
+                    let loser = currentPlayer, winner = currentPlayer === 'X' ? 'O' : 'X';
+                    showModal("HẾT GIỜ! ⏰", "⌛💥", `Bên <span class="word-highlight">${loser}</span> thua do quá thời gian!`, 'lose', true, 'caro');
                 }
             }, 1000);
         }
 
         function handleCaroClick(index) {
             if (!gameActive || isPaused || caroBoard[index] !== null) return;
-
             clearInterval(caroTurnTimer);
             playCaroSound(currentPlayer);
 
@@ -1211,25 +1148,18 @@
             let winCells = checkCaroWin(index);
             if (winCells) {
                 winningCellsList = winCells;
-                winningCellsList.forEach(idx => {
-                    cells[idx].classList.add('winning-cell');
-                });
-
-                document.getElementById('turn-text').innerHTML = `🎉 <span class="${currentPlayer.toLowerCase()}">${currentPlayer}</span> CHIẾN THẮNG!`;
-                document.getElementById('caro-time-box').textContent = `✨ FINISH`;
+                winningCellsList.forEach(idx => cells[idx].classList.add('winning-cell'));
+                document.getElementById('turn-text').innerHTML = `🎉 <span class="${currentPlayer.toLowerCase()}">${currentPlayer}</span> THẮNG!`;
                 document.getElementById('btn-pause').style.display = 'none';
-                showModal("KẾT QUẢ CỜ CARO 🏆", "⚔️👑", `Bên <span class="word-highlight">${currentPlayer}</span> đã giành chiến thắng!`, 'win', true, 'caro');
-                gameActive = false;
-                return;
+                showModal("KẾT QUẢ CỜ CARO 🏆", "⚔️👑", `Bên <span class="word-highlight">${currentPlayer}</span> chiến thắng!`, 'win', true, 'caro');
+                gameActive = false; return;
             }
 
             if (!caroBoard.includes(null)) {
                 document.getElementById('turn-text').innerHTML = "🤝 HÒA NHAU!";
-                document.getElementById('caro-time-box').textContent = `🤝 DRAW`;
                 document.getElementById('btn-pause').style.display = 'none';
-                showModal("VÁN CỜ HÒA! 🤝", "🤝✨", `Bàn cờ đã đầy ô mà chưa phân thắng bại!`, 'lose', true, 'caro');
-                gameActive = false;
-                return;
+                showModal("HÒA NHAU! 🤝", "🤝✨", "Bàn cờ đã đầy!", 'lose', true, 'caro');
+                gameActive = false; return;
             }
 
             currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
@@ -1238,39 +1168,21 @@
         }
 
         function updateTurnIndicator() {
-            const turnText = document.getElementById('turn-text');
-            if (currentPlayer === 'X') {
-                turnText.innerHTML = 'Lượt: <span class="x">X</span>';
-            } else {
-                turnText.innerHTML = 'Lượt: <span class="o">O</span>';
-            }
+            document.getElementById('turn-text').innerHTML = currentPlayer === 'X' ? 'Lượt: <span class="x">X</span>' : 'Lượt: <span class="o">O</span>';
         }
 
         function checkCaroWin(index) {
-            const row = Math.floor(index / boardSize);
-            const col = index % boardSize;
-            const player = caroBoard[index];
+            const row = Math.floor(index / boardSize), col = index % boardSize, player = caroBoard[index];
             const directions = [[0, 1], [1, 0], [1, 1], [1, -1]];
-
             for (let [dx, dy] of directions) {
                 let line = [index];
                 for (let i = 1; i < winCondition; i++) {
-                    let r = row + dx * i, c = col + dy * i;
-                    let idx = r * boardSize + c;
-                    if (r >= 0 && r < boardSize && c >= 0 && c < boardSize && caroBoard[idx] === player) {
-                        line.push(idx);
-                    } else {
-                        break;
-                    }
+                    let r = row + dx * i, c = col + dy * i, idx = r * boardSize + c;
+                    if (r >= 0 && r < boardSize && c >= 0 && c < boardSize && caroBoard[idx] === player) line.push(idx); else break;
                 }
                 for (let i = 1; i < winCondition; i++) {
-                    let r = row - dx * i, c = col - dy * i;
-                    let idx = r * boardSize + c;
-                    if (r >= 0 && r < boardSize && c >= 0 && c < boardSize && caroBoard[idx] === player) {
-                        line.push(idx);
-                    } else {
-                        break;
-                    }
+                    let r = row - dx * i, c = col - dy * i, idx = r * boardSize + c;
+                    if (r >= 0 && r < boardSize && c >= 0 && c < boardSize && caroBoard[idx] === player) line.push(idx); else break;
                 }
                 if (line.length >= winCondition) return line;
             }
@@ -1278,47 +1190,33 @@
         }
 
         function reviewCurrentGame() {
-            if (document.getElementById('tab-caro').classList.contains('active')) {
-                reviewCaroGame();
-            } else {
-                reviewWordleSummary();
-            }
+            if (document.getElementById('tab-caro').classList.contains('active')) reviewCaroGame();
+            else reviewWordleSummary();
         }
 
         function reviewCaroGame() {
             document.getElementById("modal").style.display = "none";
             const cells = document.querySelectorAll('.caro-cell');
-            
-            cells.forEach(c => {
-                c.className = 'caro-cell';
-                c.querySelector('.caro-symbol').innerText = '';
-            });
-
+            cells.forEach(c => { c.className = 'caro-cell'; c.querySelector('.caro-symbol').innerText = ''; });
             let step = 0;
             let reviewInterval = setInterval(() => {
-                if (step >= moveHistory.length) {
+                if (!document.getElementById('tab-caro').classList.contains('active') || step >= moveHistory.length) {
                     clearInterval(reviewInterval);
-                    if (winningCellsList.length > 0) {
-                        winningCellsList.forEach(idx => {
-                            cells[idx].classList.add('winning-cell');
-                        });
-                    }
+                    if (step >= moveHistory.length && winningCellsList.length > 0) winningCellsList.forEach(idx => cells[idx].classList.add('winning-cell'));
                     return;
                 }
-
                 let move = moveHistory[step];
                 let cell = cells[move.index];
                 cell.classList.add(move.player.toLowerCase());
                 cell.querySelector('.caro-symbol').innerText = move.player;
                 step++;
-            }, 400);
+            }, 300);
         }
 
-        // Xem tổng kết các lượt đoán chữ ngay lập tức
         function reviewWordleSummary() {
             document.getElementById("modal").style.display = "none";
+            clearInterval(gameTimer);
             
-            // Vẽ lại toàn bộ lịch sử các lượt đoán lên các dòng tương ứng cùng lúc
             for (let i = 0; i < getMaxAttempts(); i++) {
                 let historyItem = wordleHistory[i];
                 let wordsArray = targetWord.split(" ");
@@ -1340,10 +1238,13 @@
                     }
                 });
             }
+
+            document.getElementById("inline-action-box").style.display = "flex";
         }
 
         function showModal(title, stickers, body, soundType, showReviewBtn, gameType = 'caro') {
-            if (soundType !== 'pause') {
+            if (soundType && soundType !== 'pause') {
+                clearInterval(gameTimer);
                 clearInterval(caroTurnTimer);
             }
             document.getElementById("modal-title").innerHTML = title;
@@ -1351,6 +1252,9 @@
             document.getElementById("modal-body").innerHTML = body;
             
             const reviewBtn = document.getElementById("modal-btn-review");
+            const actionBtn = document.getElementById("modal-btn-action");
+            actionBtn.textContent = "CHƠI VÁN MỚI ➔"; actionBtn.onclick = closeModal;
+
             if (showReviewBtn && ((gameType === 'caro' && moveHistory.length > 0) || (gameType === 'wordle' && wordleHistory.length > 0))) {
                 reviewBtn.style.display = 'block';
                 reviewBtn.textContent = gameType === 'wordle' ? "👁️ Xem lại bảng tổng kết" : "👁️ Xem lại ván cờ";
@@ -1359,25 +1263,19 @@
             }
 
             document.getElementById("modal").style.display = "flex";
-            
-            if (soundType && soundType !== 'pause') {
-                playSound(soundType);
-            }
+            if (soundType && soundType !== 'pause') playSound(soundType);
         }
 
         function closeModal() { 
             document.getElementById("modal").style.display = "none"; 
-            if (document.getElementById('tab-doanchu').classList.contains('active')) {
-                setGameMode(gameMode);
-            } else {
-                initCaro();
-            }
+            if (document.getElementById('tab-doanchu').classList.contains('active')) startNewGame();
+            else initCaro();
         }
 
         function showToast(msg) {
             const t = document.getElementById("toast"); 
             t.textContent = msg; t.style.display = "block";
-            setTimeout(() => t.style.display = "none", 1500);
+            setTimeout(() => t.style.display = "none", 1400);
         }
 
         document.addEventListener('keydown', (e) => {
@@ -1390,11 +1288,7 @@
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
-      navigator.serviceWorker.register('./sw.js').then(function(registration) {
-        console.log('ServiceWorker đăng ký thành công: ', registration.scope);
-      }, function(err) {
-        console.log('ServiceWorker đăng ký thất bại: ', err);
-      });
+      navigator.serviceWorker.register('./sw.js').then(function(reg) {});
     });
   }
 </script>
