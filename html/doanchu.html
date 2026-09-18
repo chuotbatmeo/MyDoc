@@ -309,7 +309,7 @@
         .bg-dark { background-color: var(--absent); }
 
         #keyboard { 
-            width: 98%; 
+            width: 100%; 
             display: flex; 
             flex-direction: column; 
             gap: 4px; 
@@ -605,7 +605,7 @@
         const winAudio = new Audio('votay.mp3');
         const loseAudio = new Audio('lose.mp3');
         const bgMusic = new Audio('nhacnen.mp3');
-        bgMusic.loop = true; bgMusic.volume = 0.2;
+        bgMusic.loop = true; bgMusic.volume = 0.3;
 
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playSound(type) {
