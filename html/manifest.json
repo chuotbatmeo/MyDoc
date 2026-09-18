@@ -1,6 +1,6 @@
 {
   "name": "Chill game tí thôi",
-  "short_name": "MiniGame",
+  "short_name": "GameChill",
   "description": "Đoán Chữ nào...",
   "start_url": "https://chuotbatmeo.github.io/MyDoc/html/doanchu.html",
   "display": "fullscreen",
