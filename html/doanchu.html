@@ -254,10 +254,36 @@
             background: transparent;
         }
 
+       /* Bọc khung ngoài để chứa hiệu ứng ánh sáng chạy */
+        .row-wrapper.active-wrapper {
+            position: relative;
+            padding: 3px; /* Độ dày của đường viền sáng chạy */
+            border-radius: 10px;
+            overflow: clip;
+        }
+
+        /* Tạo vệt sáng chạy vòng quanh cho dòng đang active */
+        .row-wrapper.active-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -50%;
+            background: conic-gradient(from 0deg, transparent 0deg, transparent 270deg, #ebf309 360deg);
+            animation: spinBorder 1s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes spinBorder {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Đè lại lớp nền bên trong để không bị che mất ô chữ */
         .row.active-row { 
-            background: radial-gradient(circle, rgba(239, 68, 68, 0.35) 0%, rgba(185, 28, 28, 0.18) 70%, transparent 100%);
-            box-shadow: 0 0 18px rgba(239, 68, 68, 0.5);
+            position: relative;
+            background: radial-gradient(circle, rgba(248, 4, 4, 0.95) 0%, rgba(241, 161, 111, 0.98) 100%);
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
             border: none;
+            z-index: 1;
         }
 
         .space-gap { width: 6px; }
@@ -447,6 +473,37 @@
         #toast { 
             position: absolute; top: 5%; background: rgba(30, 41, 59, 0.98); color: #fde047; padding: 5px 12px; border-radius: 8px; font-weight: 700; font-size: 0.75rem; display: none; z-index: 50; border: 1px solid rgba(56, 189, 248, 0.5);
         }
+
+        .neon-border-box {
+            position: relative;
+            border-radius: 16px; /* Độ bo góc của khung */
+            overflow: hidden;
+            padding: 2px; /* Độ dày của đường viền sáng */
+        }
+
+        /* Tạo lớp giả để làm hiệu ứng ánh sáng chạy */
+        .neon-border-box::before {
+            content: '';
+            position: absolute;
+            inset: -50%;
+            background: conic-gradient(from 0deg, transparent 0deg, transparent 270deg, #38bdf8 360deg);
+            animation: spinBorder 4s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes spinBorder {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Lớp chứa nội dung bên trong để đè lên vùng chạy sáng */
+        .neon-content {
+            position: relative;
+            background: #0f172a; /* Màu nền bên trong của khung */
+            border-radius: 14px;
+            z-index: 1;
+        }
+
     </style>
 </head>
 <body>
