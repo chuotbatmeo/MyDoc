@@ -267,7 +267,7 @@
             content: '';
             position: absolute;
             inset: -50%;
-            background: conic-gradient(from 0deg, transparent 0deg, transparent 270deg, #ebf309 360deg);
+            background: conic-gradient(from 0deg, transparent 0deg, transparent 270deg, #f4dc03 360deg);
             animation: spinBorder 1s linear infinite;
             z-index: 0;
         }
@@ -280,7 +280,7 @@
         /* Đè lại lớp nền bên trong để không bị che mất ô chữ */
         .row.active-row { 
             position: relative;
-            background: radial-gradient(circle, rgba(248, 4, 4, 0.95) 0%, rgba(241, 161, 111, 0.98) 100%);
+            background: radial-gradient(circle, rgba(247, 238, 180, 0.95) 0%, rgba(241, 222, 5, 0.98) 100%);
             box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
             border: none;
             z-index: 1;
@@ -502,6 +502,94 @@
             background: #0f172a; /* Màu nền bên trong của khung */
             border-radius: 14px;
             z-index: 1;
+        }
+
+        /* Hiệu ứng xuất hiện nảy cho Modal Card */
+        @keyframes modalPopIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(1.08); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Hiệu ứng rung lắc khi thua */
+        @keyframes shakeModal {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+
+        /* Lớp áp dụng hiệu ứng */
+        .modal-card.win-effect {
+            animation: modalPopIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, floatCard 3s ease-in-out infinite alternate;
+            border-color: #34d399;
+            box-shadow: 0 0 30px rgba(52, 211, 153, 0.5);
+        }
+
+        .modal-card.lose-effect {
+            animation: modalPopIn 0.4s ease-out forwards, shakeModal 0.5s ease-in-out 0.4s;
+            border-color: #ef4444;
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.5);
+        }
+
+        @keyframes floatCard {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-6px); }
+        }
+
+        /* Hiệu ứng pháo giấy nhỏ bay bên trong popup khi thắng */
+        .confetti-piece {
+            position: absolute;
+            width: 6px;
+            height: 10px;
+            background: #fde047;
+            top: 0;
+            opacity: 0.8;
+            animation: confettiFall 1.5s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes confettiFall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(120px) rotate(360deg); opacity: 0; }
+        }
+        /* Hiệu ứng pháo hoa / nổ tung hạt sáng */
+        .firework-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: explodeParticle 0.8s ease-out forwards;
+            pointer-events: none;
+            z-index: 110;
+        }
+
+        @keyframes explodeParticle {
+            0% { 
+                transform: translate(0, 0) scale(1.2); 
+                opacity: 1; 
+                filter: drop-shadow(0 0 8px #fde047); 
+            }
+            100% { 
+                transform: translate(var(--dx), var(--dy)) scale(0.2); 
+                opacity: 0; 
+                filter: drop-shadow(0 0 2px transparent); 
+            }
+        }
+
+        /* Hiệu ứng chớp sáng bùng nổ (Flash) cho khung khi hiện popup */
+        @keyframes flashBurst {
+            0% { box-shadow: 0 0 0 0 rgba(253, 224, 71, 0.9), 0 0 40px rgba(239, 68, 68, 0.8); }
+            100% { box-shadow: 0 0 0 30px rgba(253, 224, 71, 0), 0 0 10px rgba(239, 68, 68, 0.2); }
+        }
+
+        .modal-card.win-fireworks {
+            animation: modalPopIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, flashBurst 0.6s ease-out;
+            border-color: #fde047;
+        }
+
+        .modal-card.lose-boom {
+            animation: modalPopIn 0.3s ease-out forwards, shakeModal 0.4s ease-in-out;
+            border-color: #ef4444;
+            box-shadow: 0 0 35px rgba(239, 68, 68, 0.8);
         }
 
     </style>
@@ -1308,6 +1396,39 @@ let tileFont = gameMode === 'classic' ? Math.min(1.2, tileW * 0.085) + 'rem' : M
             document.getElementById("inline-action-box").style.display = "flex";
         }
 
+        function triggerFireworks() {
+            const colors = ['#fde047', '#38bdf8', '#f43f5e', '#34d399', '#a855f7', '#ffffff', '#fb923c'];
+            const particleCount = 45; // Số lượng hạt pháo hoa
+            
+            const overlay = document.getElementById('modal');
+            const rect = overlay.getBoundingClientRect();
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'firework-particle';
+                
+                // Đã thêm dấu () cho Math.random() để tính toán chính xác
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 160 + 50; 
+                const dx = Math.cos(angle) * distance;
+                const dy = Math.sin(angle) * distance;
+
+                particle.style.setProperty('--dx', `${dx}px`);
+                particle.style.setProperty('--dy', `${dy}px`);
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                particle.style.left = `${centerX}px`;
+                particle.style.top = `${centerY}px`;
+
+                overlay.appendChild(particle);
+
+                // Tự động xóa sau khi chạy xong animation
+                setTimeout(() => particle.remove(), 800);
+            }
+        }
+
         function showModal(title, stickers, body, soundType, showReviewBtn, gameType = 'caro') {
             if (soundType && soundType !== 'pause') {
                 clearInterval(gameTimer);
@@ -1319,11 +1440,22 @@ let tileFont = gameMode === 'classic' ? Math.min(1.2, tileW * 0.085) + 'rem' : M
             
             const reviewBtn = document.getElementById("modal-btn-review");
             const actionBtn = document.getElementById("modal-btn-action");
+            const modalCard = document.getElementById("modal-card");
+
+            modalCard.className = "modal-card";
+
+            if (soundType === 'win') {
+                modalCard.classList.add('win-fireworks');
+                setTimeout(() => triggerFireworks(), 100); // Kích hoạt pháo hoa bùng nổ giữa màn hình
+            } else if (soundType === 'lose') {
+                modalCard.classList.add('lose-boom');
+            }
+
             actionBtn.textContent = "CHƠI VÁN MỚI ➔"; actionBtn.onclick = closeModal;
 
             if (showReviewBtn && ((gameType === 'caro' && moveHistory.length > 0) || (gameType === 'wordle' && wordleHistory.length > 0))) {
                 reviewBtn.style.display = 'block';
-                reviewBtn.textContent = gameType === 'wordle' ? "👁️ Xem lại" : "👁️ Xem lại";
+                reviewBtn.textContent = "👁️ Xem lại";
             } else {
                 reviewBtn.style.display = 'none';
             }
